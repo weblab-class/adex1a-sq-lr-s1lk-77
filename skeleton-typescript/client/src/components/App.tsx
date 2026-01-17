@@ -1,16 +1,26 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, createContext } from "react";
 import jwt_decode from "jwt-decode";
 import { CredentialResponse } from "@react-oauth/google";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import { get, post } from "../utilities";
 import NotFound from "./pages/NotFound";
-import Skeleton from "./pages/Skeleton";
 import WallView from "./pages/WallView";
 import { socket } from "../client-socket";
 import User from "../../../shared/User";
+import { Cat } from "../../../server/models/Cat";
+
 import "../utilities.css";
 import "../output.css";
+
+// cats and setCats as context
+export const CatContext = createContext<{
+  cats: Cat[];
+  setCats: React.Dispatch<React.SetStateAction<Cat[]>>;
+}>({
+  cats: [],
+  setCats: () => {},
+});
 
 const App = () => {
   const [userId, setUserId] = useState<string | undefined>(undefined);
@@ -45,34 +55,37 @@ const App = () => {
     post("/api/logout");
   };
 
-  const [activeCats, setActiveCats] = useState([]);
-  const getActiveCats = () => {
-    get("/api/activeCats").then((catData) => {
-      setActiveCats(catData);
+  const [cats, setCats] = useState([]);
+  const getCats = () => {
+    get("/api/Cats").then((catData) => {
+      setCats(catData);
     });
+    // console.log("it working");
   };
 
   // get the player's active cats on load
   // TO DO: WHENEVER A CAT IS "SOLVED"
   useEffect(() => {
-    getActiveCats();
+    getCats();
   }, []);
 
   // NOTE:
   // All the pages need to have the props extended via RouteComponentProps for @reach/router to work properly. Please use the Skeleton as an example.
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route
-          element={
-            //<Skeleton handleLogin={handleLogin} handleLogout={handleLogout} userId={userId} />
-            <WallView />
-          }
-          path="/"
-        />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </BrowserRouter>
+    <CatContext.Provider value={{ cats: cats, setCats: setCats }}>
+      <BrowserRouter>
+        <Routes>
+          <Route
+            element={
+              //<Skeleton handleLogin={handleLogin} handleLogout={handleLogout} userId={userId} />
+              <WallView />
+            }
+            path="/"
+          />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </BrowserRouter>
+    </CatContext.Provider>
   );
 };
 

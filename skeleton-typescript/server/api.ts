@@ -1,6 +1,8 @@
 import express from "express";
 import auth from "./auth";
 import socketManager from "./server-socket";
+
+import Cat from "./models/Cat";
 const router = express.Router();
 
 router.post("/login", auth.login);
@@ -24,6 +26,18 @@ router.post("/initsocket", (req, res) => {
 // |------------------------------|
 // | write your API methods below!|
 // |------------------------------|
+
+router.get("/cats", (req, res) => {
+  if (!req.user) {
+    // Not logged in.
+    return res.send({});
+  }
+  console.log("working!");
+  // get all active cats
+  Cat.find({ playerid: req.user }).then((cats) => {
+    res.send(cats);
+  });
+});
 
 // anything else falls to this "not found" case
 router.all("*", (req, res) => {
