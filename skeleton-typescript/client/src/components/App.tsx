@@ -7,6 +7,7 @@ import { get, post } from "../utilities";
 import NotFound from "./pages/NotFound";
 import WallView from "./pages/WallView";
 import { socket } from "../client-socket";
+import { Outlet } from "react-router-dom";
 import User from "../../../shared/User";
 import { Cat } from "../../../server/models/Cat";
 
@@ -55,9 +56,9 @@ const App = () => {
     post("/api/logout");
   };
 
-  const [cats, setCats] = useState([]);
+  const [cats, setCats] = useState<Cat[]>([]);
   const getCats = () => {
-    get("/api/Cats").then((catData) => {
+    get("/api/cats").then((catData) => {
       setCats(catData);
     });
     // console.log("it working");
@@ -73,18 +74,7 @@ const App = () => {
   // All the pages need to have the props extended via RouteComponentProps for @reach/router to work properly. Please use the Skeleton as an example.
   return (
     <CatContext.Provider value={{ cats: cats, setCats: setCats }}>
-      <BrowserRouter>
-        <Routes>
-          <Route
-            element={
-              //<Skeleton handleLogin={handleLogin} handleLogout={handleLogout} userId={userId} />
-              <WallView />
-            }
-            path="/"
-          />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
+      <Outlet />
     </CatContext.Provider>
   );
 };
