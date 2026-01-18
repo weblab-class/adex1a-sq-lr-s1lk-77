@@ -2,18 +2,14 @@ import { Schema, model, Document } from "mongoose";
 
 const CatSchema = new Schema({
   playerid: { type: String, required: true },
-
   name: { type: String, required: true },
   age: { type: Number, required: true },
-
   color: { type: String, required: true },
   pattern: { type: String, required: true },
-
-  timestamp: { type: Date, default: Date.now, required: true },
-
+  timestamp: { type: Number, required: true },
   currentmood: { type: [Number], default: [] },
   // ??? idrk how goal works
-  goal: { type: [[Boolean]], default: [] },
+  goal: { type: Map, of: [String] },
   hasachieved: { type: [Boolean], default: [] },
 });
 
@@ -26,10 +22,10 @@ export interface Cat extends Document {
   color: string;
   pattern: string;
 
-  timestamp: Date;
+  timestamp: number;
 
   currentmood: number[];
-  goal: boolean[][];
+  goal: Record<string, string[]>;
   hasachieved: boolean[];
 }
 

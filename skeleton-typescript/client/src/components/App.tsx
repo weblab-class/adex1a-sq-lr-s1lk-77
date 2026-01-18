@@ -4,23 +4,27 @@ import { CredentialResponse } from "@react-oauth/google";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import { get, post } from "../utilities";
-import NotFound from "./pages/NotFound";
-import WallView from "./pages/WallView";
+
 import { socket } from "../client-socket";
 import { Outlet } from "react-router-dom";
+
+import NotFound from "./pages/NotFound";
+import WallView from "./pages/WallView";
+
 import User from "../../../shared/User";
-import { Cat } from "../../../server/models/Cat";
+
+import Cat from "../../../shared/Cat";
 
 import "../utilities.css";
 import "../output.css";
 
-// cats and setCats as context
-export const CatContext = createContext<{
-  cats: Cat[];
-  setCats: React.Dispatch<React.SetStateAction<Cat[]>>;
+// activeCats and setActiveCats as context
+export const ActiveCatContext = createContext<{
+  activeCats: Cat[];
+  setActiveCats: React.Dispatch<React.SetStateAction<Cat[]>>;
 }>({
-  cats: [],
-  setCats: () => {},
+  activeCats: [],
+  setActiveCats: () => {},
 });
 
 const App = () => {
@@ -56,26 +60,25 @@ const App = () => {
     post("/api/logout");
   };
 
-  const [cats, setCats] = useState<Cat[]>([]);
-  const getCats = () => {
-    get("/api/cats").then((catData) => {
-      setCats(catData);
+  const [activeCats, setActiveCats] = useState<Cat[]>([]);
+  const getActiveCats = () => {
+    get("/api/activecats").then((catData) => {
+      setActiveCats(catData);
     });
     // console.log("it working");
   };
 
-  // get the player's active cats on load
-  // TO DO: WHENEVER A CAT IS "SOLVED"
+  // get the player's active cats on load and ensures the user always has 3 cats
   useEffect(() => {
-    getCats();
+    getActiveCats();
   }, []);
 
   // NOTE:
   // All the pages need to have the props extended via RouteComponentProps for @reach/router to work properly. Please use the Skeleton as an example.
   return (
-    <CatContext.Provider value={{ cats: cats, setCats: setCats }}>
+    <ActiveCatContext.Provider value={{ activeCats: activeCats, setActiveCats: setActiveCats }}>
       <Outlet />
-    </CatContext.Provider>
+    </ActiveCatContext.Provider>
   );
 };
 
