@@ -1,13 +1,15 @@
 // a single item in the inventory
 import React from "react";
+import "./SingleItem.css";
 
 type Props = {
-  placeholder: String;
+  itemname: string;
+  clickcallback?: () => Object;
 };
 
 // w only multiples of 4 for some reason??
-const Cat = (props: Props) => {
-  return <p className="text-white">{props.placeholder}</p>;
+const SingleItem = (props: Props) => {
+  return <img className="SingleItem-container text-white" alt={props.itemname} />;
 };
 
-export default Cat;
+export default SingleItem;
