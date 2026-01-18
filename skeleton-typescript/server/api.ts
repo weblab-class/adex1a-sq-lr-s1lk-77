@@ -3,9 +3,11 @@ import auth from "./auth";
 import socketManager from "./server-socket";
 
 import gameLogic from "./game-logic";
-import CatModel, { Cat } from "./models/Cat";
+import Cat from "./models/Cat";
+import CatInterface from "../shared/Cat";
 import { ObjectId } from "mongodb";
-import PlayerModel, { Player } from "./models/Player";
+import Player from "./models/Player";
+import PlayerInterface from "../shared/Player";
 
 const router = express.Router();
 router.post("/login", auth.login);
@@ -35,8 +37,8 @@ router.get("/player", (req, res) => {
     // Not logged in.
     return res.send({});
   }
-  PlayerModel.findById(req.user._id)
-    .then((player) => {
+  Player.findById(req.user._id)
+    .then((player: PlayerInterface | null | undefined) => {
       res.send(player);
     })
     .catch((err) => {
@@ -50,7 +52,7 @@ router.get("/allcats", (req, res) => {
     return res.send({});
   }
 
-  CatModel.find({ playerid: req.user._id }).then((cats) => {
+  Cat.find({ playerid: req.user._id }).then((cats) => {
     res.send(cats);
   });
 });
@@ -61,14 +63,14 @@ router.get("/activecats", async (req, res) => {
     return res.send({});
   }
 
-  const cats = await CatModel.find({ playerid: "billy" });
-  const curActiveCats: Cat[] = cats.filter(
+  const cats = await Cat.find({ playerid: "billy" });
+  const curActiveCats: CatInterface[] = cats.filter(
     (cat) => !(cat.hasachieved[0] || cat.hasachieved[1] || cat.hasachieved[2])
   );
 
   while (curActiveCats.length < 3) {
     const newCatData = gameLogic.generateNewCat("billy");
-    const newCat = new CatModel(newCatData);
+    const newCat = new Cat(newCatData);
     await newCat.save();
     curActiveCats.push(newCat);
   }
@@ -79,8 +81,8 @@ router.get("/activecats", async (req, res) => {
 router.get("/catfromid", (req, res) => {
   const catId: string = req.query.catid as string;
 
-  CatModel.find({ _id: new ObjectId(catId) })
-    .then((catObj) => {
+  Cat.findById(new ObjectId(catId))
+    .then((catObj: CatInterface | null | undefined) => {
       res.send(catObj);
     })
     .catch((err) => {
