@@ -9,7 +9,7 @@ type Props = {
 const Cat = (props: Props) => {
   return (
     <>
-      <img src={catImg} className="w-60 h-auto" />
+      <img src={catImg} className="w-[15vw] h-auto" />
     </>
   );
 };
