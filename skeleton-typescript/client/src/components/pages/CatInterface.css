@@ -1,0 +1,17 @@
+.CatInterface-panel {
+  position: fixed;
+  background-color: aqua;
+  left: 3%;
+}
+
+.CatInterface-bl {
+  bottom: 5%;
+  height: 30%;
+  width: 30%;
+}
+
+.CatInterface-tl {
+  top: 5%;
+  height: 50%;
+  width: 20%;
+}
