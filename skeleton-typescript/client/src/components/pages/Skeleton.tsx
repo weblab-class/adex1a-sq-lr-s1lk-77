@@ -6,6 +6,8 @@ import {
   CredentialResponse,
 } from "@react-oauth/google";
 
+import { Link } from "react-router-dom";
+
 import "./Skeleton.css";
 
 //TODO(weblab student): REPLACE WITH YOUR OWN CLIENT_ID
@@ -20,21 +22,33 @@ const Skeleton = (props: Props) => {
   const { handleLogin, handleLogout } = props;
 
   return (
-    <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
-      {props.userId ? (
-        <button
-          onClick={() => {
-            googleLogout();
-            handleLogout();
-          }}
-        >
-          Logout
-        </button>
-      ) : (
-        <GoogleLogin onSuccess={handleLogin} onError={() => console.log("Error Logging in")} />
+    <div className="min-h-screen bg-blue-50 flex flex-col items-center justify-center">
+      <h1 className="text-black-950 p-sm text-lg">Tired of your mundane, tiring life?</h1>
+      <h1 className="text-black-950 p-sm m-xl text-lg">Come escape to the weird cat cafe!</h1>
+      {props.userId && (
+        <Link to="/wallview" className="bg-emerald-500 mb-xl px-xs py-2 rounded-md">
+          Start!
+        </Link>
       )}
-      <h1 className="text-red-500">Good luck on your project :)</h1>
-    </GoogleOAuthProvider>
+      {!props.userId && (
+        <p className="m-md px-xs py-2 text-sm">Login to start and save your progress :3</p>
+      )}
+      <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
+        {props.userId ? (
+          <button
+            className="bg-gray-400 px-xs py-2 rounded-md"
+            onClick={() => {
+              googleLogout();
+              handleLogout();
+            }}
+          >
+            Logout
+          </button>
+        ) : (
+          <GoogleLogin onSuccess={handleLogin} onError={() => console.log("Error Logging in")} />
+        )}
+      </GoogleOAuthProvider>
+    </div>
   );
 };
 
