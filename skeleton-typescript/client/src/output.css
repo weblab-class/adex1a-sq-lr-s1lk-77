@@ -570,12 +570,34 @@ video {
   display: flex;
 }
 
+.size-lg {
+  width: 16px;
+  height: 16px;
+}
+
+.size-xl {
+  width: 24px;
+  height: 24px;
+}
+
 .h-auto {
   height: auto;
 }
 
+.h-sm {
+  height: 8px;
+}
+
 .min-h-screen {
   min-height: 100vh;
+}
+
+.w-sm {
+  width: 8px;
+}
+
+.w-auto {
+  width: auto;
 }
 
 .flex-col {
