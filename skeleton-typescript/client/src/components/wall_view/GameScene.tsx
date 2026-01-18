@@ -1,16 +1,25 @@
-import React, { useContext } from "react";
+import React, { useEffect, useContext } from "react";
 
 import Cat from "./Cat";
 import ItemStation from "./ItemStation";
 import PaintStation from "./PaintStation";
 import InventoryBar from "../InventoryBar";
+import { get, post } from "../../utilities";
 
-import { CatContext } from "../App";
+import { ActiveCatContext } from "../App";
 
 import bg from "../../assets/bg.png";
 
 const GameScene = () => {
-  const { cats, setCats } = useContext(CatContext);
+  const { activeCats, setActiveCats } = useContext(ActiveCatContext);
+
+  /*useEffect(() => {
+    post("/api/newcat").then((newcat) => setCats([newcat]));
+  }, []);*/
+  useEffect(() => {
+    console.log(activeCats);
+  }, [activeCats]);
+
   return (
     <div
       className="min-h-screen bg-no-repeat bg-cover bg-center"
