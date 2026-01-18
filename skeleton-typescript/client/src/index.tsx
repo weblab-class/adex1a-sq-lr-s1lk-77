@@ -16,7 +16,7 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route errorElement={<NotFound />} element={<App />}>
       <Route path="/" element={<WallView />} />
-      <Route path="/cat" element={<CatInterface />} />
+      <Route path="/cat/:catId" element={<CatInterface />} />
     </Route>
   )
 );
