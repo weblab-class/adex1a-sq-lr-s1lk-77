@@ -41,7 +41,7 @@ router.get("/allcats", (req, res) => {
 
 router.get("/activecats", async (req, res) => {
   if (!req.user) {
-    // Not logged in.
+    // Not logged in
     return res.send([]);
   }
 

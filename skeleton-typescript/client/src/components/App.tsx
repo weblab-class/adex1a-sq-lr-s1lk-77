@@ -60,7 +60,7 @@ const App = () => {
   // get the player's active cats on load and ensures the user always has 3 cats
   useEffect(() => {
     getActiveCats();
-  }, []);
+  }, [userId]);
 
   // NOTE:
   // All the pages need to have the props extended via RouteComponentProps for @reach/router to work properly. Please use the Skeleton as an example.
