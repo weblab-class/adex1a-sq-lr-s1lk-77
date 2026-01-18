@@ -18,16 +18,19 @@ const GameScene = () => {
   }, []);*/
   useEffect(() => {
     console.log(activeCats);
-  }, [activeCats]);
+  }, []);
 
+  if (!activeCats) {
+    return <div>log in plz</div>;
+  }
   return (
     <div
       className="min-h-screen bg-no-repeat bg-cover bg-center"
       style={{ backgroundImage: `url(${bg})` }}
     >
-      <Cat />
-      <Cat />
-      <Cat />
+      {activeCats.map((cat) => (
+        <Cat key={cat._id} catDoc={cat} />
+      ))}
       <ItemStation />
       <PaintStation />
       <InventoryBar />

@@ -42,16 +42,16 @@ router.get("/allcats", (req, res) => {
 router.get("/activecats", async (req, res) => {
   if (!req.user) {
     // Not logged in.
-    return res.send({});
+    return res.send([]);
   }
 
-  const cats = await CatModel.find({ playerid: "billy" });
+  const cats = await CatModel.find({ playerid: req.user._id });
   const curActiveCats: Cat[] = cats.filter(
     (cat) => !(cat.hasachieved[0] || cat.hasachieved[1] || cat.hasachieved[2])
   );
 
   while (curActiveCats.length < 3) {
-    const newCatData = gameLogic.generateNewCat("billy");
+    const newCatData = gameLogic.generateNewCat(req.user._id);
     const newCat = new CatModel(newCatData);
     await newCat.save();
     curActiveCats.push(newCat);

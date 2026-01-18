@@ -1,6 +1,6 @@
 import CatData from "./@types/CatData";
 
-const items: string[] = ["pickle", "my homework", "balloon"];
+const items: string[] = ["pickle", "myhomework", "balloon"];
 const item_colors: string[] = ["red", "green", "blue"];
 const actions: string[] = ["pet", "feed", "dress", "bonk"];
 
@@ -95,11 +95,10 @@ const patterns: string[] = ["none", "tabby", "spotted"];
 const default_mood: number = 0;
 
 const randomElementIn = (arr: string[]): string => {
-    return arr[Math.floor(Math.random() * arr.length)];
-}
+  return arr[Math.floor(Math.random() * arr.length)];
+};
 
 const generateNewCat = (playerid: string): CatData => {
-
   return {
     playerid: playerid,
     name: randomElementIn(default_name_prefixes) + randomElementIn(default_name_suffixes),
@@ -109,9 +108,9 @@ const generateNewCat = (playerid: string): CatData => {
     timestamp: Date.now(),
     currentmood: [default_mood, default_mood, default_mood],
     goal: {
-      "happy": [randomElementIn(items), randomElementIn(item_colors), randomElementIn(actions)],
-      "sad": [randomElementIn(items), randomElementIn(item_colors), randomElementIn(actions)],
-      "angry": [randomElementIn(items), randomElementIn(item_colors), randomElementIn(actions)], 
+      happy: [randomElementIn(items), randomElementIn(item_colors), randomElementIn(actions)],
+      sad: [randomElementIn(items), randomElementIn(item_colors), randomElementIn(actions)],
+      angry: [randomElementIn(items), randomElementIn(item_colors), randomElementIn(actions)],
     },
     hasachieved: [false, false, false],
   };
