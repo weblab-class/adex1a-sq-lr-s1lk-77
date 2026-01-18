@@ -4,6 +4,8 @@ import socketManager from "./server-socket";
 
 import gameLogic from "./game-logic";
 import CatModel, { Cat } from "./models/Cat";
+import { ObjectId } from "mongodb";
+import PlayerModel, { Player } from "./models/Player";
 
 const router = express.Router();
 router.post("/login", auth.login);
@@ -27,6 +29,20 @@ router.post("/initsocket", (req, res) => {
 // |------------------------------|
 // | write your API methods below!|
 // |------------------------------|
+
+router.get("/player", (req, res) => {
+  if (!req.user) {
+    // Not logged in.
+    return res.send({});
+  }
+  PlayerModel.findById(req.user._id)
+    .then((player) => {
+      res.send(player);
+    })
+    .catch((err) => {
+      res.status(500).send("User Not");
+    });
+});
 
 router.get("/allcats", (req, res) => {
   if (!req.user) {
@@ -58,6 +74,18 @@ router.get("/activecats", async (req, res) => {
   }
 
   res.send(curActiveCats);
+});
+
+router.get("/catfromid", (req, res) => {
+  const catId: string = req.query.catid as string;
+
+  CatModel.find({ _id: new ObjectId(catId) })
+    .then((catObj) => {
+      res.send(catObj);
+    })
+    .catch((err) => {
+      res.status(500).send("Error" + `catid is ${catId}`);
+    });
 });
 
 // anything else falls to this "not found" case
