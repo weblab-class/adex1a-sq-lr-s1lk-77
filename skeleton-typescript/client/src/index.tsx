@@ -10,11 +10,13 @@ import {
 import NotFound from "./components/pages/NotFound";
 import App from "./components/App";
 import WallView from "./components/pages/WallView";
+import CatInterface from "./components/pages/CatInterface";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route errorElement={<NotFound />} element={<App />}>
       <Route path="/" element={<WallView />} />
+      <Route path="/cat" element={<CatInterface />} />
     </Route>
   )
 );
