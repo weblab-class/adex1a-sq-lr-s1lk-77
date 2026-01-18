@@ -19,7 +19,7 @@ type Props = {
   handleLogin: (credentialResponse: CredentialResponse) => void;
   handleLogout: () => void;
 };
-const Skeleton = (props: Props) => {
+const Skeleton = () => {
   const { userId, handleLogin, handleLogout } = useOutletContext<{
     userId: string | undefined;
     handleLogin: Function;
@@ -29,16 +29,16 @@ const Skeleton = (props: Props) => {
     <div className="min-h-screen bg-blue-50 flex flex-col items-center justify-center">
       <h1 className="text-black-950 p-sm text-lg">Tired of your mundane, tiring life?</h1>
       <h1 className="text-black-950 p-sm m-xl text-lg">Come escape to the weird cat cafe!</h1>
-      {props.userId && (
+      {userId && (
         <Link to="/wallview" className="bg-emerald-500 mb-xl px-xs py-2 rounded-md">
           Start!
         </Link>
       )}
-      {!props.userId && (
+      {!userId && (
         <p className="m-md px-xs py-2 text-sm">Login to start and save your progress :3</p>
       )}
       <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
-        {props.userId ? (
+        {userId ? (
           <button
             className="bg-gray-400 px-xs py-2 rounded-md"
             onClick={() => {
