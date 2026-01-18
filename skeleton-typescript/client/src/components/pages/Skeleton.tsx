@@ -1,4 +1,5 @@
 import React from "react";
+import { useOutletContext } from "react-router-dom";
 import {
   GoogleOAuthProvider,
   GoogleLogin,
@@ -19,8 +20,11 @@ type Props = {
   handleLogout: () => void;
 };
 const Skeleton = (props: Props) => {
-  const { handleLogin, handleLogout } = props;
-
+  const { userId, handleLogin, handleLogout } = useOutletContext<{
+    userId: string | undefined;
+    handleLogin: Function;
+    handleLogout: Function;
+  }>();
   return (
     <div className="min-h-screen bg-blue-50 flex flex-col items-center justify-center">
       <h1 className="text-black-950 p-sm text-lg">Tired of your mundane, tiring life?</h1>
