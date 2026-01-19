@@ -33,7 +33,7 @@ const GameScene = () => {
       ))}
       <ItemStation />
       <PaintStation />
-      <InventoryBar />
+      <InventoryBar initialitems={["pickle"]} dependency={"pickle"} canInteract={true} />
     </div>
   );
 };
