@@ -18,6 +18,7 @@ type SelectedItem = {
 const InventoryBar = (props: Props) => {
   const [items, setItems] = useState<Array<string | null>>([null, null, null, null]);
   const [selectedItem, setSelectedItem] = useState<SelectedItem>({ item: null, index: NaN });
+  const [showPanel, setShowPanel] = useState<boolean>(false);
   let itemsList: Array<React.ReactNode> = [];
 
   // getting initial item list
@@ -36,12 +37,18 @@ const InventoryBar = (props: Props) => {
     console.log(`selected item at index ${idx}`);
     const thisItem: string = items[idx] as string;
     props.canInteract && toggleAction(idx); // only toggle actionPanel if can interact
-    setSelectedItem({ item: parseItemName(thisItem), index: idx });
+    setSelectedItem({ item: thisItem, index: idx });
   };
 
   // callback to control positioning and on/off of action panel, actively working on this
   const toggleAction = (idx: number): void => {
-    // execute things here
+    const currentIdx: number = selectedItem.index;
+    if (idx != currentIdx) {
+      !showPanel && setShowPanel(true);
+      return;
+    }
+
+    setShowPanel(!showPanel);
   };
 
   // generating slots
@@ -69,13 +76,15 @@ const InventoryBar = (props: Props) => {
       <div className="InventoryBar-header u-flex">
         <p className="text-lg text-white">
           {" "}
-          {selectedItem.item ? selectedItem.item : "No Item Selected"}{" "}
+          {selectedItem.item ? parseItemName(selectedItem.item) : "No Item Selected"}{" "}
         </p>
         <img className="text-white" alt="Gear Icon" />
       </div>
       <div className="u-flexColumn border-solid border-white border-2 grow InventoryBar-relative">
         {itemsList}
-        <div className={`ActionPanel ActionPanel-pos${selectedItem.index}`}>
+        <div
+          className={`ActionPanel ActionPanel-pos${selectedItem.index} ${showPanel ? "ActionPanel-show" : "ActionPanel-hide"}`}
+        >
           <ActionPanel itemname={selectedItem.item ? selectedItem.item : "none"} />
         </div>
       </div>

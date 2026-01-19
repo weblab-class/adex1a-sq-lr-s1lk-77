@@ -29,6 +29,14 @@
   padding: 1em;
 }
 
+.ActionPanel-hide {
+  visibility: hidden;
+}
+
+.ActionPanel-show {
+  visibility: visible;
+}
+
 .ActionPanel-pos0 {
   top: 0;
 }

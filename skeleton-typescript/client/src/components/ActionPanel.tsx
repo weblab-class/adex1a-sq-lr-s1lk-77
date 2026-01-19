@@ -8,12 +8,27 @@ type Props = {
 
 // w only multiples of 4 for some reason??
 const SingleItem = (props: Props) => {
+  // click callback for button
+  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+    let thisAction: string = (event.target as HTMLElement).textContent;
+    thisAction = thisAction.charAt(0).toLowerCase() + thisAction.slice(1);
+    console.log(props.itemname + "-" + thisAction);
+
+    // emit event
+    // freeze selection
+  };
+
+  const actionNames: string[] = ["Pet", "Feed", "Dress", "Bonk"];
+
   return (
     <div className="ActionPanel-container">
-      <button>Pet</button>
-      <button>Feed</button>
-      <button>Dress</button>
-      <button>Bonk</button>
+      {actionNames.map((action: string, i: number): React.ReactNode => {
+        return (
+          <button key={`ActionPanel-button${i}`} onClick={handleClick}>
+            {action}
+          </button>
+        );
+      })}
     </div>
   );
 };
