@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
 import SingleItem from "./SingleItem";
+import ActionPanel from "./ActionPanel";
 import "./InventoryBar.css";
+import { parseItemName } from "../custom-utilities";
 
 type Props = {
-  initialitems: Array<string | null>;
-  dependency?: string | null;
+  initialitems: Array<string | null>; // items array passed down from immediate parent
+  canInteract: boolean; // if ActionPanel should popup: true for cat interface, false for wallview
+  dependency?: string | null; // TODO, make inventory bar know when to update itself based on player actions
 };
 
 type SelectedItem = {
@@ -15,11 +18,12 @@ type SelectedItem = {
 const InventoryBar = (props: Props) => {
   const [items, setItems] = useState<Array<string | null>>([null, null, null, null]);
   const [selectedItem, setSelectedItem] = useState<SelectedItem>({ item: null, index: NaN });
+  const [showPanel, setShowPanel] = useState<boolean>(false);
+  const [selectionFrozen, setSelectionFrozen] = useState<boolean>(false);
   let itemsList: Array<React.ReactNode> = [];
-  console.log(props.initialitems);
 
+  // getting initial item list
   useEffect((): void => {
-    console.log("running useEffect in inventory bar");
     setItems(props.initialitems);
   }, [props.initialitems]);
 
@@ -28,18 +32,58 @@ const InventoryBar = (props: Props) => {
     // need to pass in item and number
   }, [props.dependency]);
 
+  // function that takes an index and places the selected item in the state
+  // passed down to SingleItem to be executed in its callback
+  const selectItem = (idx: number): void => {
+    console.log(`selected item at index ${idx}`);
+    const thisItem: string = items[idx] as string;
+    props.canInteract && toggleAction(idx); // only toggle actionPanel if can interact
+    setSelectedItem({ item: thisItem, index: idx });
+  };
+
+  // callback to control positioning and on/off of action panel, actively working on this
+  const toggleAction = (idx: number): void => {
+    const currentIdx: number = selectedItem.index;
+    if (idx != currentIdx) {
+      !showPanel && setShowPanel(true);
+      return;
+    }
+
+    setShowPanel(!showPanel);
+  };
+
+  // callback to freeze selection
+  const freezeSelection = () => {
+    toggleAction(selectedItem.index);
+    setSelectionFrozen(true);
+
+    // this setTimeout should disappear once i figure out sockets
+    setTimeout(() => {
+      setSelectionFrozen(false);
+    }, 5000);
+  };
+
+  // generating slots
   itemsList = items.map((item, i) => {
     if (item) {
       return (
         <div
-          className="h-1/4 border-solid border-white border-2 u-flex justify-center items-center"
+          className={
+            selectedItem.index == i
+              ? "InventoryBar-slot InventoryBar-hasitem InventoryBar-selected"
+              : "InventoryBar-slot InventoryBar-hasitem"
+          }
           key={`itemslot-${i}`}
         >
-          <SingleItem itemname={item} />
+          <SingleItem
+            itemname={item}
+            slotnumber={i}
+            selectItem={selectionFrozen ? null : selectItem}
+          />
         </div>
       );
     } else {
-      return <div className="h-1/4 border-solid border-white border-2" key={`itemslot-${i}`}></div>;
+      return <div className="InventoryBar-slot" key={`itemslot-${i}`}></div>;
     }
   });
 
@@ -48,11 +92,21 @@ const InventoryBar = (props: Props) => {
       <div className="InventoryBar-header u-flex">
         <p className="text-lg text-white">
           {" "}
-          {selectedItem.item ? selectedItem.item : "No Item Selected"}{" "}
+          {selectedItem.item ? parseItemName(selectedItem.item) : "No Item Selected"}{" "}
         </p>
         <img className="text-white" alt="Gear Icon" />
       </div>
-      <div className="u-flexColumn border-solid border-white border-2 grow">{itemsList}</div>
+      <div className="u-flexColumn border-solid border-white border-2 grow InventoryBar-relative">
+        {itemsList}
+        <div
+          className={`ActionPanel ActionPanel-pos${selectedItem.index} ${showPanel ? "ActionPanel-show" : "ActionPanel-hide"}`}
+        >
+          <ActionPanel
+            itemname={selectedItem.item ? selectedItem.item : "none"}
+            freezeSelection={freezeSelection}
+          />
+        </div>
+      </div>
     </div>
   );
 };

@@ -33,17 +33,14 @@ router.post("/initsocket", (req, res) => {
 // |------------------------------|
 
 router.get("/player", (req, res) => {
-  if (!req.user) {
-    // Not logged in.
-    return res.send({});
-  }
-  Player.findById(req.user._id)
-    .then((player: PlayerInterface | null | undefined) => {
-      res.send(player);
-    })
-    .catch((err) => {
-      res.status(500).send("User Not");
-    });
+  // if (!req.user) {
+  //   // Not logged in.
+  //   return res.send({ name: "not logged in" });
+  // }
+  // Player.findById(req.user._id);
+  Player.findById(req.query.playerid).then((player: PlayerInterface | null | undefined) => {
+    res.send(player);
+  });
 });
 
 router.get("/allcats", (req, res) => {
@@ -78,10 +75,11 @@ router.get("/activecats", async (req, res) => {
   res.send(curActiveCats);
 });
 
+// find cat by Id!
 router.get("/catfromid", (req, res) => {
   const catId: string = req.query.catid as string;
 
-  Cat.findById(new ObjectId(catId))
+  Cat.findById(catId)
     .then((catObj: CatInterface | null | undefined) => {
       res.send(catObj);
     })
