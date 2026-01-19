@@ -19,6 +19,7 @@ const InventoryBar = (props: Props) => {
   const [items, setItems] = useState<Array<string | null>>([null, null, null, null]);
   const [selectedItem, setSelectedItem] = useState<SelectedItem>({ item: null, index: NaN });
   const [showPanel, setShowPanel] = useState<boolean>(false);
+  const [selectionFrozen, setSelectionFrozen] = useState<boolean>(false);
   let itemsList: Array<React.ReactNode> = [];
 
   // getting initial item list
@@ -51,6 +52,17 @@ const InventoryBar = (props: Props) => {
     setShowPanel(!showPanel);
   };
 
+  // callback to freeze selection
+  const freezeSelection = () => {
+    toggleAction(selectedItem.index);
+    setSelectionFrozen(true);
+
+    // this setTimeout should disappear once i figure out sockets
+    setTimeout(() => {
+      setSelectionFrozen(false);
+    }, 5000);
+  };
+
   // generating slots
   itemsList = items.map((item, i) => {
     if (item) {
@@ -63,7 +75,11 @@ const InventoryBar = (props: Props) => {
           }
           key={`itemslot-${i}`}
         >
-          <SingleItem itemname={item} slotnumber={i} selectItem={selectItem} />
+          <SingleItem
+            itemname={item}
+            slotnumber={i}
+            selectItem={selectionFrozen ? null : selectItem}
+          />
         </div>
       );
     } else {
@@ -85,7 +101,10 @@ const InventoryBar = (props: Props) => {
         <div
           className={`ActionPanel ActionPanel-pos${selectedItem.index} ${showPanel ? "ActionPanel-show" : "ActionPanel-hide"}`}
         >
-          <ActionPanel itemname={selectedItem.item ? selectedItem.item : "none"} />
+          <ActionPanel
+            itemname={selectedItem.item ? selectedItem.item : "none"}
+            freezeSelection={freezeSelection}
+          />
         </div>
       </div>
     </div>

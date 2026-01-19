@@ -5,13 +5,13 @@ import "./SingleItem.css";
 type Props = {
   itemname: string; // name of item
   slotnumber: number;
-  selectItem: (arg0: number) => void; // callback function from parent
+  selectItem: ((arg0: number) => void) | null; // callback function from parent
 };
 
 const SingleItem = (props: Props) => {
   // callback function on button press
   const handleClick = (event: React.MouseEvent) => {
-    props.selectItem(props.slotnumber); // ping inventory bar that item has been selected
+    props.selectItem && props.selectItem(props.slotnumber); // ping inventory bar that item has been selected
   };
 
   return (

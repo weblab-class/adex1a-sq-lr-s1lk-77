@@ -4,7 +4,10 @@ import "./ActionPanel.css";
 
 type Props = {
   itemname: string;
+  freezeSelection: () => void;
 };
+
+type ActionNames = Array<"Pet" | "Feed" | "Dress" | "Bonk">;
 
 // w only multiples of 4 for some reason??
 const SingleItem = (props: Props) => {
@@ -14,11 +17,12 @@ const SingleItem = (props: Props) => {
     thisAction = thisAction.charAt(0).toLowerCase() + thisAction.slice(1);
     console.log(props.itemname + "-" + thisAction);
 
-    // emit event
-    // freeze selection
+    // emit event start action
+    props.freezeSelection();
+    // onclick remove handle click
   };
 
-  const actionNames: string[] = ["Pet", "Feed", "Dress", "Bonk"];
+  const actionNames: ActionNames = ["Pet", "Feed", "Dress", "Bonk"];
 
   return (
     <div className="ActionPanel-container">
