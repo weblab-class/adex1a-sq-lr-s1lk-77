@@ -16,7 +16,6 @@ const InventoryBar = (props: Props) => {
     <div className="u-flexColumn border-2 border-solid h-screen bg-black">
       <div className="InventoryBar-header u-flex">
         <p className="text-lg text-white"> Inventory Bar </p>
-        <img className="text-white" alt="Gear Icon" />
       </div>
       <div className="u-flexColumn border-solid border-white border-2 grow">
         {items.map((item) => {

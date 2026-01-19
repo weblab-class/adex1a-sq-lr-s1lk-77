@@ -4,10 +4,12 @@ import { get, post } from "../../utilities";
 import InventoryBar from "../InventoryBar";
 import catImg from "../../assets/cat.jpg";
 import "./CatInterface.css";
+import BackButton from "../cat_view/BackButton";
 
 const CatInterface = () => {
   return (
     <>
+      <BackButton />
       <div className="u-flex">
         <div className="u-flex justify-center items-center grow">
           <p>Test cat interface</p>

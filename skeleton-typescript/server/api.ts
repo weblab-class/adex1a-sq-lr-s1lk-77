@@ -60,6 +60,30 @@ router.get("/activecats", async (req, res) => {
   res.send(curActiveCats);
 });
 
+router.post("/visitcat", async (req, res) => {
+  if (!req.user) {
+    // Not logged in
+    return res.send([]);
+  }
+  const cat: Cat | null = await CatModel.findOne({ playerid: req.user._id, _id: req.body.catId });
+  // check if player actually owns this cat
+  if (!cat) {
+    console.log("not ur cat");
+    return res.send([]);
+  }
+  // alter cat based on last visited
+  const updatedCat = await CatModel.findByIdAndUpdate(
+    req.body.catId,
+    {
+      age: gameLogic.calcCatAge(cat),
+      currentmood: gameLogic.calcCatMood(cat),
+      timestamp: Date.now(),
+    },
+    { new: true } // return updated doc
+  );
+  res.send(updatedCat);
+});
+
 // anything else falls to this "not found" case
 router.all("*", (req, res) => {
   const msg = `Api route not found: ${req.method} ${req.url}`;

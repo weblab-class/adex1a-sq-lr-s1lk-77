@@ -116,5 +116,20 @@ const generateNewCat = (playerid: string): CatData => {
   };
 };
 
-const gameLogic = { generateNewCat };
+const calcCatAge = (cat: CatData): number => {
+  // cat ages one year every 30 seconds. time is ticking >:3
+  return cat.age + Math.floor((Date.now() - cat.timestamp) / 30000);
+};
+
+const calcCatMood = (cat: CatData): number[] => {
+  // cat mood decreases by one every minute. time is ticking owo
+  const toDecrease: number = +((Date.now() - cat.timestamp) / 60000).toFixed(2);
+  return [
+    Math.max(0, cat.currentmood[0] - toDecrease),
+    Math.max(0, cat.currentmood[1] - toDecrease),
+    Math.max(0, cat.currentmood[1] - toDecrease),
+  ];
+};
+
+const gameLogic = { generateNewCat, calcCatAge, calcCatMood };
 export default gameLogic;

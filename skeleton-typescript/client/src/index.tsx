@@ -12,12 +12,14 @@ import App from "./components/App";
 import WallView from "./components/pages/WallView";
 import Skeleton from "./components/pages/Skeleton";
 import CatInterface from "./components/pages/CatInterface";
+import Settings from "./components/pages/Settings";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route errorElement={<NotFound />} element={<App />}>
       <Route path="/" element={<Skeleton />} />
       <Route path="/wallview" element={<WallView />} />
+      <Route path="/settings" element={<Settings />} />
       <Route path="/cat/:catId" element={<CatInterface />} />
     </Route>
   )
