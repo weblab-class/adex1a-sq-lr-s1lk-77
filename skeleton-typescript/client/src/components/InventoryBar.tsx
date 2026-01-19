@@ -20,9 +20,6 @@ const InventoryBar = (props: Props) => {
   const [selectedItem, setSelectedItem] = useState<SelectedItem>({ item: null, index: NaN });
   let itemsList: Array<React.ReactNode> = [];
 
-  // action panel is NOT working as intended, still editing
-  let actionPanelClassName: string[] = ["ActionPanel", "ActionPanel-pos0"];
-
   // getting initial item list
   useEffect((): void => {
     setItems(props.initialitems);
@@ -44,12 +41,7 @@ const InventoryBar = (props: Props) => {
 
   // callback to control positioning and on/off of action panel, actively working on this
   const toggleAction = (idx: number): void => {
-    const cachedIdx: number = selectedItem.index;
-    if (cachedIdx != idx) {
-      actionPanelClassName.splice(actionPanelClassName.indexOf(`ActionPanel-pos${cachedIdx}`));
-      actionPanelClassName.push(`ActionPanel-pos${idx}`);
-    }
-    console.log("toggle fired with " + actionPanelClassName);
+    // execute things here
   };
 
   // generating slots
@@ -83,7 +75,7 @@ const InventoryBar = (props: Props) => {
       </div>
       <div className="u-flexColumn border-solid border-white border-2 grow InventoryBar-relative">
         {itemsList}
-        <div className={actionPanelClassName.join(" ")}>
+        <div className={`ActionPanel ActionPanel-pos${selectedItem.index}`}>
           <ActionPanel itemname={selectedItem.item ? selectedItem.item : "none"} />
         </div>
       </div>
