@@ -4,21 +4,62 @@ import { get, post } from "../../utilities";
 import InventoryBar from "../InventoryBar";
 import catImg from "../../assets/cat.jpg";
 import "./CatInterface.css";
+import { useParams } from "react-router-dom";
+import CatInterfaceMongo from "../../../../shared/Cat";
+import PlayerInterface from "../../../../shared/Player";
 import BackButton from "../cat_view/BackButton";
 
 const CatInterface = () => {
+  let props = useParams<"catId">();
+  const [selectedCat, setSelectedCat] = useState<CatInterfaceMongo | null>(null);
+  const [activeItem, setActiveItem] = useState<null>(null);
+  const [player, setPlayer] = useState<PlayerInterface | Object>({
+    items: [null, null, null, null],
+    name: "initial",
+  });
+
+  useEffect(() => {
+    console.log(`running use effect in Cat interface`);
+    document.title = "Cat";
+
+    // testing api request with hardcoded test_player
+    get(`/api/player`, { playerid: "696e6d7c7bc87d68a4ab147f" }).then(
+      (playerObj: PlayerInterface): void => {
+        setPlayer(playerObj);
+      }
+    );
+
+    if (props.catId != "urmom") {
+      get(`/api/catfromid`, { catid: props.catId }).then(
+        (catObj: CatInterfaceMongo): void => setSelectedCat(catObj)
+        // should do a hard player._id = playerid check but not rn
+      );
+    }
+  }, []);
+
+  useEffect(() => {
+    console.log(`player name is ${player.name}`);
+    console.log(`player items is ${player.items}`);
+  }, [player]);
+
+  useEffect(() => {
+    console.log(`cat is ${selectedCat}`);
+    console.log(`cat id is ${selectedCat ? selectedCat._id : "no cat selected"}`);
+    document.title = `Cat | ${selectedCat ? selectedCat.name : "Test Cat"}`;
+  }, [selectedCat]);
+
   return (
     <>
       <BackButton />
       <div className="u-flex">
         <div className="u-flex justify-center items-center grow">
-          <p>Test cat interface</p>
           <div className="w-1/2 h-1/2 border-2 border-black">
-            <img className="object-contain" src={catImg} alt="cat" />
+            <img className="CatInterface-cat" src={catImg} alt="cat" />
           </div>
         </div>
         <div className="w-1/5">
-          <InventoryBar />
+          <InventoryBar initialitems={player.items} dependency={activeItem} canInteract={true} />
+          {/* Assign callback function and pass as props down, should pass dependency variable, function body */}
         </div>
       </div>
       <div className="CatInterface-panel CatInterface-bl border-2 border-black">Panel</div>

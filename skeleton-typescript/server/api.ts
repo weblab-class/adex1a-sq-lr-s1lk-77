@@ -3,7 +3,11 @@ import auth from "./auth";
 import socketManager from "./server-socket";
 
 import gameLogic from "./game-logic";
-import CatModel, { Cat } from "./models/Cat";
+import Cat from "./models/Cat";
+import CatInterface from "../shared/Cat";
+import { ObjectId } from "mongodb";
+import Player from "./models/Player";
+import PlayerInterface from "../shared/Player";
 
 const router = express.Router();
 router.post("/login", auth.login);
@@ -28,13 +32,24 @@ router.post("/initsocket", (req, res) => {
 // | write your API methods below!|
 // |------------------------------|
 
+router.get("/player", (req, res) => {
+  // if (!req.user) {
+  //   // Not logged in.
+  //   return res.send({ name: "not logged in" });
+  // }
+  // Player.findById(req.user._id);
+  Player.findById(req.query.playerid).then((player: PlayerInterface | null | undefined) => {
+    res.send(player);
+  });
+});
+
 router.get("/allcats", (req, res) => {
   if (!req.user) {
     // Not logged in.
     return res.send({});
   }
 
-  CatModel.find({ playerid: req.user._id }).then((cats) => {
+  Cat.find({ playerid: req.user._id }).then((cats) => {
     res.send(cats);
   });
 });
@@ -45,19 +60,32 @@ router.get("/activecats", async (req, res) => {
     return res.send([]);
   }
 
-  const cats = await CatModel.find({ playerid: req.user._id });
-  const curActiveCats: Cat[] = cats.filter(
+  const cats = await Cat.find({ playerid: "billy" });
+  const curActiveCats: CatInterface[] = cats.filter(
     (cat) => !(cat.hasachieved[0] || cat.hasachieved[1] || cat.hasachieved[2])
   );
 
   while (curActiveCats.length < 3) {
     const newCatData = gameLogic.generateNewCat(req.user._id);
-    const newCat = new CatModel(newCatData);
+    const newCat = new Cat(newCatData);
     await newCat.save();
     curActiveCats.push(newCat);
   }
 
   res.send(curActiveCats);
+});
+
+// find cat by Id!
+router.get("/catfromid", (req, res) => {
+  const catId: string = req.query.catid as string;
+
+  Cat.findById(catId)
+    .then((catObj: CatInterface | null | undefined) => {
+      res.send(catObj);
+    })
+    .catch((err) => {
+      res.status(500).send("Error" + `catid is ${catId}`);
+    });
 });
 
 router.post("/visitcat", async (req, res) => {

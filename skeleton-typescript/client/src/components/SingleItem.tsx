@@ -1,13 +1,22 @@
 // a single item in the inventory
 import React from "react";
+import "./SingleItem.css";
 
 type Props = {
-  placeholder: String;
+  itemname: string; // name of item
+  slotnumber: number;
+  selectItem: ((arg0: number) => void) | null; // callback function from parent
 };
 
-// w only multiples of 4 for some reason??
-const Cat = (props: Props) => {
-  return <p className="text-white">{props.placeholder}</p>;
+const SingleItem = (props: Props) => {
+  // callback function on button press
+  const handleClick = (event: React.MouseEvent) => {
+    props.selectItem && props.selectItem(props.slotnumber); // ping inventory bar that item has been selected
+  };
+
+  return (
+    <img className="SingleItem-container text-white" alt={props.itemname} onClick={handleClick} />
+  );
 };
 
-export default Cat;
+export default SingleItem;

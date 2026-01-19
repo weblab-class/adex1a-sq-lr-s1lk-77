@@ -1,0 +1,16 @@
+.ActionPanel-container button {
+  border: 2px solid red;
+  margin-top: 0.3em;
+  padding-left: 0.4em;
+  padding-right: 0.4em;
+}
+
+.ActionPanel-container button:hover {
+  background-color: aqua;
+}
+
+.ActionPanel-container {
+  /* width: 50%; */
+  display: flex;
+  flex-direction: column;
+}
