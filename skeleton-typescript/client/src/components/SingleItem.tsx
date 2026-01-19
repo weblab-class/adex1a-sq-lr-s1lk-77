@@ -3,13 +3,20 @@ import React from "react";
 import "./SingleItem.css";
 
 type Props = {
-  itemname: string;
-  clickcallback?: () => Object;
+  itemname: string; // name of item
+  slotnumber: number;
+  selectItem: (arg0: number) => void; // callback function from parent
 };
 
-// w only multiples of 4 for some reason??
 const SingleItem = (props: Props) => {
-  return <img className="SingleItem-container text-white" alt={props.itemname} />;
+  // callback function on button press
+  const handleClick = (event: React.MouseEvent) => {
+    props.selectItem(props.slotnumber); // ping inventory bar that item has been selected
+  };
+
+  return (
+    <img className="SingleItem-container text-white" alt={props.itemname} onClick={handleClick} />
+  );
 };
 
 export default SingleItem;
