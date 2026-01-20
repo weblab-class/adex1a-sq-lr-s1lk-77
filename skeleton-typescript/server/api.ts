@@ -3,7 +3,8 @@ import auth from "./auth";
 import socketManager from "./server-socket";
 
 import gameLogic from "./game-logic";
-import CatModel, { Cat } from "./models/Cat";
+import Cat from "./models/Cat";
+import CatInterface from "../shared/Cat";
 import { ObjectId } from "mongodb";
 import Player from "./models/Player";
 import PlayerInterface from "../shared/Player";
@@ -48,7 +49,7 @@ router.get("/allcats", (req, res) => {
     return res.send({});
   }
 
-  CatModel.find({ playerid: req.user._id }).then((cats) => {
+  Cat.find({ playerid: req.user._id }).then((cats) => {
     res.send(cats);
   });
 });
@@ -59,14 +60,14 @@ router.get("/activecats", async (req, res) => {
     return res.send([]);
   }
 
-  const cats = await CatModel.find({ playerid: req.user._id });
-  const curActiveCats: Cat[] = cats.filter(
+  const cats = await Cat.find({ playerid: "billy" });
+  const curActiveCats: CatInterface[] = cats.filter(
     (cat) => !(cat.hasachieved[0] || cat.hasachieved[1] || cat.hasachieved[2])
   );
 
   while (curActiveCats.length < 3) {
     const newCatData = gameLogic.generateNewCat(req.user._id);
-    const newCat = new CatModel(newCatData);
+    const newCat = new Cat(newCatData);
     await newCat.save();
     curActiveCats.push(newCat);
   }
@@ -78,8 +79,8 @@ router.get("/activecats", async (req, res) => {
 router.get("/catfromid", (req, res) => {
   const catId: string = req.query.catid as string;
 
-  CatModel.findById(catId)
-    .then((catObj: Cat | null | undefined) => {
+  Cat.findById(catId)
+    .then((catObj: CatInterface | null | undefined) => {
       res.send(catObj);
     })
     .catch((err) => {
@@ -92,14 +93,17 @@ router.post("/visitcat", async (req, res) => {
     // Not logged in
     return res.send([]);
   }
-  const cat: Cat | null = await CatModel.findOne({ playerid: req.user._id, _id: req.body.catId });
+  const cat: CatInterface | null = await Cat.findOne({
+    playerid: req.user._id,
+    _id: req.body.catId,
+  });
   // check if player actually owns this cat
   if (!cat) {
     console.log("not ur cat");
     return res.send([]);
   }
   // alter cat based on last visited
-  const updatedCat = await CatModel.findByIdAndUpdate(
+  const updatedCat = await Cat.findByIdAndUpdate(
     req.body.catId,
     {
       age: gameLogic.calcCatAge(cat),
