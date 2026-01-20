@@ -7,6 +7,7 @@ import "./CatInterface.css";
 import { useParams } from "react-router-dom";
 import CatInterfaceMongo from "../../../../shared/Cat";
 import PlayerInterface from "../../../../shared/Player";
+import BackButton from "../cat_view/BackButton";
 
 const CatInterface = () => {
   let props = useParams<"catId">();
@@ -49,6 +50,7 @@ const CatInterface = () => {
 
   return (
     <>
+      <BackButton />
       <div className="u-flex">
         <div className="u-flex justify-center items-center grow">
           <div className="w-1/2 h-1/2 border-2 border-black">

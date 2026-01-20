@@ -8,7 +8,6 @@ const CatSchema = new Schema({
   pattern: { type: String, required: true },
   timestamp: { type: Number, required: true },
   currentmood: { type: [Number], default: [] },
-  // ??? idrk how goal works
   goal: { type: Map, of: [String] },
   hasachieved: { type: [Boolean], default: [] },
 });

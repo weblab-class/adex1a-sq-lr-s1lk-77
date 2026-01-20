@@ -9,7 +9,11 @@ import { CredentialResponse } from "@react-oauth/google";
 import User from "../../../shared/User";
 import { socket } from "../client-socket";
 
+import { useLocation } from "react-router-dom";
+
 import Cat from "../../../shared/Cat";
+
+import SettingsButton from "../components/SettingsButton";
 
 import "../utilities.css";
 import "../output.css";
@@ -64,10 +68,16 @@ const App = () => {
 
   // NOTE:
   // All the pages need to have the props extended via RouteComponentProps for @reach/router to work properly. Please use the Skeleton as an example.
+  const location = useLocation();
+  const showSettings =
+    userId && (location.pathname === "/wallview" || location.pathname.startsWith("/cat/"));
   return (
-    <ActiveCatContext.Provider value={{ activeCats: activeCats, setActiveCats: setActiveCats }}>
-      <Outlet context={{ userId, handleLogin, handleLogout }} />
-    </ActiveCatContext.Provider>
+    <>
+      {showSettings && <SettingsButton />}
+      <ActiveCatContext.Provider value={{ activeCats: activeCats, setActiveCats: setActiveCats }}>
+        <Outlet context={{ userId, handleLogin, handleLogout }} />
+      </ActiveCatContext.Provider>
+    </>
   );
 };
 

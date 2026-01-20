@@ -18,9 +18,9 @@ const GameScene = () => {
   }, []);*/
   useEffect(() => {
     console.log(activeCats);
-  }, []);
+  }, [activeCats]);
 
-  if (!activeCats) {
+  if (activeCats.length == 0) {
     return <div>log in plz</div>;
   }
   return (
@@ -33,7 +33,7 @@ const GameScene = () => {
       ))}
       <ItemStation />
       <PaintStation />
-      <InventoryBar />
+      <InventoryBar initialitems={["pickle"]} dependency={"pickle"} canInteract={true} />
     </div>
   );
 };
