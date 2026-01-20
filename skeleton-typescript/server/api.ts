@@ -60,7 +60,7 @@ router.get("/activecats", async (req, res) => {
     return res.send([]);
   }
 
-  const cats = await Cat.find({ playerid: "billy" });
+  const cats = await Cat.find({ playerid: req.user._id });
   const curActiveCats: CatInterface[] = cats.filter(
     (cat) => !(cat.hasachieved[0] || cat.hasachieved[1] || cat.hasachieved[2])
   );
