@@ -1,7 +1,7 @@
 import CatData from "./@types/CatData";
 
-const items: string[] = ["pickle", "myhomework", "balloon"];
-const item_colors: string[] = ["red", "green", "blue"];
+const items: string[] = ["pickle", "myhomework", "balloon", "homework"];
+const item_colors: string[] = ["red", "green", "blue", "purple"];
 const actions: string[] = ["pet", "feed", "dress", "bonk"];
 
 const max_age: number = 100;
@@ -129,6 +129,22 @@ const calcCatMood = (cat: CatData): number[] => {
     Math.max(0, cat.currentmood[1] - toDecrease),
     Math.max(0, cat.currentmood[1] - toDecrease),
   ];
+};
+
+/*
+export const verifyaction = function
+verifies whether an action is legit
+returns boolean
+
+*/
+export const verifyAction = (action: string): boolean => {
+  const thisAction: string[] = action.split("-");
+  return (
+    thisAction.length == 3 &&
+    items.includes(thisAction[1]) &&
+    item_colors.includes(thisAction[0]) &&
+    actions.includes(thisAction[2])
+  );
 };
 
 const gameLogic = { generateNewCat, calcCatAge, calcCatMood };

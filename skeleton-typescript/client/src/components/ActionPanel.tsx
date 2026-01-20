@@ -1,6 +1,8 @@
 // a single item in the inventory
-import React from "react";
+import React, { useEffect } from "react";
 import "./ActionPanel.css";
+import { socket } from "../client-socket";
+import { post } from "../utilities";
 
 type Props = {
   itemname: string;
@@ -18,9 +20,30 @@ const SingleItem = (props: Props) => {
     console.log(props.itemname + "-" + thisAction);
 
     // emit event start action
+    post("/api/triggeraction", {
+      socketid: socket.id,
+      action: props.itemname + "-" + thisAction,
+    }).then((result) => {
+      console.log(result.status);
+    });
     props.freezeSelection();
     // onclick remove handle click
   };
+
+  // test eventhandler
+  useEffect(() => {
+    const registerPing = (data: string) => {
+      console.log(`ping from socket received ${data}`);
+    };
+
+    socket.on("actiondenied", registerPing);
+    socket.on("actionbegan", registerPing);
+
+    return () => {
+      socket.off("actiondenied", registerPing);
+      socket.off("actionbegan", registerPing);
+    };
+  }, []);
 
   const actionNames: ActionNames = ["Pet", "Feed", "Dress", "Bonk"];
 
