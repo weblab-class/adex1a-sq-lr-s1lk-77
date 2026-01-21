@@ -16,7 +16,6 @@ const SingleItem = (props: Props) => {
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     let thisAction: string = (event.target as HTMLElement).textContent;
     thisAction = thisAction.charAt(0).toLowerCase() + thisAction.slice(1);
-    console.log(props.itemname + "-" + thisAction);
 
     // emit event start action
     post("/api/triggeraction", {

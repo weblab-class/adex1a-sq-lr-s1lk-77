@@ -57,7 +57,7 @@ const CatInterface = () => {
         <div className="u-flex justify-center items-center grow">
           <CatDisplay sprite={catImg} />
         </div>
-        <div className="w-1/5">
+        <div className="CatInterface-inventorycontainer">
           <InventoryBar initialitems={player.items} dependency={activeItem} canInteract={true} />
           {/* Assign callback function and pass as props down, should pass dependency variable, function body */}
         </div>

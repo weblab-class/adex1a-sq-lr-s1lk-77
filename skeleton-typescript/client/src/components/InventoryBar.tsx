@@ -28,32 +28,67 @@ const InventoryBar = (props: Props) => {
     setItems(props.initialitems);
   }, [props.initialitems]);
 
-  // event handler definitions
+  // !!! event handler definitions
   const registerPing = (data: string) => {
     console.log(`ping from socket received ${data}`);
   };
+
   // on action trigger handler
   const handleActionTrigger = (data: string) => {
     console.log(`ping from socket received ${data}`);
 
+    console.log("states when action is fired");
+    console.log(items);
+    console.log(selectedItem);
+
     // hide panel and freeze selection
     setShowPanel(false);
     setSelectionFrozen(true);
-
-    // this setTimeout should disappear once i figure out sockets
-    setTimeout(() => {
-      setSelectionFrozen(false);
-    }, 5000);
   };
+
+  // on action resolved successfully, remove item
+  const handleActionComplete = (data: string): void => {
+    console.log("inventory bar received action complete ping");
+    console.log(items);
+    console.log("selected item here");
+    console.log(selectedItem);
+    const newItems = [...items];
+    newItems[selectedItem.index] = null;
+    console.log(newItems);
+    setItems(newItems);
+    setSelectedItem({ item: null, index: NaN });
+    setSelectionFrozen(false);
+  };
+
+  // debug
+  useEffect(() => {
+    console.log("items has changed to:");
+    console.log(items);
+  }, [items]);
+
+  useEffect(() => {
+    console.log("item selection has changed to:");
+    console.log(selectedItem);
+  }, [selectedItem]);
+
+  useEffect(() => {
+    setInterval(() => {
+      console.log("states regular update print");
+      console.log(items);
+      console.log(selectedItem);
+    }, 10000);
+  }, []);
 
   // subscribing to events
   useEffect(() => {
     socket.on("actiondenied", registerPing);
     socket.on("actionbegan", handleActionTrigger);
+    socket.on("actioncomplete", handleActionComplete);
 
     return () => {
       socket.off("actiondenied", registerPing);
       socket.off("actionbegan", handleActionTrigger);
+      socket.off("actioncomplete", handleActionComplete);
     };
   }, []);
 
@@ -65,7 +100,6 @@ const InventoryBar = (props: Props) => {
   // function that takes an index and places the selected item in the state
   // passed down to SingleItem to be executed in its callback
   const selectItem = (idx: number): void => {
-    console.log(`selected item at index ${idx}`);
     const thisItem: string = items[idx] as string;
     props.canInteract && toggleAction(idx); // only toggle actionPanel if can interact
     setSelectedItem({ item: thisItem, index: idx });
@@ -85,6 +119,9 @@ const InventoryBar = (props: Props) => {
   // generating slots
   itemsList = items.map((item, i) => {
     if (item) {
+      console.log("states inside item list map function");
+      console.log(items);
+      console.log(selectedItem);
       return (
         <div
           className={
