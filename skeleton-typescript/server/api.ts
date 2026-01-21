@@ -8,6 +8,7 @@ import CatInterface from "../shared/Cat";
 import { ObjectId } from "mongodb";
 import Player from "./models/Player";
 import PlayerInterface from "../shared/Player";
+//import ItemInterface from "../shared/Item";
 
 const router = express.Router();
 router.post("/login", auth.login);
@@ -20,7 +21,7 @@ router.get("/whoami", (req, res) => {
   res.send(req.player);
 });
 router.post("/initsocket", (req, res) => {
-  // do nothing if user not logged in
+  // do nothing if player not logged in
   if (req.player) {
     const socket = socketManager.getSocketFromSocketID(req.body.socketid);
     if (socket !== undefined) socketManager.addUser(req.player, socket);
@@ -33,11 +34,11 @@ router.post("/initsocket", (req, res) => {
 // |------------------------------|
 
 router.get("/player", (req, res) => {
-  // if (!req.user) {
+  // if (!req.player) {
   //   // Not logged in.
   //   return res.send({ name: "not logged in" });
   // }
-  // Player.findById(req.user._id);
+  // Player.findById(req.player._id);
   Player.findById(req.query.playerid).then((player: PlayerInterface | null | undefined) => {
     res.send(player);
   });
