@@ -8,6 +8,7 @@ const Settings = () => {
       <button onClick={() => navigate(-1)}>
         <img alt="go back" />
       </button>
+      <p>Settings.</p>
     </>
   );
 };

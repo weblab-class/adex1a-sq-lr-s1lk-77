@@ -26,7 +26,7 @@ const Cat = (props: Props) => {
   };
   return (
     <>
-      <img src={catImg} className="w-[15vw] h-auto" />
+      <img src={catImg} onClick={handleClick} className="w-[15vw] h-auto" />
     </>
   );
 };

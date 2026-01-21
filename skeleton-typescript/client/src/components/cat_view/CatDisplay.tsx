@@ -21,7 +21,7 @@ const CatDisplay = (props: Props) => {
   // on action registered
   const handleActionTrigger = (input: string): void => {
     const [color, item, action] = input.split("-");
-    const toSpeech: string = `Meow! ${capitalizeFirst(action)} me with your ${color} ${item}`;
+    const toSpeech = `Meow! ${capitalizeFirst(action)} me with your ${color} ${item}`;
     setSpeech(toSpeech);
     setTrigger(input);
   };

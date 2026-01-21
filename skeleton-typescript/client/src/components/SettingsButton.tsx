@@ -10,7 +10,7 @@ const SettingsButton = (props: Props) => {
   return (
     <>
       <button onClick={() => navigate("/settings")}>
-        <img className="text-white" alt="Gear Icon" />
+        <img className="text-black" alt="Gear Icon" />
       </button>
     </>
   );

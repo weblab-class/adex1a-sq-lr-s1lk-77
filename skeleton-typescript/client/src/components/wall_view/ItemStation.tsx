@@ -2,12 +2,13 @@ import React from "react";
 
 type Props = {
   // TO DO
+  onClick: (new_item: string) => void;
 };
 
 const ItemStation = (props: Props) => {
   return (
     <div>
-      <p class="text-lg"> Item Station </p>
+      <p className="text-lg"> Item Station </p>
     </div>
   );
 };

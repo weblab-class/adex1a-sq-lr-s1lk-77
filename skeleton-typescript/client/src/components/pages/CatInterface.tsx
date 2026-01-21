@@ -54,7 +54,7 @@ const CatInterface = () => {
     <>
       <BackButton />
       <div className="u-flex">
-        <div className="u-flex justify-center items-center grow">
+        <div className="u-flex justify-center items-center grow max-w-4/5">
           <CatDisplay sprite={catImg} />
         </div>
         <div className="w-1/5">
