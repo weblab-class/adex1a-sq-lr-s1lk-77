@@ -115,6 +115,13 @@ router.post("/visitcat", async (req, res) => {
   res.send(updatedCat);
 });
 
+router.post("/additem", async (req, res) => {
+  if (!req.player) {
+    // Not logged in
+    return res.send([]);
+  }
+});
+
 /*
 router to /startaction, logs the action that was started
 verifies that it is a correct action
