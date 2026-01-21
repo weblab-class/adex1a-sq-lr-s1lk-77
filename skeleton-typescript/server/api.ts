@@ -140,14 +140,16 @@ router.post("/triggeraction", (req, res) => {
     socketManager
       .getSocketFromSocketID(req.body.socketid)
       ?.emit("actiondenied", "action was denied");
-
-    // for debugging
-    return res.send({ status: "action failed" });
   }
   socketManager.getSocketFromSocketID(req.body.socketid)?.emit("actionbegan", thisAction);
+});
 
-  // for debugging
-  res.send({ status: "action registered" });
+router.post("/resolveaction", (req, res) => {
+  const thisAction: string = req.body.action as string;
+  if (!verifyAction(thisAction)) {
+    socketManager.getSocketFromSocketID(req.body.socketid)?.emit("actionfailed", "action failed");
+  }
+  socketManager.getSocketFromSocketID(req.body.socketid)?.emit("actioncomplete", thisAction);
 });
 
 // anything else falls to this "not found" case

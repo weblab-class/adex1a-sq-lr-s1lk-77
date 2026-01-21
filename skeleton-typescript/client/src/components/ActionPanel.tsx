@@ -22,8 +22,6 @@ const SingleItem = (props: Props) => {
     post("/api/triggeraction", {
       socketid: socket.id,
       action: props.itemname + "-" + thisAction,
-    }).then((result) => {
-      console.log(result.status);
     });
     // onclick remove handle click
   };
