@@ -35,7 +35,6 @@ const CatDisplay = (props: Props) => {
 
   // on action complete
   const handleActionComplete = (data: string): void => {
-    console.log("received ping");
     setTrigger("default");
     makeRandomNoise();
   };

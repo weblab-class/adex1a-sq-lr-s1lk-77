@@ -6,6 +6,7 @@ import { socket } from "../client-socket";
 
 type Props = {
   itemname: string;
+  index: number;
 };
 
 type ActionNames = Array<"Pet" | "Feed" | "Dress" | "Bonk">;
@@ -16,12 +17,12 @@ const SingleItem = (props: Props) => {
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     let thisAction: string = (event.target as HTMLElement).textContent;
     thisAction = thisAction.charAt(0).toLowerCase() + thisAction.slice(1);
-    console.log(props.itemname + "-" + thisAction);
 
     // emit event start action
     post("/api/triggeraction", {
       socketid: socket.id,
       action: props.itemname + "-" + thisAction,
+      index: props.index,
     });
     // onclick remove handle click
   };

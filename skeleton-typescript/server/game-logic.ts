@@ -1,5 +1,7 @@
 import CatData from "./@types/CatData";
 
+// dynamic variables OWO
+
 const items: string[] = ["pickle", "myhomework", "balloon", "homework"];
 const item_colors: string[] = ["red", "green", "blue", "purple"];
 const actions: string[] = ["pet", "feed", "dress", "bonk"];
