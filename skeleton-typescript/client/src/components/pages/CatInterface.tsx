@@ -55,7 +55,7 @@ const CatInterface = () => {
       <BackButton />
       <div className="u-flex">
         <div className="u-flex justify-center items-center grow">
-          <CatDisplay catImg={catImg} />
+          <CatDisplay sprite={catImg} />
         </div>
         <div className="w-1/5">
           <InventoryBar initialitems={player.items} dependency={activeItem} canInteract={true} />
