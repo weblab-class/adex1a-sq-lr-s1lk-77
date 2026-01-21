@@ -8,12 +8,13 @@ import { useParams } from "react-router-dom";
 import CatInterfaceMongo from "../../../../shared/Cat";
 import PlayerInterface from "../../../../shared/Player";
 import BackButton from "../cat_view/BackButton";
+import CatDisplay from "../cat_view/CatDisplay";
 
 const CatInterface = () => {
   let props = useParams<"catId">();
   const [selectedCat, setSelectedCat] = useState<CatInterfaceMongo | null>(null);
   const [activeItem, setActiveItem] = useState<null>(null);
-  const [player, setPlayer] = useState<PlayerInterface | Object>({
+  const [player, setPlayer] = useState<PlayerInterface | object>({
     items: [null, null, null, null],
     name: "initial",
   });
@@ -54,9 +55,7 @@ const CatInterface = () => {
       <BackButton />
       <div className="u-flex">
         <div className="u-flex justify-center items-center grow">
-          <div className="w-1/2 h-1/2 border-2 border-black">
-            <img className="CatInterface-cat" src={catImg} alt="cat" />
-          </div>
+          <CatDisplay catImg={catImg} />
         </div>
         <div className="w-1/5">
           <InventoryBar initialitems={player.items} dependency={activeItem} canInteract={true} />
