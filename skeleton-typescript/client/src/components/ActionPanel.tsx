@@ -6,6 +6,7 @@ import { socket } from "../client-socket";
 
 type Props = {
   itemname: string;
+  index: number;
 };
 
 type ActionNames = Array<"Pet" | "Feed" | "Dress" | "Bonk">;
@@ -21,6 +22,7 @@ const SingleItem = (props: Props) => {
     post("/api/triggeraction", {
       socketid: socket.id,
       action: props.itemname + "-" + thisAction,
+      index: props.index,
     });
     // onclick remove handle click
   };

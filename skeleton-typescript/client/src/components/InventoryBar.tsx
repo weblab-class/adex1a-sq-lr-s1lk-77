@@ -34,7 +34,7 @@ const InventoryBar = (props: Props) => {
   };
 
   // on action trigger handler
-  const handleActionTrigger = (data: string) => {
+  const handleActionTrigger = (data: Array<string | number>) => {
     console.log(`ping from socket received ${data}`);
 
     console.log("states when action is fired");
@@ -47,37 +47,39 @@ const InventoryBar = (props: Props) => {
   };
 
   // on action resolved successfully, remove item
-  const handleActionComplete = (data: string): void => {
-    console.log("inventory bar received action complete ping");
-    console.log(items);
-    console.log("selected item here");
-    console.log(selectedItem);
-    const newItems = [...items];
-    newItems[selectedItem.index] = null;
-    console.log(newItems);
-    setItems(newItems);
-    setSelectedItem({ item: null, index: NaN });
-    setSelectionFrozen(false);
+  const handleActionComplete = (data: number): void => {
+    console.log(data);
+    // console.log("inventory bar received action complete ping");
+    // console.log(items);
+    // console.log("selected item here");
+    // console.log(selectedItem);
+    // const newItems = [...items];
+    // newItems[selectedItem.index] = null;
+    // console.log(newItems);
+    // setItems(newItems);
+    // setSelectedItem({ item: null, index: NaN });
+    // setSelectionFrozen(false);
   };
 
-  // debug
-  useEffect(() => {
-    console.log("items has changed to:");
-    console.log(items);
-  }, [items]);
+  // DEBUGGING CODE
+  // useEffect(() => {
+  //   console.log("items has changed to:");
+  //   console.log(items);
+  // }, [items]);
 
-  useEffect(() => {
-    console.log("item selection has changed to:");
-    console.log(selectedItem);
-  }, [selectedItem]);
+  // useEffect(() => {
+  //   console.log("item selection has changed to:");
+  //   console.log(selectedItem);
+  // }, [selectedItem]);
 
-  useEffect(() => {
-    setInterval(() => {
-      console.log("states regular update print");
-      console.log(items);
-      console.log(selectedItem);
-    }, 10000);
-  }, []);
+  // DEBUGGING CODE
+  // useEffect(() => {
+  //   setInterval(() => {
+  //     console.log("states regular update print");
+  //     console.log(items);
+  //     console.log(selectedItem);
+  //   }, 10000);
+  // }, []);
 
   // subscribing to events
   useEffect(() => {
@@ -156,7 +158,10 @@ const InventoryBar = (props: Props) => {
         {itemsList}
         {showPanel && (
           <div className={`ActionPanel ActionPanel-pos${selectedItem.index}`}>
-            <ActionPanel itemname={selectedItem.item ? selectedItem.item : "none"} />
+            <ActionPanel
+              itemname={selectedItem.item ? selectedItem.item : "none"}
+              index={selectedItem.index}
+            />
           </div>
         )}
       </div>
