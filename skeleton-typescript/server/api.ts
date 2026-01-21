@@ -2,7 +2,7 @@ import express from "express";
 import auth from "./auth";
 import socketManager from "./server-socket";
 
-import gameLogic from "./game-logic";
+import gameLogic, { verifyAction } from "./game-logic";
 import Cat from "./models/Cat";
 import CatInterface from "../shared/Cat";
 import { ObjectId } from "mongodb";
@@ -121,6 +121,33 @@ router.post("/additem", async (req, res) => {
     // Not logged in
     return res.send([]);
   }
+});
+
+/*
+router to /startaction, logs the action that was started
+verifies that it is a correct action
+pings a socket
+req.body has the socket id
+socket emit event "actionstart"
+*/
+
+// this function is pinged on a player's action input
+// information is accessed via req.body.action
+// socket id to emit to is accessed via req.body.socketid
+router.post("/triggeraction", (req, res) => {
+  const thisAction: string = req.body.action as string;
+  if (!verifyAction(thisAction)) {
+    socketManager
+      .getSocketFromSocketID(req.body.socketid)
+      ?.emit("actiondenied", "action was denied");
+
+    // for debugging
+    return res.send({ status: "action failed" });
+  }
+  socketManager.getSocketFromSocketID(req.body.socketid)?.emit("actionbegan", thisAction);
+
+  // for debugging
+  res.send({ status: "action registered" });
 });
 
 // anything else falls to this "not found" case

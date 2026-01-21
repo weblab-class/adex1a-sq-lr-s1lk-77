@@ -1,10 +1,11 @@
 // a single item in the inventory
-import React from "react";
+import React, { useEffect } from "react";
 import "./ActionPanel.css";
+import { post } from "../utilities";
+import { socket } from "../client-socket";
 
 type Props = {
   itemname: string;
-  freezeSelection: () => void;
 };
 
 type ActionNames = Array<"Pet" | "Feed" | "Dress" | "Bonk">;
@@ -18,7 +19,12 @@ const SingleItem = (props: Props) => {
     console.log(props.itemname + "-" + thisAction);
 
     // emit event start action
-    props.freezeSelection();
+    post("/api/triggeraction", {
+      socketid: socket.id,
+      action: props.itemname + "-" + thisAction,
+    }).then((result) => {
+      console.log(result.status);
+    });
     // onclick remove handle click
   };
 

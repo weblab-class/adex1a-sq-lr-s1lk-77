@@ -1,0 +1,31 @@
+.CatDisplay-cat {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.CatDisplay-container {
+  /* w-1/2 h-1/2 border-2 border-black */
+  width: 50%;
+  height: 50%;
+  border: 2px solid black;
+  position: relative;
+}
+
+.CatDisplay-containerbig {
+  /* w-1/2 h-1/2 border-2 border-black */
+  width: 55%;
+  height: 55%;
+  border: 2px solid black;
+  position: relative;
+}
+
+.CatDisplay-speech {
+  font-size: 2em;
+  position: absolute;
+  bottom: 105%;
+  left: 50%;
+}
+
+/* .CatDisplay-speech {
+} */
