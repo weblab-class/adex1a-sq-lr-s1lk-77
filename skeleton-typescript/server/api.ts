@@ -7,6 +7,7 @@ import CatModel, { Cat } from "./models/Cat";
 import { ObjectId } from "mongodb";
 import Player from "./models/Player";
 import PlayerInterface from "../shared/Player";
+import ItemInterface from "../shared/Item";
 
 const router = express.Router();
 router.post("/login", auth.login);
@@ -109,6 +110,13 @@ router.post("/visitcat", async (req, res) => {
     { new: true } // return updated doc
   );
   res.send(updatedCat);
+});
+
+router.post("/additem", async (req, res) => {
+  if (!req.user) {
+    // Not logged in
+    return res.send([]);
+  }
 });
 
 // anything else falls to this "not found" case

@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 
 import Cat from "./Cat";
 import ItemStation from "./ItemStation";
@@ -10,19 +10,33 @@ import { ActiveCatContext } from "../App";
 
 import bg from "../../assets/bg.png";
 
+import Player from "../../../../shared/Player";
+
 const GameScene = () => {
   const { activeCats, setActiveCats } = useContext(ActiveCatContext);
+  const [items, setItems] = useState<Array<string | null>>([null, null, null, null]);
 
-  /*useEffect(() => {
-    post("/api/newcat").then((newcat) => setCats([newcat]));
-  }, []);*/
   useEffect(() => {
     console.log(activeCats);
   }, [activeCats]);
 
-  if (activeCats.length == 0) {
-    return <div>log in plz</div>;
-  }
+  useEffect(() => {
+    get("/api/player").then((player: Player) => {
+      setItems(player.items);
+    });
+  }, []);
+
+  const addItem = (new_item: string) => {
+    // add item at first empty slot
+    for (let i = 0; i < 4; i++) {
+      post("/api/additem", { new_item: new_item }).then((new_list_items) => {
+        if (new_list_items === items) {
+          //TO DO: u can't add item sadge popup
+        }
+        setItems(new_list_items);
+      });
+    }
+  };
   return (
     <div
       className="min-h-screen bg-no-repeat bg-cover bg-center"
@@ -31,9 +45,9 @@ const GameScene = () => {
       {activeCats.map((cat) => (
         <Cat key={cat._id} catDoc={cat} />
       ))}
-      <ItemStation />
+      <ItemStation onClick={addItem} />
       <PaintStation />
-      <InventoryBar initialitems={["pickle"]} dependency={"pickle"} canInteract={true} />
+      <InventoryBar initialitems={items} dependency={"placeholder"} canInteract={true} />
     </div>
   );
 };
