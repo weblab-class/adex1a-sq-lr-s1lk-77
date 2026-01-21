@@ -6,7 +6,7 @@ import { Outlet } from "react-router-dom";
 
 import jwt_decode from "jwt-decode";
 import { CredentialResponse } from "@react-oauth/google";
-import User from "../../../shared/User";
+import Player from "../../../shared/Player";
 import { socket } from "../client-socket";
 
 import { useLocation } from "react-router-dom";
@@ -31,8 +31,8 @@ const App = () => {
   const [userId, setUserId] = useState<string | undefined>(undefined);
 
   useEffect(() => {
-    get("/api/whoami").then((user: User) => {
-      if (user._id) setUserId(user._id);
+    get("/api/whoami").then((player: Player) => {
+      if (player._id) setUserId(player._id);
     });
 
     socket.on("connect", () => {
@@ -42,8 +42,8 @@ const App = () => {
 
   const handleLogin = (credentialResponse: CredentialResponse) => {
     const userToken = credentialResponse.credential;
-    post("/api/login", { token: userToken }).then((user) => {
-      setUserId(user._id);
+    post("/api/login", { token: userToken }).then((player) => {
+      setUserId(player._id);
       post("/api/initsocket", { socketid: socket.id });
     });
   };
@@ -61,7 +61,7 @@ const App = () => {
     // console.log("it working");
   };
 
-  // get the player's active cats on load and ensures the user always has 3 cats
+  // get the player's active cats on load and ensures the player always has 3 cats
   useEffect(() => {
     getActiveCats();
   }, [userId]);

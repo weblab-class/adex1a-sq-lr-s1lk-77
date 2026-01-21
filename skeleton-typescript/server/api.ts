@@ -13,17 +13,17 @@ const router = express.Router();
 router.post("/login", auth.login);
 router.post("/logout", auth.logout);
 router.get("/whoami", (req, res) => {
-  if (!req.user) {
+  if (!req.player) {
     // Not logged in.
     return res.send({});
   }
-  res.send(req.user);
+  res.send(req.player);
 });
 router.post("/initsocket", (req, res) => {
   // do nothing if user not logged in
-  if (req.user) {
+  if (req.player) {
     const socket = socketManager.getSocketFromSocketID(req.body.socketid);
-    if (socket !== undefined) socketManager.addUser(req.user, socket);
+    if (socket !== undefined) socketManager.addUser(req.player, socket);
   }
   res.send({});
 });
@@ -44,29 +44,29 @@ router.get("/player", (req, res) => {
 });
 
 router.get("/allcats", (req, res) => {
-  if (!req.user) {
+  if (!req.player) {
     // Not logged in.
     return res.send({});
   }
 
-  Cat.find({ playerid: req.user._id }).then((cats) => {
+  Cat.find({ playerid: req.player._id }).then((cats) => {
     res.send(cats);
   });
 });
 
 router.get("/activecats", async (req, res) => {
-  if (!req.user) {
+  if (!req.player) {
     // Not logged in
     return res.send([]);
   }
 
-  const cats = await Cat.find({ playerid: req.user._id });
+  const cats = await Cat.find({ playerid: req.player._id });
   const curActiveCats: CatInterface[] = cats.filter(
     (cat) => !(cat.hasachieved[0] || cat.hasachieved[1] || cat.hasachieved[2])
   );
 
   while (curActiveCats.length < 3) {
-    const newCatData = gameLogic.generateNewCat(req.user._id);
+    const newCatData = gameLogic.generateNewCat(req.player._id);
     const newCat = new Cat(newCatData);
     await newCat.save();
     curActiveCats.push(newCat);
@@ -89,12 +89,12 @@ router.get("/catfromid", (req, res) => {
 });
 
 router.post("/visitcat", async (req, res) => {
-  if (!req.user) {
+  if (!req.player) {
     // Not logged in
     return res.send([]);
   }
   const cat: CatInterface | null = await Cat.findOne({
-    playerid: req.user._id,
+    playerid: req.player._id,
     _id: req.body.catId,
   });
   // check if player actually owns this cat

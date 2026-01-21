@@ -44,7 +44,7 @@ app.use(
     saveUninitialized: false,
   })
 );
-app.use(auth.populateCurrentUser);
+app.use(auth.populateCurrentPlayer);
 app.use("/api", api);
 
 // Serves the frontend code
