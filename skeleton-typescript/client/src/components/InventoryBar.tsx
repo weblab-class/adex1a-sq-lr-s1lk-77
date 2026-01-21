@@ -117,11 +117,11 @@ const InventoryBar = (props: Props) => {
       </div>
       <div className="u-flexColumn border-solid border-white border-2 grow InventoryBar-relative">
         {itemsList}
-        <div
-          className={`ActionPanel ActionPanel-pos${selectedItem.index} ${showPanel ? "ActionPanel-show" : "ActionPanel-hide"}`}
-        >
-          <ActionPanel itemname={selectedItem.item ? selectedItem.item : "none"} />
-        </div>
+        {showPanel && (
+          <div className={`ActionPanel ActionPanel-pos${selectedItem.index}`}>
+            <ActionPanel itemname={selectedItem.item ? selectedItem.item : "none"} />
+          </div>
+        )}
       </div>
     </div>
   );

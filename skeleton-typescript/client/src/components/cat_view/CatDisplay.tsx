@@ -1,6 +1,7 @@
 // a single item in the inventory
 import React from "react";
 import "./CatDisplay.css";
+import SpeechBubble from "./SpeechBubble";
 
 type Props = {
   catImg: string;
@@ -8,7 +9,8 @@ type Props = {
 
 const CatDisplay = (props: Props) => {
   return (
-    <div className="w-1/2 h-1/2 border-2 border-black">
+    <div className="CatDisplay-container">
+      <SpeechBubble textcontent="MEOW" />
       <img className="CatDisplay-cat" src={props.catImg} alt="cat" />
     </div>
   );
