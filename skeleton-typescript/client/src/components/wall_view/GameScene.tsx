@@ -37,6 +37,7 @@ const GameScene = () => {
       });
     }
   };
+
   return (
     <div
       className="min-h-screen bg-no-repeat bg-cover bg-center"

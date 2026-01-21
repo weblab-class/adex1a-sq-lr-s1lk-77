@@ -45,6 +45,7 @@ const CatInterface = () => {
   useEffect(() => {
     console.log(`cat is ${selectedCat}`);
     console.log(`cat id is ${selectedCat ? selectedCat._id : "no cat selected"}`);
+    console.log(`player id is ${selectedCat ? selectedCat.playerid : "no cat selected"}`);
     document.title = `Cat | ${selectedCat ? selectedCat.name : "Test Cat"}`;
   }, [selectedCat]);
 
