@@ -11,6 +11,8 @@ import PlayerInterface from "../shared/Player";
 //import ItemInterface from "../shared/Item";
 
 const router = express.Router();
+let cachedIndex: number = NaN;
+
 router.post("/login", auth.login);
 router.post("/logout", auth.logout);
 router.get("/whoami", (req, res) => {
@@ -141,6 +143,8 @@ router.post("/triggeraction", (req, res) => {
       .getSocketFromSocketID(req.body.socketid)
       ?.emit("actiondenied", "action was denied");
   }
+  // information storage
+  cachedIndex = req.body.index;
   socketManager.getSocketFromSocketID(req.body.socketid)?.emit("actionbegan", thisAction);
 });
 
@@ -149,7 +153,7 @@ router.post("/resolveaction", (req, res) => {
   if (!verifyAction(thisAction)) {
     socketManager.getSocketFromSocketID(req.body.socketid)?.emit("actionfailed", "action failed");
   }
-  socketManager.getSocketFromSocketID(req.body.socketid)?.emit("actioncomplete", thisAction);
+  socketManager.getSocketFromSocketID(req.body.socketid)?.emit("actioncomplete", cachedIndex);
 });
 
 // anything else falls to this "not found" case
