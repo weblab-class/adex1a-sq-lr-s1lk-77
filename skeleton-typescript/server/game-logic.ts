@@ -1,7 +1,7 @@
 import CatData from "./@types/CatData";
 
-const items: string[] = ["pickle", "my homework", "balloon"];
-const item_colors: string[] = ["red", "green", "blue"];
+const items: string[] = ["pickle", "myhomework", "balloon", "homework"];
+const item_colors: string[] = ["red", "green", "blue", "purple"];
 const actions: string[] = ["pet", "feed", "dress", "bonk"];
 
 const max_age: number = 100;
@@ -95,11 +95,10 @@ const patterns: string[] = ["none", "tabby", "spotted"];
 const default_mood: number = 0;
 
 const randomElementIn = (arr: string[]): string => {
-    return arr[Math.floor(Math.random() * arr.length)];
-}
+  return arr[Math.floor(Math.random() * arr.length)];
+};
 
 const generateNewCat = (playerid: string): CatData => {
-
   return {
     playerid: playerid,
     name: randomElementIn(default_name_prefixes) + randomElementIn(default_name_suffixes),
@@ -109,13 +108,44 @@ const generateNewCat = (playerid: string): CatData => {
     timestamp: Date.now(),
     currentmood: [default_mood, default_mood, default_mood],
     goal: {
-      "happy": [randomElementIn(items), randomElementIn(item_colors), randomElementIn(actions)],
-      "sad": [randomElementIn(items), randomElementIn(item_colors), randomElementIn(actions)],
-      "angry": [randomElementIn(items), randomElementIn(item_colors), randomElementIn(actions)], 
+      happy: [randomElementIn(items), randomElementIn(item_colors), randomElementIn(actions)],
+      sad: [randomElementIn(items), randomElementIn(item_colors), randomElementIn(actions)],
+      angry: [randomElementIn(items), randomElementIn(item_colors), randomElementIn(actions)],
     },
     hasachieved: [false, false, false],
   };
 };
 
-const gameLogic = { generateNewCat };
+const calcCatAge = (cat: CatData): number => {
+  // cat ages one year every 30 seconds. time is ticking >:3
+  return cat.age + Math.floor((Date.now() - cat.timestamp) / 30000);
+};
+
+const calcCatMood = (cat: CatData): number[] => {
+  // cat mood decreases by one every minute. time is ticking owo
+  const toDecrease: number = +((Date.now() - cat.timestamp) / 60000).toFixed(2);
+  return [
+    Math.max(0, cat.currentmood[0] - toDecrease),
+    Math.max(0, cat.currentmood[1] - toDecrease),
+    Math.max(0, cat.currentmood[1] - toDecrease),
+  ];
+};
+
+/*
+export const verifyaction = function
+verifies whether an action is legit
+returns boolean
+
+*/
+export const verifyAction = (action: string): boolean => {
+  const thisAction: string[] = action.split("-");
+  return (
+    thisAction.length == 3 &&
+    items.includes(thisAction[1]) &&
+    item_colors.includes(thisAction[0]) &&
+    actions.includes(thisAction[2])
+  );
+};
+
+const gameLogic = { generateNewCat, calcCatAge, calcCatMood };
 export default gameLogic;

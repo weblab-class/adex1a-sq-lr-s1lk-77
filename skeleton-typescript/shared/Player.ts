@@ -2,6 +2,6 @@
 Remember to share the interface between your mongoose models
 and frontend here.
 */
-import { User } from "../server/models/User";
+import { Player } from "../server/models/Player";
 
-export default User;
+export default Player;

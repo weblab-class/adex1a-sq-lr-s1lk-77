@@ -1,0 +1,46 @@
+.InventoryBar-header {
+  height: 10%;
+}
+
+.InventoryBar-slot {
+  /* h-1/4 border-solid border-white border-2 u-flex justify-center items-center */
+  height: 25%;
+  border: 2px solid white;
+}
+
+.InventoryBar-hasitem {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.InventoryBar-selected {
+  background-color: rgb(114, 255, 255);
+}
+
+.InventoryBar-relative {
+  position: relative;
+}
+
+.ActionPanel {
+  position: absolute;
+  right: 110%;
+  border: 2px solid black;
+  padding: 1em;
+}
+
+.ActionPanel-pos0 {
+  top: 0;
+}
+
+.ActionPanel-pos1 {
+  top: 25%;
+}
+
+.ActionPanel-pos2 {
+  top: 50%;
+}
+
+.ActionPanel-pos3 {
+  top: 75%;
+}

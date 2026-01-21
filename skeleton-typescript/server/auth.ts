@@ -1,7 +1,7 @@
 import { OAuth2Client, TokenPayload } from "google-auth-library";
 import { NextFunction, Request, Response } from "express";
-import User from "./models/User";
-import UserInterface from "../shared/User";
+import Player from "./models/Player";
+import PlayerInterface from "../shared/Player";
 
 // create a new OAuth client used to verify google sign-in
 //    TODO: replace with your own CLIENT_ID
@@ -17,31 +17,31 @@ const verify = (token: string) => {
     .then((ticket) => ticket.getPayload());
 };
 
-const getOrCreateUser = (user: TokenPayload) => {
-  return User.findOne({ googleid: user.sub }).then(
-    (existingUser: UserInterface | null | undefined) => {
-      if (existingUser !== null && existingUser !== undefined) return existingUser;
-      const newUser = new User({
-        name: user.name,
-        googleid: user.sub,
+const getOrCreatePlayer = (player: TokenPayload) => {
+  return Player.findOne({ googleid: player.sub }).then(
+    (existingPlayer: PlayerInterface | null | undefined) => {
+      if (existingPlayer !== null && existingPlayer !== undefined) return existingPlayer;
+      const newPlayer = new Player({
+        name: player.name,
+        googleid: player.sub,
       });
-      return newUser.save();
+      return newPlayer.save();
     }
   );
 };
 
 const login = (req: Request, res: Response) => {
   verify(req.body.token)
-    .then((user) => {
-      if (user === undefined) return;
-      return getOrCreateUser(user);
+    .then((player) => {
+      if (player === undefined) return;
+      return getOrCreatePlayer(player);
     })
-    .then((user) => {
-      if (user === null || user === undefined) {
+    .then((player) => {
+      if (player === null || player === undefined) {
         throw new Error("Unable to retrieve user.");
       }
-      req.session.user = user;
-      res.send(user);
+      req.session.player = player;
+      res.send(player);
     })
     .catch((err) => {
       console.log(`Failed to login: ${err}`);
@@ -50,18 +50,18 @@ const login = (req: Request, res: Response) => {
 };
 
 const logout = (req: Request, res: Response) => {
-  req.session.user = undefined;
+  req.session.player = undefined;
   res.send({});
 };
 
-const populateCurrentUser = (req: Request, _res: Response, next: NextFunction) => {
-  req.user = req.session.user;
+const populateCurrentPlayer = (req: Request, _res: Response, next: NextFunction) => {
+  req.player = req.session.player;
   next();
 };
 
 // We use any because
 const ensureLoggedIn = (req: Request, res: Response, next: NextFunction) => {
-  if (!req.user) {
+  if (!req.player) {
     return res.status(401).send({ err: "Not logged in." });
   }
   next();
@@ -69,7 +69,7 @@ const ensureLoggedIn = (req: Request, res: Response, next: NextFunction) => {
 
 export default {
   ensureLoggedIn,
-  populateCurrentUser,
+  populateCurrentPlayer,
   login,
   logout,
 };

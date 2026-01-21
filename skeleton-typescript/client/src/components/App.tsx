@@ -6,10 +6,14 @@ import { Outlet } from "react-router-dom";
 
 import jwt_decode from "jwt-decode";
 import { CredentialResponse } from "@react-oauth/google";
-import User from "../../../shared/User";
+import Player from "../../../shared/Player";
 import { socket } from "../client-socket";
 
+import { useLocation } from "react-router-dom";
+
 import Cat from "../../../shared/Cat";
+
+import SettingsButton from "../components/SettingsButton";
 
 import "../utilities.css";
 import "../output.css";
@@ -27,8 +31,8 @@ const App = () => {
   const [userId, setUserId] = useState<string | undefined>(undefined);
 
   useEffect(() => {
-    get("/api/whoami").then((user: User) => {
-      if (user._id) setUserId(user._id);
+    get("/api/whoami").then((player: Player) => {
+      if (player._id) setUserId(player._id);
     });
 
     socket.on("connect", () => {
@@ -38,8 +42,8 @@ const App = () => {
 
   const handleLogin = (credentialResponse: CredentialResponse) => {
     const userToken = credentialResponse.credential;
-    post("/api/login", { token: userToken }).then((user) => {
-      setUserId(user._id);
+    post("/api/login", { token: userToken }).then((player) => {
+      setUserId(player._id);
       post("/api/initsocket", { socketid: socket.id });
     });
   };
@@ -57,17 +61,23 @@ const App = () => {
     // console.log("it working");
   };
 
-  // get the player's active cats on load and ensures the user always has 3 cats
+  // get the player's active cats on load and ensures the player always has 3 cats
   useEffect(() => {
     getActiveCats();
-  }, []);
+  }, [userId]);
 
   // NOTE:
   // All the pages need to have the props extended via RouteComponentProps for @reach/router to work properly. Please use the Skeleton as an example.
+  const location = useLocation();
+  const showSettings =
+    userId && (location.pathname === "/wallview" || location.pathname.startsWith("/cat/"));
   return (
-    <ActiveCatContext.Provider value={{ activeCats: activeCats, setActiveCats: setActiveCats }}>
-      <Outlet context={{ userId, handleLogin, handleLogout }} />
-    </ActiveCatContext.Provider>
+    <>
+      {showSettings && <SettingsButton />}
+      <ActiveCatContext.Provider value={{ activeCats: activeCats, setActiveCats: setActiveCats }}>
+        <Outlet context={{ userId, handleLogin, handleLogout }} />
+      </ActiveCatContext.Provider>
+    </>
   );
 };
 
