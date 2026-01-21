@@ -1,12 +1,11 @@
 // a single item in the inventory
 import React, { useEffect } from "react";
 import "./ActionPanel.css";
-import { socket } from "../client-socket";
 import { post } from "../utilities";
+import { socket } from "../client-socket";
 
 type Props = {
   itemname: string;
-  freezeSelection: () => void;
 };
 
 type ActionNames = Array<"Pet" | "Feed" | "Dress" | "Bonk">;
@@ -26,24 +25,8 @@ const SingleItem = (props: Props) => {
     }).then((result) => {
       console.log(result.status);
     });
-    props.freezeSelection();
     // onclick remove handle click
   };
-
-  // test eventhandler
-  useEffect(() => {
-    const registerPing = (data: string) => {
-      console.log(`ping from socket received ${data}`);
-    };
-
-    socket.on("actiondenied", registerPing);
-    socket.on("actionbegan", registerPing);
-
-    return () => {
-      socket.off("actiondenied", registerPing);
-      socket.off("actionbegan", registerPing);
-    };
-  }, []);
 
   const actionNames: ActionNames = ["Pet", "Feed", "Dress", "Bonk"];
 
