@@ -35,7 +35,7 @@ const CatDisplay = (props: Props) => {
   return (
     <div className={trigger ? "CatDisplay-containerbig" : "CatDisplay-container"}>
       {speech && <SpeechBubble textcontent={speech} />}
-      <CatSprite sprite={props.sprite} trigger={trigger} />
+      <CatSprite sprite={props.sprite} />
     </div>
   );
 };
