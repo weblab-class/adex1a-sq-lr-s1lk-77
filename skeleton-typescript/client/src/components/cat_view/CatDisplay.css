@@ -4,6 +4,10 @@
   object-fit: cover;
 }
 
+.CatDisplay-cat:hover {
+  cursor: pointer;
+}
+
 .CatDisplay-container {
   /* w-1/2 h-1/2 border-2 border-black */
   width: 50%;
