@@ -47,9 +47,9 @@ const GameScene = () => {
         <Cat key={cat._id} catDoc={cat} />
       ))}
 
-      <ItemStation addItem={addItem} item={"pickle"} />
-      <ItemStation addItem={addItem} item={"homework"} />
-      <ItemStation addItem={addItem} item={"balloon"} />
+      <ItemStation addItem={addItem} item={"green-pickle"} />
+      <ItemStation addItem={addItem} item={"white-homework"} />
+      <ItemStation addItem={addItem} item={"red-balloon"} />
 
       <PaintStation />
       <InventoryBar initialitems={items} dependency={"placeholder"} canInteract={true} />
