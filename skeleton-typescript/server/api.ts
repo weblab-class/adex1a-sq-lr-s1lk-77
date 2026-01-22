@@ -189,6 +189,7 @@ router.post("/resolveaction", async (req, res) => {
   thisPlayer.items[cachedIndex] = null;
   socketManager.getSocketFromSocketID(req.body.socketid)?.emit("actioncomplete", thisPlayer.items);
 
+  req.player.items = thisPlayer.items;
   await thisPlayer.save();
   res.send({});
 });
