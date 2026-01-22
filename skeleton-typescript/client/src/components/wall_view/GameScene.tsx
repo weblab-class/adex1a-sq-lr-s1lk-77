@@ -56,7 +56,7 @@ const GameScene = () => {
       </div>
 
       <div className="w-[13.25%]">
-        <InventoryBar initialitems={items} dependency={"placeholder"} canInteract={true} />
+        <InventoryBar initialitems={items} dependency={"placeholder"} canInteract={false} />
       </div>
     </div>
   );
