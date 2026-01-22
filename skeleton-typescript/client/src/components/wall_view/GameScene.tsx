@@ -28,11 +28,11 @@ const GameScene = () => {
   }, []);
 
   const addItem = (new_item: string) => {
-    console.log(items);
     // add item at first empty slot
     post("/api/additem", { new_item: new_item }).then((new_list_items) => {
       if (JSON.stringify(new_list_items) === JSON.stringify(items)) {
         //TO DO: u can't add item sadge popup
+        console.log("ooh no");
       }
       console.log(new_list_items);
       setItems(new_list_items);

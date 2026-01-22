@@ -160,21 +160,47 @@ router.post("/triggeraction", (req, res) => {
     socketManager
       .getSocketFromSocketID(req.body.socketid)
       ?.emit("actiondenied", "action was denied");
-    return;
+    return res.send({});
   }
   // information storage
   cachedIndex = req.body.index;
   socketManager.getSocketFromSocketID(req.body.socketid)?.emit("actionbegan", thisAction);
+  res.send({});
 });
 
-router.post("/resolveaction", (req, res) => {
+router.post("/resolveaction", async (req, res) => {
+  // check that player is logged in
+  if (!req.player) {
+    // Not logged in
+    return res.send([]);
+  }
+
+  // check that action is legit
   const thisAction: string = req.body.action as string;
   if (!verifyAction(thisAction)) {
     socketManager.getSocketFromSocketID(req.body.socketid)?.emit("actionfailed", "action failed");
-    return;
+    return res.send({});
   }
-  socketManager.getSocketFromSocketID(req.body.socketid)?.emit("actioncomplete", cachedIndex);
+  const thisPlayer = await Player.findById(req.player._id);
+  if (!thisPlayer) {
+    socketManager.getSocketFromSocketID(req.body.socketid)?.emit("actionfailed", "action failed");
+    return res.send({});
+  }
+  thisPlayer.items[cachedIndex] = null;
+  socketManager.getSocketFromSocketID(req.body.socketid)?.emit("actioncomplete", thisPlayer.items);
+
+  await thisPlayer.save();
+  res.send({});
 });
+
+// router.post("/resolveaction", (req, res) => {
+//   const thisAction: string = req.body.action as string;
+//   if (!verifyAction(thisAction)) {
+//     socketManager.getSocketFromSocketID(req.body.socketid)?.emit("actionfailed", "action failed");
+//     return;
+//   }
+//   socketManager.getSocketFromSocketID(req.body.socketid)?.emit("actioncomplete", cachedIndex);
+// });
 
 // anything else falls to this "not found" case
 router.all("*", (req, res) => {

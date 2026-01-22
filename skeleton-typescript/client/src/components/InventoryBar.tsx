@@ -47,7 +47,7 @@ const InventoryBar = (props: Props) => {
   };
 
   // on action resolved successfully, remove item
-  const handleActionComplete = (data: number): void => {
+  const handleActionComplete = (data: Array<string | null>): void => {
     console.log(data);
     // console.log("inventory bar received action complete ping");
     console.log("states inside handleActionComplete");
@@ -56,8 +56,8 @@ const InventoryBar = (props: Props) => {
     // const newItems = [...items];
     // newItems[selectedItem.index] = null;
     // console.log(newItems);
-    // setItems(newItems);
-    // setSelectedItem({ item: null, index: NaN });
+    setItems(data);
+    setSelectedItem({ item: null, index: NaN });
     setSelectionFrozen(false);
   };
 
