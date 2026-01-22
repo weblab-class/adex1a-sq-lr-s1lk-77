@@ -3,7 +3,7 @@ import { Schema, model, Document } from "mongoose";
 const PlayerSchema = new Schema({
   name: String,
   googleid: String,
-  items: { type: [String], default: [] },
+  items: { type: [String], default: [null, null, null, null] },
 });
 
 export interface Player extends Document {

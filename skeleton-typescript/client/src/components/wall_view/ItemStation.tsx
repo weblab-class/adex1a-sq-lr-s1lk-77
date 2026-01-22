@@ -1,14 +1,20 @@
 import React from "react";
 
 type Props = {
-  // TO DO
+  addItem: Function;
+  item: string;
 };
 
 const ItemStation = (props: Props) => {
+  const addItem = props.addItem;
+  const item = props.item;
+
   return (
-    <div>
-      <p class="text-lg"> Item Station </p>
-    </div>
+    <>
+      <p class="text-lg" onClick={() => addItem(item)}>
+        Item Station
+      </p>
+    </>
   );
 };
 

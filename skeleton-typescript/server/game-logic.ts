@@ -131,5 +131,16 @@ const calcCatMood = (cat: CatData): number[] => {
   ];
 };
 
-const gameLogic = { generateNewCat, calcCatAge, calcCatMood };
+const addItem = (old_list_items: Array<string>, new_item: string): Array<string> => {
+  for (let i = 0; i < 4; i++) {
+    if (old_list_items[i] === null) {
+      const new_list_items = [...old_list_items];
+      new_list_items[i] = new_item;
+      return new_list_items;
+    }
+  }
+  return old_list_items;
+};
+
+const gameLogic = { generateNewCat, calcCatAge, calcCatMood, addItem };
 export default gameLogic;

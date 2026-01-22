@@ -16,9 +16,10 @@ const GameScene = () => {
   const { activeCats, setActiveCats } = useContext(ActiveCatContext);
   const [items, setItems] = useState<Array<string | null>>([null, null, null, null]);
 
-  useEffect(() => {
+  /* useEffect(() => {
     console.log(activeCats);
-  }, [activeCats]);
+    console.log(items);
+  }, [activeCats, items]); */
 
   useEffect(() => {
     get("/api/player").then((player: Player) => {
@@ -28,14 +29,13 @@ const GameScene = () => {
 
   const addItem = (new_item: string) => {
     // add item at first empty slot
-    for (let i = 0; i < 4; i++) {
-      post("/api/additem", { new_item: new_item }).then((new_list_items) => {
-        if (new_list_items === items) {
-          //TO DO: u can't add item sadge popup
-        }
-        setItems(new_list_items);
-      });
-    }
+    post("/api/additem", { new_item: new_item }).then((new_list_items) => {
+      if (JSON.stringify(new_list_items) === JSON.stringify(items)) {
+        //TO DO: u can't add item sadge popup
+      }
+      console.log(new_list_items);
+      setItems(new_list_items);
+    });
   };
 
   return (
@@ -46,7 +46,8 @@ const GameScene = () => {
       {activeCats.map((cat) => (
         <Cat key={cat._id} catDoc={cat} />
       ))}
-      <ItemStation onClick={addItem} />
+
+      <ItemStation addItem={addItem} item={"pickle"} />
       <PaintStation />
       <InventoryBar initialitems={items} dependency={"placeholder"} canInteract={true} />
     </div>

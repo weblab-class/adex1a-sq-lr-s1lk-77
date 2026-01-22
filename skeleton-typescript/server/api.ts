@@ -39,7 +39,7 @@ router.get("/player", (req, res) => {
   //   return res.send({ name: "not logged in" });
   // }
   // Player.findById(req.player._id);
-  Player.findById(req.query.playerid).then((player: PlayerInterface | null | undefined) => {
+  Player.findById(req.player._id).then((player: PlayerInterface | null | undefined) => {
     res.send(player);
   });
 });
@@ -121,6 +121,12 @@ router.post("/additem", async (req, res) => {
     // Not logged in
     return res.send([]);
   }
+  const new_items_list: Array<string> = gameLogic.addItem(req.player.items, req.body.new_item);
+  await Player.findByIdAndUpdate(req.player._id, {
+    items: new_items_list,
+  });
+  req.player.items = new_items_list; // update in memory so it works even when u don't refresh
+  res.send(new_items_list);
 });
 
 // anything else falls to this "not found" case
