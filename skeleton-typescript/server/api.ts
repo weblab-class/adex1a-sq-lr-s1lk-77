@@ -160,6 +160,7 @@ router.post("/triggeraction", (req, res) => {
     socketManager
       .getSocketFromSocketID(req.body.socketid)
       ?.emit("actiondenied", "action was denied");
+    return;
   }
   // information storage
   cachedIndex = req.body.index;
@@ -170,6 +171,7 @@ router.post("/resolveaction", (req, res) => {
   const thisAction: string = req.body.action as string;
   if (!verifyAction(thisAction)) {
     socketManager.getSocketFromSocketID(req.body.socketid)?.emit("actionfailed", "action failed");
+    return;
   }
   socketManager.getSocketFromSocketID(req.body.socketid)?.emit("actioncomplete", cachedIndex);
 });

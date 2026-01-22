@@ -50,15 +50,15 @@ const InventoryBar = (props: Props) => {
   const handleActionComplete = (data: number): void => {
     console.log(data);
     // console.log("inventory bar received action complete ping");
-    // console.log(items);
-    // console.log("selected item here");
-    // console.log(selectedItem);
+    console.log("states inside handleActionComplete");
+    console.log(items);
+    console.log(selectedItem);
     // const newItems = [...items];
     // newItems[selectedItem.index] = null;
     // console.log(newItems);
     // setItems(newItems);
     // setSelectedItem({ item: null, index: NaN });
-    // setSelectionFrozen(false);
+    setSelectionFrozen(false);
   };
 
   // DEBUGGING CODE
@@ -102,6 +102,9 @@ const InventoryBar = (props: Props) => {
   // function that takes an index and places the selected item in the state
   // passed down to SingleItem to be executed in its callback
   const selectItem = (idx: number): void => {
+    console.log("states inside select item");
+    console.log(items);
+    console.log(selectedItem);
     const thisItem: string = items[idx] as string;
     props.canInteract && toggleAction(idx); // only toggle actionPanel if can interact
     setSelectedItem({ item: thisItem, index: idx });
@@ -121,9 +124,6 @@ const InventoryBar = (props: Props) => {
   // generating slots
   itemsList = items.map((item, i) => {
     if (item) {
-      console.log("states inside item list map function");
-      console.log(items);
-      console.log(selectedItem);
       return (
         <div
           className={
