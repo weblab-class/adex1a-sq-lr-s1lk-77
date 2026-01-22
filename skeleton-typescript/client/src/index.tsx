@@ -11,6 +11,7 @@ import NotFound from "./components/pages/NotFound";
 import App from "./components/App";
 import WallView from "./components/pages/WallView";
 import Login from "./components/pages/Login";
+import Catalog from "./components/pages/Catalog";
 import CatInterface from "./components/pages/CatInterface";
 import Settings from "./components/pages/Settings";
 
@@ -20,6 +21,7 @@ const router = createBrowserRouter(
       <Route path="/" element={<Login />} />
       <Route path="/wallview" element={<WallView />} />
       <Route path="/settings" element={<Settings />} />
+      <Route path="/catalog" element={<Catalog />} />
       <Route path="/cat/:catId" element={<CatInterface />} />
     </Route>
   )
