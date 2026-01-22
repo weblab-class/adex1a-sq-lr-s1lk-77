@@ -10,6 +10,7 @@ interface Emotion {
 const items: Array<string> = ["pickle", "homework", "balloon"];
 const item_colors: Array<string> = ["red", "green", "blue"];
 const actions: Array<string> = ["pet", "feed", "dress", "bonk"];
+const emotionMap: string[] = ["happy", "sad", "angry"];
 
 const max_age: number = 100;
 const default_name_prefixes: string[] = [
@@ -170,7 +171,7 @@ const addItem = (old_list_items: Array<string>, new_item: string): Array<string>
 const updateEmotions = (
   action: string,
   goal: Record<string, string[]>,
-  currentStats: Record<string, number>
+  currentStats: number[]
 ): string => {
   let deltaLog: Emotion = { happy: 0, sad: 0, angry: 0 };
   const tokens: Array<string> = action.split("-");
@@ -178,16 +179,16 @@ const updateEmotions = (
 
   console.log(`parsed action is ${parsedAction}`);
 
-  Object.keys(currentStats).forEach((emotion) => {
-    const delta: number = goal[emotion].filter((word: string, i: number) => {
+  emotionMap.forEach((emotion: string, index: number): void => {
+    const delta: number = goal[emotion].filter((word: string, i: number): boolean => {
       return word === parsedAction[i];
     }).length;
 
     deltaLog[emotion] = delta;
-    currentStats[emotion] += delta;
+    currentStats[index] += delta;
   });
 
-  return Object.keys(deltaLog).reduce((emo1, emo2) =>
+  return Object.keys(deltaLog).reduce((emo1, emo2): string =>
     deltaLog[emo1] > deltaLog[emo2] ? emo1 : emo2
   );
 };
