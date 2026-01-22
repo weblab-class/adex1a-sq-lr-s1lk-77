@@ -125,6 +125,18 @@ router.post("/additem", async (req, res) => {
   }
 });
 
+router.post("/editnotes", async (req, res) => {
+  if (!req.player) {
+    // Not logged in
+    return res.send([]);
+  }
+
+  await Cat.findByIdAndUpdate(req.body.catId, {
+    notes: req.body.notes_value,
+  });
+  res.send([]);
+});
+
 /*
 router to /startaction, logs the action that was started
 verifies that it is a correct action

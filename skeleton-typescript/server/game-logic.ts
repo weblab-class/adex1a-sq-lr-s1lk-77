@@ -115,6 +115,7 @@ const generateNewCat = (playerid: string): CatData => {
       angry: [randomElementIn(items), randomElementIn(item_colors), randomElementIn(actions)],
     },
     hasachieved: [false, false, false],
+    notes: "",
   };
 };
 

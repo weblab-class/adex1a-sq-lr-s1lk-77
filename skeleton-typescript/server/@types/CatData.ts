@@ -8,6 +8,7 @@ interface CatData {
   currentmood: number[];
   goal: Record<string, string[]>;
   hasachieved: boolean[];
+  notes: string;
 }
 
 export default CatData;

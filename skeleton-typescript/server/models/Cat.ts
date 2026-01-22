@@ -10,6 +10,7 @@ const CatSchema = new Schema({
   currentmood: { type: [Number], default: [] },
   goal: { type: Map, of: [String] },
   hasachieved: { type: [Boolean], default: [] },
+  notes: { type: String },
 });
 
 export interface Cat extends Document {
@@ -26,6 +27,8 @@ export interface Cat extends Document {
   currentmood: number[];
   goal: Record<string, string[]>;
   hasachieved: boolean[];
+
+  notes: string;
 }
 
 const CatModel = model<Cat>("Cat", CatSchema);
