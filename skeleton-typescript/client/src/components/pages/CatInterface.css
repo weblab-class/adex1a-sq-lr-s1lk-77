@@ -16,8 +16,6 @@
   width: 20%;
 }
 
-.CatInterface-cat {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+.CatInterface-inventorycontainer {
+  width: 20%;
 }

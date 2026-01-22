@@ -2,15 +2,17 @@ import express from "express";
 import auth from "./auth";
 import socketManager from "./server-socket";
 
-import gameLogic from "./game-logic";
+import gameLogic, { verifyAction } from "./game-logic";
 import Cat from "./models/Cat";
 import CatInterface from "../shared/Cat";
-import { ObjectId } from "mongodb";
+// import { ObjectId } from "mongodb";
 import Player from "./models/Player";
 import PlayerInterface from "../shared/Player";
 //import ItemInterface from "../shared/Item";
 
 const router = express.Router();
+let cachedIndex: number = NaN;
+
 router.post("/login", auth.login);
 router.post("/logout", auth.logout);
 router.get("/whoami", (req, res) => {
@@ -127,6 +129,49 @@ router.post("/additem", async (req, res) => {
   });
   req.player.items = new_items_list; // update in memory so it works even when u don't refresh
   res.send(new_items_list);
+});
+
+router.post("/editnotes", async (req, res) => {
+  if (!req.player) {
+    // Not logged in
+    return res.send([]);
+  }
+
+  await Cat.findByIdAndUpdate(req.body.catId, {
+    notes: req.body.notes_value,
+  });
+  res.send([]);
+});
+
+/*
+router to /startaction, logs the action that was started
+verifies that it is a correct action
+pings a socket
+req.body has the socket id
+socket emit event "actionstart"
+*/
+
+// this function is pinged on a player's action input
+// information is accessed via req.body.action
+// socket id to emit to is accessed via req.body.socketid
+router.post("/triggeraction", (req, res) => {
+  const thisAction: string = req.body.action as string;
+  if (!verifyAction(thisAction)) {
+    socketManager
+      .getSocketFromSocketID(req.body.socketid)
+      ?.emit("actiondenied", "action was denied");
+  }
+  // information storage
+  cachedIndex = req.body.index;
+  socketManager.getSocketFromSocketID(req.body.socketid)?.emit("actionbegan", thisAction);
+});
+
+router.post("/resolveaction", (req, res) => {
+  const thisAction: string = req.body.action as string;
+  if (!verifyAction(thisAction)) {
+    socketManager.getSocketFromSocketID(req.body.socketid)?.emit("actionfailed", "action failed");
+  }
+  socketManager.getSocketFromSocketID(req.body.socketid)?.emit("actioncomplete", cachedIndex);
 });
 
 // anything else falls to this "not found" case

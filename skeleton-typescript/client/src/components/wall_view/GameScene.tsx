@@ -40,7 +40,7 @@ const GameScene = () => {
 
   return (
     <div
-      className="min-h-screen bg-no-repeat bg-cover bg-center"
+      className="min-h-screen bg-no-repeat bg-cover bg-center u-flex"
       style={{ backgroundImage: `url(${bg})` }}
     >
       {activeCats.map((cat) => (

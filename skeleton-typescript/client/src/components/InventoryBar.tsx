@@ -3,6 +3,7 @@ import SingleItem from "./SingleItem";
 import ActionPanel from "./ActionPanel";
 import "./InventoryBar.css";
 import { parseItemName } from "../custom-utilities";
+import { socket } from "../client-socket";
 
 type Props = {
   initialitems: Array<string | null>; // items array passed down from immediate parent
@@ -27,6 +28,72 @@ const InventoryBar = (props: Props) => {
     setItems(props.initialitems);
   }, [props.initialitems]);
 
+  // !!! event handler definitions
+  const registerPing = (data: string) => {
+    console.log(`ping from socket received ${data}`);
+  };
+
+  // on action trigger handler
+  const handleActionTrigger = (data: Array<string | number>) => {
+    console.log(`ping from socket received ${data}`);
+
+    console.log("states when action is fired");
+    console.log(items);
+    console.log(selectedItem);
+
+    // hide panel and freeze selection
+    setShowPanel(false);
+    setSelectionFrozen(true);
+  };
+
+  // on action resolved successfully, remove item
+  const handleActionComplete = (data: number): void => {
+    console.log(data);
+    // console.log("inventory bar received action complete ping");
+    // console.log(items);
+    // console.log("selected item here");
+    // console.log(selectedItem);
+    // const newItems = [...items];
+    // newItems[selectedItem.index] = null;
+    // console.log(newItems);
+    // setItems(newItems);
+    // setSelectedItem({ item: null, index: NaN });
+    // setSelectionFrozen(false);
+  };
+
+  // DEBUGGING CODE
+  // useEffect(() => {
+  //   console.log("items has changed to:");
+  //   console.log(items);
+  // }, [items]);
+
+  // useEffect(() => {
+  //   console.log("item selection has changed to:");
+  //   console.log(selectedItem);
+  // }, [selectedItem]);
+
+  // DEBUGGING CODE
+  // useEffect(() => {
+  //   setInterval(() => {
+  //     console.log("states regular update print");
+  //     console.log(items);
+  //     console.log(selectedItem);
+  //   }, 10000);
+  // }, []);
+
+  // subscribing to events
+  useEffect(() => {
+    socket.on("actiondenied", registerPing);
+    socket.on("actionbegan", handleActionTrigger);
+    socket.on("actioncomplete", handleActionComplete);
+
+    return () => {
+      socket.off("actiondenied", registerPing);
+      socket.off("actionbegan", handleActionTrigger);
+      socket.off("actioncomplete", handleActionComplete);
+    };
+  }, []);
+
   useEffect(() => {
     // setItems here with the item being passed in
     // need to pass in item and number
@@ -35,13 +102,12 @@ const InventoryBar = (props: Props) => {
   // function that takes an index and places the selected item in the state
   // passed down to SingleItem to be executed in its callback
   const selectItem = (idx: number): void => {
-    console.log(`selected item at index ${idx}`);
     const thisItem: string = items[idx] as string;
     props.canInteract && toggleAction(idx); // only toggle actionPanel if can interact
     setSelectedItem({ item: thisItem, index: idx });
   };
 
-  // callback to control positioning and on/off of action panel, actively working on this
+  // callback to control positioning and on/off of action panel
   const toggleAction = (idx: number): void => {
     const currentIdx: number = selectedItem.index;
     if (idx != currentIdx) {
@@ -52,20 +118,12 @@ const InventoryBar = (props: Props) => {
     setShowPanel(!showPanel);
   };
 
-  // callback to freeze selection
-  const freezeSelection = () => {
-    toggleAction(selectedItem.index);
-    setSelectionFrozen(true);
-
-    // this setTimeout should disappear once i figure out sockets
-    setTimeout(() => {
-      setSelectionFrozen(false);
-    }, 5000);
-  };
-
   // generating slots
   itemsList = items.map((item, i) => {
     if (item) {
+      console.log("states inside item list map function");
+      console.log(items);
+      console.log(selectedItem);
       return (
         <div
           className={
@@ -98,14 +156,14 @@ const InventoryBar = (props: Props) => {
       </div>
       <div className="u-flexColumn border-solid border-white border-2 grow InventoryBar-relative">
         {itemsList}
-        <div
-          className={`ActionPanel ActionPanel-pos${selectedItem.index} ${showPanel ? "ActionPanel-show" : "ActionPanel-hide"}`}
-        >
-          <ActionPanel
-            itemname={selectedItem.item ? selectedItem.item : "none"}
-            freezeSelection={freezeSelection}
-          />
-        </div>
+        {showPanel && (
+          <div className={`ActionPanel ActionPanel-pos${selectedItem.index}`}>
+            <ActionPanel
+              itemname={selectedItem.item ? selectedItem.item : "none"}
+              index={selectedItem.index}
+            />
+          </div>
+        )}
       </div>
     </div>
   );

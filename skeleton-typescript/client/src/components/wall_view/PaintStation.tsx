@@ -4,7 +4,7 @@ import paint from "../../assets/paint.png";
 const PaintStation = () => {
   return (
     <div>
-      <img src={paint} className="w-60 h-auto" />
+      <img src={paint} className="w-[15vw] h-auto" />
     </div>
   );
 };

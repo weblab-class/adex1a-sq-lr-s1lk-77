@@ -113,6 +113,7 @@ const generateNewCat = (playerid: string): CatData => {
       angry: [randomElementIn(items), randomElementIn(item_colors), randomElementIn(actions)],
     },
     hasachieved: [false, false, false],
+    notes: "",
   };
 };
 
@@ -129,6 +130,22 @@ const calcCatMood = (cat: CatData): number[] => {
     Math.max(0, cat.currentmood[1] - toDecrease),
     Math.max(0, cat.currentmood[1] - toDecrease),
   ];
+};
+
+/*
+export const verifyaction = function
+verifies whether an action is legit
+returns boolean
+
+*/
+export const verifyAction = (action: string): boolean => {
+  const thisAction: string[] = action.split("-");
+  return (
+    thisAction.length == 3 &&
+    items.includes(thisAction[1]) &&
+    item_colors.includes(thisAction[0]) &&
+    actions.includes(thisAction[2])
+  );
 };
 
 const addItem = (old_list_items: Array<string>, new_item: string): Array<string> => {
