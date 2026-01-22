@@ -43,16 +43,21 @@ const GameScene = () => {
       className="min-h-screen bg-no-repeat bg-cover bg-center u-flex"
       style={{ backgroundImage: `url(${bg})` }}
     >
-      {activeCats.map((cat) => (
-        <Cat key={cat._id} catDoc={cat} />
-      ))}
+      <div className="grow">
+        {activeCats.map((cat) => (
+          <Cat key={cat._id} catDoc={cat} />
+        ))}
 
-      <ItemStation addItem={addItem} item={"green-pickle"} />
-      <ItemStation addItem={addItem} item={"white-homework"} />
-      <ItemStation addItem={addItem} item={"red-balloon"} />
+        <ItemStation addItem={addItem} item={"green-pickle"} />
+        <ItemStation addItem={addItem} item={"white-homework"} />
+        <ItemStation addItem={addItem} item={"red-balloon"} />
 
-      <PaintStation />
-      <InventoryBar initialitems={items} dependency={"placeholder"} canInteract={true} />
+        <PaintStation />
+      </div>
+
+      <div className="w-[13.25%]">
+        <InventoryBar initialitems={items} dependency={"placeholder"} canInteract={true} />
+      </div>
     </div>
   );
 };
