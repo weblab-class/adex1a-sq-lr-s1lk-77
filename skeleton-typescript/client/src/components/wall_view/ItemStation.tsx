@@ -11,7 +11,7 @@ const ItemStation = (props: Props) => {
 
   return (
     <>
-      <p class="text-lg" onClick={() => addItem(item)}>
+      <p className="text-lg" onClick={() => addItem(item)}>
         {item}
       </p>
     </>
