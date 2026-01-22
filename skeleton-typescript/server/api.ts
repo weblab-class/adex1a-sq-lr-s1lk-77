@@ -42,6 +42,9 @@ router.get("/player", (req, res) => {
   // }
   // Player.findById(req.player._id);
   Player.findById(req.player._id).then((player: PlayerInterface | null | undefined) => {
+    if (player) {
+      req.player.items = player.items;
+    }
     res.send(player);
   });
 });
@@ -181,27 +184,14 @@ router.post("/resolveaction", async (req, res) => {
     socketManager.getSocketFromSocketID(req.body.socketid)?.emit("actionfailed", "action failed");
     return res.send({});
   }
-  const thisPlayer = await Player.findById(req.player._id);
-  if (!thisPlayer) {
-    socketManager.getSocketFromSocketID(req.body.socketid)?.emit("actionfailed", "action failed");
-    return res.send({});
-  }
-  thisPlayer.items[cachedIndex] = null;
-  socketManager.getSocketFromSocketID(req.body.socketid)?.emit("actioncomplete", thisPlayer.items);
 
-  req.player.items = thisPlayer.items;
-  await thisPlayer.save();
+  // update inventory and save to db
+  req.player.items[cachedIndex] = null;
+  socketManager.getSocketFromSocketID(req.body.socketid)?.emit("actioncomplete", req.player.items);
+
+  const thisPlayer = await Player.findByIdAndUpdate(req.player._id, { items: req.player.items });
   res.send({});
 });
-
-// router.post("/resolveaction", (req, res) => {
-//   const thisAction: string = req.body.action as string;
-//   if (!verifyAction(thisAction)) {
-//     socketManager.getSocketFromSocketID(req.body.socketid)?.emit("actionfailed", "action failed");
-//     return;
-//   }
-//   socketManager.getSocketFromSocketID(req.body.socketid)?.emit("actioncomplete", cachedIndex);
-// });
 
 // anything else falls to this "not found" case
 router.all("*", (req, res) => {
