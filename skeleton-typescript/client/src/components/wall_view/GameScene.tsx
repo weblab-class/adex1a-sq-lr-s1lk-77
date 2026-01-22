@@ -52,7 +52,7 @@ const GameScene = () => {
       <ItemStation addItem={addItem} item={"red-balloon"} />
 
       <PaintStation />
-      <InventoryBar initialitems={items} dependency={"placeholder"} canInteract={true} />
+      <InventoryBar initialitems={items} dependency={"placeholder"} canInteract={false} />
     </div>
   );
 };
