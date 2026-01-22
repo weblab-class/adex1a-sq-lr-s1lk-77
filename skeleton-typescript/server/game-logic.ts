@@ -1,8 +1,15 @@
 import CatData from "./@types/CatData";
 
-const items: string[] = ["pickle", "homework", "balloon"];
-const item_colors: string[] = ["red", "green", "blue"];
-const actions: string[] = ["pet", "feed", "dress", "bonk"];
+// type declarations
+interface Emotion {
+  happy: number;
+  sad: number;
+  angry: number;
+}
+
+const items: Array<string> = ["pickle", "homework", "balloon"];
+const item_colors: Array<string> = ["red", "green", "blue"];
+const actions: Array<string> = ["pet", "feed", "dress", "bonk"];
 
 const max_age: number = 100;
 const default_name_prefixes: string[] = [
@@ -159,5 +166,31 @@ const addItem = (old_list_items: Array<string>, new_item: string): Array<string>
   return old_list_items;
 };
 
-const gameLogic = { generateNewCat, calcCatAge, calcCatMood, addItem };
+// MUTATES INPUT
+const updateEmotions = (
+  action: string,
+  goal: Record<string, string[]>,
+  currentStats: Record<string, number>
+): string => {
+  let deltaLog: Emotion = { happy: 0, sad: 0, angry: 0 };
+  const tokens: Array<string> = action.split("-");
+  const parsedAction: Array<string> = [tokens[1], tokens[0], tokens[2]];
+
+  console.log(`parsed action is ${parsedAction}`);
+
+  Object.keys(currentStats).forEach((emotion) => {
+    const delta: number = goal[emotion].filter((word: string, i: number) => {
+      return word === parsedAction[i];
+    }).length;
+
+    deltaLog[emotion] = delta;
+    currentStats[emotion] += delta;
+  });
+
+  return Object.keys(deltaLog).reduce((emo1, emo2) =>
+    deltaLog[emo1] > deltaLog[emo2] ? emo1 : emo2
+  );
+};
+
+const gameLogic = { generateNewCat, calcCatAge, calcCatMood, addItem, updateEmotions };
 export default gameLogic;

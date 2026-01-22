@@ -193,6 +193,15 @@ router.post("/resolveaction", async (req, res) => {
   res.send({});
 });
 
+// update cat
+// check player logged in
+// check action is valid
+// pull cat from cat id
+// call game logic to update stats
+// call game logic to determine strongest emotion change
+// socket ping status panel
+// soeckt ping cat image
+
 // anything else falls to this "not found" case
 router.all("*", (req, res) => {
   const msg = `Api route not found: ${req.method} ${req.url}`;
