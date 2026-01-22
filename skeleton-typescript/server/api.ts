@@ -193,6 +193,51 @@ router.post("/resolveaction", async (req, res) => {
   res.send({});
 });
 
+// update cat
+// check player logged in
+// check action is valid
+// pull cat from cat id
+// call game logic to update stats
+// call game logic to determine strongest emotion change
+// socket ping status panel
+// soeckt ping cat image
+
+// following an action, updates emotion stats of cat and socket pings the relevant pieces to update
+// req.body has an action: string and a catid: string
+
+// router.post("/updatecat", async (req, res) => {
+//   if (!req.player) {
+//     // Not logged in
+//     return res.send({});
+//   }
+
+//   res.send({ mood: "got ping" });
+// });
+
+router.post("/updatecat", async (req, res) => {
+  if (!req.player) {
+    // Not logged in
+    return res.send({});
+  }
+
+  // check that action is legit
+  const thisAction: string = req.body.action as string;
+  const catId: string = req.body.catid as string;
+  if (!verifyAction(thisAction)) {
+    return res.send({ mood: "action bad" });
+  }
+
+  // do cat things
+  const thisCat = await Cat.findById(catId);
+  if (!thisCat) {
+    return res.send({ mood: "no cat" });
+  }
+  // const mood: string = gameLogic.updateEmotions(thisAction, thisCat.goal, thisCat.currentmood);
+  // await thisCat.save();
+  // res.send({ mood: mood, stats: thisCat.currentmood });
+  res.send({ mood: "got ping" });
+});
+
 // anything else falls to this "not found" case
 router.all("*", (req, res) => {
   const msg = `Api route not found: ${req.method} ${req.url}`;
