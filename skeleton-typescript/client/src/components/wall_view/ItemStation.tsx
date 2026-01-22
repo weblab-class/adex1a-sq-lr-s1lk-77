@@ -12,7 +12,7 @@ const ItemStation = (props: Props) => {
   return (
     <>
       <p class="text-lg" onClick={() => addItem(item)}>
-        Item Station
+        {item}
       </p>
     </>
   );

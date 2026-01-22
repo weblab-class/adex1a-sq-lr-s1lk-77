@@ -1,6 +1,6 @@
 import CatData from "./@types/CatData";
 
-const items: string[] = ["pickle", "myhomework", "balloon"];
+const items: string[] = ["pickle", "homework", "balloon"];
 const item_colors: string[] = ["red", "green", "blue"];
 const actions: string[] = ["pet", "feed", "dress", "bonk"];
 
