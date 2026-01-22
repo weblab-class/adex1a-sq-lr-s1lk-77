@@ -2,6 +2,7 @@ import React from "react";
 import "./CatDisplay.css";
 import { post } from "../../utilities";
 import { socket } from "../../client-socket";
+import { useParams } from "react-router";
 
 type Props = {
   sprite: string;
@@ -10,6 +11,7 @@ type Props = {
 };
 
 const CatSprite = (props: Props) => {
+  let urlParam = useParams<"catId">();
   // click handler
   const handleClick = (): void => {
     const trigger: string = props.action === "default" ? "" : props.action.split("-")[2];
@@ -18,7 +20,11 @@ const CatSprite = (props: Props) => {
       case "pet":
       case "dress":
       case "feed":
+        console.log("cat id is" + urlParam.catId);
         post("/api/resolveaction", { action: props.action, socketid: socket.id });
+        post("/api/updatecat", { action: props.action, catid: urlParam.catId }).then((result) => {
+          console.log(result);
+        });
         break;
       default:
         props.callback();
