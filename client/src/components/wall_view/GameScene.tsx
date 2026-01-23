@@ -53,7 +53,7 @@ const GameScene = () => {
         <ItemStation addItem={addItem} item={"white-homework"} />
         <ItemStation addItem={addItem} item={"red-balloon"} />
 
-        <PaintStation />
+        <PaintStation color={"blue"} />
       </div>
 
       <div className="w-[13.25%]">

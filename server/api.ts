@@ -240,6 +240,38 @@ router.post("/updatecat", async (req, res) => {
   // res.send({ mood: "got ping" });
 });
 
+router.post("/startpaint", (req, res) => {
+  if (!req.player) {
+    // Not logged in
+    return res.send({});
+  }
+  const color: string = req.body.color as string;
+  if (!gameLogic.verifyColor(color)) {
+    return res.send({});
+  }
+  socketManager.getSocketFromSocketID(req.body.socketid)?.emit("paint", color);
+  res.send({});
+});
+
+router.post("/applypaint", async (req, res) => {
+  if (!req.player) {
+    // Not logged in
+    return res.send([]);
+  }
+  const color: string = req.body.color;
+  const item: string = req.body.item;
+  const index: string = req.body.index;
+  if (!gameLogic.verifyColor(color) || !gameLogic.verifyItems([item])) {
+    return res.send([]);
+  }
+  const new_item = gameLogic.changeColor(color, item);
+  const new_items = req.player.items;
+  new_items[index] = new_item;
+  req.player.items = new_items; // just for readability
+  await Player.findByIdAndUpdate(req.player._id, { items: req.player.items });
+  res.send(req.player.items);
+});
+
 // anything else falls to this "not found" case
 router.all("*", (req, res) => {
   const msg = `Api route not found: ${req.method} ${req.url}`;

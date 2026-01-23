@@ -3,6 +3,7 @@ import SingleItem from "./SingleItem";
 import ActionPanel from "./ActionPanel";
 import "./InventoryBar.css";
 import { parseItemName } from "../custom-utilities";
+import { get, post } from "../utilities";
 import { socket } from "../client-socket";
 
 type Props = {
@@ -28,6 +29,18 @@ const InventoryBar = (props: Props) => {
     setItems(props.initialitems);
   }, [props.initialitems]);
 
+  const applyPaint = (color: string) => {
+    console.log("paint2");
+    if (selectedItem.item == null) return;
+    post("/api/applypaint", {
+      color: color,
+      item: selectedItem.item,
+      index: selectedItem.index,
+    }).then((new_items) => {
+      console.log(new_items);
+      setItems(new_items);
+    });
+  };
   // !!! event handler definitions
   const registerPing = (data: string) => {
     console.log(`ping from socket received ${data}`);
@@ -93,6 +106,16 @@ const InventoryBar = (props: Props) => {
       socket.off("actioncomplete", handleActionComplete);
     };
   }, []);
+
+  useEffect(() => {
+    const paintHandler = (color: string) => applyPaint(color);
+
+    socket.on("paint", paintHandler);
+
+    return () => {
+      socket.off("paint", paintHandler);
+    };
+  }, [applyPaint]);
 
   useEffect(() => {
     // setItems here with the item being passed in
