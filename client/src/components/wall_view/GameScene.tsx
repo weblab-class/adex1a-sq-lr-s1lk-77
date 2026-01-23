@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 
 import Cat from "./Cat";
 import ItemStation from "./ItemStation";
-import PaintStation from "./PaintStation";
+import PaintSelector from "./PaintSelector";
 import InventoryBar from "../InventoryBar";
 import { get, post } from "../../utilities";
 
@@ -53,7 +53,7 @@ const GameScene = () => {
         <ItemStation addItem={addItem} item={"white-homework"} />
         <ItemStation addItem={addItem} item={"red-balloon"} />
 
-        <PaintStation color={"blue"} />
+        <PaintSelector />
       </div>
 
       <div className="w-[13.25%]">
