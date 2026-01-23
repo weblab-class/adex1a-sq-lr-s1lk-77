@@ -1,7 +1,7 @@
 import CatData from "./@types/CatData";
 
 const items: Array<string> = ["pickle", "homework", "balloon"];
-const item_colors: Array<string> = ["red", "green", "blue", "white"];
+const item_colors: Array<string> = ["red", "green", "blue"];
 const actions: Array<string> = ["pet", "feed", "dress", "bonk"];
 const emotionMap: string[] = ["happy", "sad", "angry"];
 

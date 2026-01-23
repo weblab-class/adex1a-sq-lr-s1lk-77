@@ -26,6 +26,19 @@ const CatDisplay = (props: Props) => {
     setTrigger(input);
   };
 
+  // denied action
+  const handleActionDenied = (input: string): void => {
+    setTrigger("failed");
+    const color = input.split("-")[0];
+    const toSpeech = `meow, ${color} is boring, add some color`;
+    setSpeech(toSpeech);
+
+    setTimeout(() => {
+      setTrigger("default");
+      makeRandomNoise();
+    }, 2000);
+  };
+
   // on click cat image when action not firing
   const makeRandomNoise = (): void => {
     // code here
@@ -59,10 +72,12 @@ const CatDisplay = (props: Props) => {
   // listener subscriptions
   useEffect(() => {
     socket.on("actionbegan", handleActionTrigger);
+    socket.on("actiondenied", handleActionDenied);
     socket.on("updatestatus", handleActionComplete);
 
     return () => {
       socket.off("actionbegan", handleActionTrigger);
+      socket.off("actiondenied", handleActionDenied);
       socket.off("updatestatus", handleActionComplete);
     };
   }, []);

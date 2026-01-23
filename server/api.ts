@@ -160,9 +160,7 @@ socket emit event "actionstart"
 router.post("/triggeraction", (req, res) => {
   const thisAction: string = req.body.action as string;
   if (!gameLogic.verifyAction(thisAction)) {
-    socketManager
-      .getSocketFromSocketID(req.body.socketid)
-      ?.emit("actiondenied", "action was denied");
+    socketManager.getSocketFromSocketID(req.body.socketid)?.emit("actiondenied", thisAction);
     return res.send({});
   }
   // information storage

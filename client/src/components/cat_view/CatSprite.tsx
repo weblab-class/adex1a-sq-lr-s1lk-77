@@ -14,7 +14,10 @@ const CatSprite = (props: Props) => {
   let urlParam = useParams<"catId">();
   // click handler
   const handleClick = (): void => {
-    const trigger: string = props.action === "default" ? "" : props.action.split("-")[2];
+    const trigger: string =
+      props.action === "default" || props.action === "failed"
+        ? props.action
+        : props.action.split("-")[2];
     switch (trigger) {
       case "bonk":
       case "pet":
@@ -30,8 +33,10 @@ const CatSprite = (props: Props) => {
           console.log(result);
         });
         break;
-      default:
+      case "default":
         props.callback();
+        break;
+      default:
         break;
     }
   };
