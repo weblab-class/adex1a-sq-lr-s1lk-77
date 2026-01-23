@@ -34,19 +34,36 @@ const CatDisplay = (props: Props) => {
   };
 
   // on action complete
-  const handleActionComplete = (data: string): void => {
+  const handleActionComplete = (data): void => {
+    let message: string;
+    console.log(data);
+
+    switch (data.mostfelt) {
+      case "happy":
+        message = "purrrr";
+        break;
+      case "sad":
+        message = "sadge QQ";
+        break;
+      case "angry":
+        message = "hiss";
+        break;
+      default:
+        message = "meow";
+    }
+
     setTrigger("default");
-    makeRandomNoise();
+    setSpeech(message);
   };
 
   // listener subscriptions
   useEffect(() => {
     socket.on("actionbegan", handleActionTrigger);
-    socket.on("actioncomplete", handleActionComplete);
+    socket.on("updatestatus", handleActionComplete);
 
     return () => {
       socket.off("actionbegan", handleActionTrigger);
-      socket.off("actioncomplete", handleActionComplete);
+      socket.off("updatestatus", handleActionComplete);
     };
   }, []);
 

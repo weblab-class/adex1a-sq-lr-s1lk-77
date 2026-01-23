@@ -13,8 +13,8 @@ type Props = {
 const CatStatus = (props: Props) => {
   const [currentMood, setCurrentMood] = useState<Array<number>>([0, 0, 0]);
   // callback definition
-  const handleStatusUpdate = (data: Array<number>): void => {
-    setCurrentMood(data);
+  const handleStatusUpdate = (data): void => {
+    setCurrentMood(data.currentmood);
   };
 
   useEffect(() => {

@@ -1,7 +1,7 @@
 import CatData from "./@types/CatData";
 
 const items: Array<string> = ["pickle", "homework", "balloon"];
-const item_colors: Array<string> = ["red", "green", "blue"];
+const item_colors: Array<string> = ["red", "green", "blue", "white"];
 const actions: Array<string> = ["pet", "feed", "dress", "bonk"];
 const emotionMap: string[] = ["happy", "sad", "angry"];
 
@@ -137,7 +137,7 @@ verifies whether an action is legit
 returns boolean
 
 */
-export const verifyAction = (action: string): boolean => {
+const verifyAction = (action: string): boolean => {
   const thisAction: string[] = action.split("-");
   return (
     thisAction.length == 3 &&
@@ -180,11 +180,20 @@ const updateEmotions = (
     currentStats[index] += delta;
     deltaLog[emotion] = delta;
   });
-  // return Object.keys(deltaLog).reduce((emo1, emo2): string =>
-  //   deltaLog[emo1] > deltaLog[emo2] ? emo1 : emo2
-  // );
-  return "happy";
+
+  return Object.keys(deltaLog).reduce((emo1, emo2): string =>
+    deltaLog[emo1] > deltaLog[emo2] ? emo1 : emo2
+  );
+  // return "happy";
 };
 
-const gameLogic = { generateNewCat, calcCatAge, calcCatMood, addItem, updateEmotions, parseAction };
+const gameLogic = {
+  generateNewCat,
+  calcCatAge,
+  calcCatMood,
+  addItem,
+  updateEmotions,
+  parseAction,
+  verifyAction,
+};
 export default gameLogic;

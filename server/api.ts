@@ -2,7 +2,7 @@ import express from "express";
 import auth from "./auth";
 import socketManager from "./server-socket";
 
-import gameLogic, { verifyAction } from "./game-logic";
+import gameLogic from "./game-logic";
 import Cat from "./models/Cat";
 import CatInterface from "../shared/Cat";
 // import { ObjectId } from "mongodb";
@@ -159,7 +159,7 @@ socket emit event "actionstart"
 // socket id to emit to is accessed via req.body.socketid
 router.post("/triggeraction", (req, res) => {
   const thisAction: string = req.body.action as string;
-  if (!verifyAction(thisAction)) {
+  if (!gameLogic.verifyAction(thisAction)) {
     socketManager
       .getSocketFromSocketID(req.body.socketid)
       ?.emit("actiondenied", "action was denied");
@@ -180,7 +180,7 @@ router.post("/resolveaction", async (req, res) => {
 
   // check that action is legit
   const thisAction: string = req.body.action as string;
-  if (!verifyAction(thisAction)) {
+  if (!gameLogic.verifyAction(thisAction)) {
     socketManager.getSocketFromSocketID(req.body.socketid)?.emit("actionfailed", "action failed");
     return res.send({});
   }
@@ -223,7 +223,7 @@ router.post("/updatecat", async (req, res) => {
   // check that action is legit
   const thisAction: string = req.body.action as string;
   const catId: string = req.body.catid as string;
-  if (!verifyAction(thisAction)) {
+  if (!gameLogic.verifyAction(thisAction)) {
     return res.send({ mood: "action bad" });
   }
 
@@ -234,8 +234,10 @@ router.post("/updatecat", async (req, res) => {
   }
   const parsedAction = gameLogic.parseAction(thisAction);
   const goal = [thisCat.happy, thisCat.sad, thisCat.angry];
-  const test: string = gameLogic.updateEmotions(parsedAction, goal, thisCat.currentmood);
-  socketManager.getSocketFromSocketID(req.body.socketid)?.emit("updatestatus", thisCat.currentmood);
+  const mostfelt: string = gameLogic.updateEmotions(parsedAction, goal, thisCat.currentmood);
+  socketManager
+    .getSocketFromSocketID(req.body.socketid)
+    ?.emit("updatestatus", { currentmood: thisCat.currentmood, mostfelt: mostfelt });
   await thisCat.save();
   res.send({});
 });
