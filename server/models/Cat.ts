@@ -8,11 +8,14 @@ const CatSchema = new Schema({
   pattern: { type: String, required: true },
   timestamp: { type: Number, required: true },
   currentmood: { type: [Number], default: [] },
-  goal: { type: Map, of: [String] },
+  happy: { type: [String] },
+  sad: { type: [String] },
+  angry: { type: [String] },
   hasachieved: { type: [Boolean], default: [] },
   notes: { type: String },
 });
 
+// export type Emotion = 'happy'
 export interface Cat extends Document {
   playerid: string;
 
@@ -25,7 +28,9 @@ export interface Cat extends Document {
   timestamp: number;
 
   currentmood: number[];
-  goal: Record<string, string[]>;
+  happy: string[];
+  sad: string[];
+  angry: string[];
   hasachieved: boolean[];
 
   notes: string;

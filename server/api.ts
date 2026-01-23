@@ -233,10 +233,14 @@ router.post("/updatecat", async (req, res) => {
     return res.send({ mood: "no cat" });
   }
   const parsedAction = gameLogic.parseAction(thisAction);
+  // const test: string = gameLogic.updateEmotions(parsedAction, thisCat.goal, thisCat.currentmood);
   // await thisCat.save();
-  thisCat.currentmood = [1, 1, 1];
   socketManager.getSocketFromSocketID(req.body.socketid)?.emit("updatestatus", thisCat.currentmood);
-  res.send({ mood: "test mood", parsedAction: parsedAction });
+  res.send({
+    mood: "test mood",
+    parsedAction: parsedAction,
+    currentmood: thisCat.currentmood,
+  });
   // res.send({ mood: "got ping" });
 });
 

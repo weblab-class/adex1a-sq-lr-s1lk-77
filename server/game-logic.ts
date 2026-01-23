@@ -108,11 +108,9 @@ const generateNewCat = (playerid: string): CatData => {
     pattern: randomElementIn(patterns),
     timestamp: Date.now(),
     currentmood: [default_mood, default_mood, default_mood],
-    goal: {
-      happy: [randomElementIn(items), randomElementIn(item_colors), randomElementIn(actions)],
-      sad: [randomElementIn(items), randomElementIn(item_colors), randomElementIn(actions)],
-      angry: [randomElementIn(items), randomElementIn(item_colors), randomElementIn(actions)],
-    },
+    happy: [randomElementIn(items), randomElementIn(item_colors), randomElementIn(actions)],
+    sad: [randomElementIn(items), randomElementIn(item_colors), randomElementIn(actions)],
+    angry: [randomElementIn(items), randomElementIn(item_colors), randomElementIn(actions)],
     hasachieved: [false, false, false],
     notes: "",
   };
@@ -172,18 +170,36 @@ const updateEmotions = (
   currentStats: number[]
 ): string => {
   let deltaLog: Record<string, number> = { happy: 0, sad: 0, angry: 0 };
-  emotionMap.forEach((emotion: string, index: number): void => {
-    const delta: number = goal[emotion].filter((word: string, i: number): boolean => {
-      return word === parsedAction[i];
-    }).length;
 
-    deltaLog[emotion] = delta;
-    currentStats[index] += delta;
+  emotionMap.forEach((emotion: string, index: number) => {
+    console.log(goal);
+    console.log(emotion);
+    // const filterFunc = (item) => true;
+
+    const key = Object.entries(goal);
+    console.log("KEY", key);
+
+    const test = goal[emotion]; //.filter((item) => true);
+    console.log(test, emotion);
+
+    deltaLog[emotion] = emotion.length;
+    currentStats[index] += emotion.length;
   });
 
-  return Object.keys(deltaLog).reduce((emo1, emo2): string =>
-    deltaLog[emo1] > deltaLog[emo2] ? emo1 : emo2
-  );
+  // loops
+  // emotionMap.forEach((emotion: string, index: number): void => {
+  //   const delta: number = goal[emotion].filter((word: string, i: number): boolean => {
+  //     return word === parsedAction[i];
+  //   }).length;
+
+  // deltaLog[emotion] = delta;
+  //   currentStats[index] += delta;
+  // });
+
+  // return Object.keys(deltaLog).reduce((emo1, emo2): string =>
+  //   deltaLog[emo1] > deltaLog[emo2] ? emo1 : emo2
+  // );
+  return "happy";
 };
 
 const gameLogic = { generateNewCat, calcCatAge, calcCatMood, addItem, updateEmotions, parseAction };

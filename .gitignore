@@ -4,3 +4,4 @@ client/dist/bundle.js.LICENSE.txt
 node_modules/
 .env
 server/local-tests.ts
+.DS_Store

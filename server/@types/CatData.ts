@@ -6,7 +6,9 @@ interface CatData {
   pattern: string;
   timestamp: number;
   currentmood: number[];
-  goal: Record<string, string[]>;
+  happy: string[];
+  sad: string[];
+  angry: string[];
   hasachieved: boolean[];
   notes: string;
 }
