@@ -1,7 +1,7 @@
 import CatData from "./@types/CatData";
 
 const items: Array<string> = ["pickle", "homework", "balloon"];
-const item_colors: Array<string> = ["red", "green", "blue"];
+const item_colors: Array<string> = ["red", "green", "blue", "white"];
 const actions: Array<string> = ["pet", "feed", "dress", "bonk"];
 const emotionMap: string[] = ["happy", "sad", "angry"];
 
@@ -147,6 +147,37 @@ const verifyAction = (action: string): boolean => {
   );
 };
 
+const verifyColor = (color: string): boolean => {
+  for (let item_color of item_colors) {
+    if (color === item_color) {
+      return true;
+    }
+  }
+  return false;
+};
+
+const verifyItems = (query_items: Array<string | null>): boolean => {
+  for (let query_item of query_items) {
+    if (query_item === null) continue;
+    query_item = query_item.split("-")[1];
+    let is_valid: boolean = false;
+    //array.forEach
+    for (let item of items) {
+      if (query_item === item) {
+        is_valid = true;
+        break;
+      }
+    }
+    if (!is_valid) return false;
+  }
+  return true;
+};
+
+const changeColor = (color: string, item: string) => {
+  const tokens: Array<string> = item.split("-");
+  return color + "-" + tokens[1];
+};
+
 const addItem = (old_list_items: Array<string>, new_item: string): Array<string> => {
   for (let i = 0; i < 4; i++) {
     if (old_list_items[i] === null) {
@@ -195,5 +226,8 @@ const gameLogic = {
   updateEmotions,
   parseAction,
   verifyAction,
+  verifyColor,
+  verifyItems,
+  changeColor,
 };
 export default gameLogic;
