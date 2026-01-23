@@ -18,4 +18,5 @@
 
 .CatInterface-inventorycontainer {
   width: 20%;
+  justify-content: space-evenly;
 }

@@ -177,7 +177,7 @@ const updateEmotions = (
       return word === goalArray[i];
     }).length;
 
-    currentStats[index] += delta;
+    currentStats[index] = Math.min(currentStats[index] + delta, 10);
     deltaLog[emotion] = delta;
   });
 

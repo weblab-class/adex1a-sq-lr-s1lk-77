@@ -5,6 +5,8 @@ import { useParams } from "react-router-dom";
 import CatInterfaceMongo from "../../../../shared/Cat";
 import PlayerInterface from "../../../../shared/Player";
 import { socket } from "../../client-socket";
+import StatusBar from "./StatusBar";
+import "./CatStatus.css";
 
 type Props = {
   selectedCat: CatInterfaceMongo | null;
@@ -12,6 +14,7 @@ type Props = {
 
 const CatStatus = (props: Props) => {
   const [currentMood, setCurrentMood] = useState<Array<number>>([0, 0, 0]);
+  const numbers: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   // callback definition
   const handleStatusUpdate = (data): void => {
     setCurrentMood(data.currentmood);
@@ -31,14 +34,33 @@ const CatStatus = (props: Props) => {
     };
   }, []);
 
+  const gridlines: Array<React.ReactNode> = numbers.map((loc: number) => {
+    return (
+      <div className="CatStatus-gridline" key={`Gridline_${loc - 1}`}>
+        <div className="CatStatus-gridlabel">{loc}</div>
+      </div>
+    );
+  });
+
   return (
     <>
-      <div className="CatInterface-panel CatInterface-bl border-2 border-black p-sm">
-        Mood: <br />
-        <br />
-        Happy: {currentMood[0]} <br />
-        Sad: {currentMood[1]} <br />
-        Angry: {currentMood[2]}
+      <div className="CatInterface-panel CatInterface-bl  border-2 border-black p-sm">
+        <div className="CatStatus-container">
+          <div className="CatStatus-underlay">{gridlines}</div>
+          <h2 className="CatStatus-header">Current Mood</h2>
+          <div className="CatStatus-bar">
+            <StatusBar stat={Math.round(currentMood[0])} />
+            Happy
+          </div>
+          <div className="CatStatus-bar">
+            <StatusBar stat={Math.round(currentMood[1])} />
+            Sad
+          </div>
+          <div className="CatStatus-bar">
+            <StatusBar stat={Math.round(currentMood[2])} />
+            Angry
+          </div>
+        </div>
       </div>
     </>
   );

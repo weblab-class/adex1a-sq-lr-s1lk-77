@@ -1,0 +1,40 @@
+.CatStatus-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  position: relative;
+}
+
+.CatStatus-header {
+  height: 15%;
+  width: 100%;
+}
+
+.CatStatus-bar {
+  flex-grow: 1;
+  width: 100%;
+  /* border: 2px solid red; */
+}
+
+.CatStatus-underlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* border: 2px solid red; */
+  display: flex;
+  justify-content: space-evenly;
+  z-index: -1;
+}
+
+.CatStatus-gridline {
+  height: 100%;
+  border: 1px solid gray;
+  position: relative;
+}
+
+.CatStatus-gridlabel {
+  position: absolute;
+  bottom: 0;
+}
