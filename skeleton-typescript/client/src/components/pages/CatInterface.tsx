@@ -64,7 +64,7 @@ const CatInterface = () => {
           {/* Assign callback function and pass as props down, should pass dependency variable, function body */}
         </div>
       </div>
-      <CatStatus />
+      <CatStatus selectedCat={selectedCat} />
       <CatInfo />
     </>
   );

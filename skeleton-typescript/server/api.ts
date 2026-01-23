@@ -232,10 +232,12 @@ router.post("/updatecat", async (req, res) => {
   if (!thisCat) {
     return res.send({ mood: "no cat" });
   }
-  // const mood: string = gameLogic.updateEmotions(thisAction, thisCat.goal, thisCat.currentmood);
+  const parsedAction = gameLogic.parseAction(thisAction);
   // await thisCat.save();
-  // res.send({ mood: mood, stats: thisCat.currentmood });
-  res.send({ mood: "got ping" });
+  thisCat.currentmood = [1, 1, 1];
+  socketManager.getSocketFromSocketID(req.body.socketid)?.emit("updatestatus", thisCat.currentmood);
+  res.send({ mood: "test mood", parsedAction: parsedAction });
+  // res.send({ mood: "got ping" });
 });
 
 // anything else falls to this "not found" case

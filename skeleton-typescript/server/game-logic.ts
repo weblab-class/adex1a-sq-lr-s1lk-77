@@ -1,12 +1,5 @@
 import CatData from "./@types/CatData";
 
-// type declarations
-interface Emotion {
-  happy: number;
-  sad: number;
-  angry: number;
-}
-
 const items: Array<string> = ["pickle", "homework", "balloon"];
 const item_colors: Array<string> = ["red", "green", "blue"];
 const actions: Array<string> = ["pet", "feed", "dress", "bonk"];
@@ -167,18 +160,18 @@ const addItem = (old_list_items: Array<string>, new_item: string): Array<string>
   return old_list_items;
 };
 
+const parseAction = (action: string): string[] => {
+  const tokens: Array<string> = action.split("-");
+  return [tokens[1], tokens[0], tokens[2]];
+};
+
 // MUTATES INPUT
 const updateEmotions = (
-  action: string,
+  parsedAction: string[],
   goal: Record<string, string[]>,
   currentStats: number[]
 ): string => {
-  let deltaLog: Emotion = { happy: 0, sad: 0, angry: 0 };
-  const tokens: Array<string> = action.split("-");
-  const parsedAction: Array<string> = [tokens[1], tokens[0], tokens[2]];
-
-  console.log(`parsed action is ${parsedAction}`);
-
+  let deltaLog: Record<string, number> = { happy: 0, sad: 0, angry: 0 };
   emotionMap.forEach((emotion: string, index: number): void => {
     const delta: number = goal[emotion].filter((word: string, i: number): boolean => {
       return word === parsedAction[i];
@@ -193,5 +186,5 @@ const updateEmotions = (
   );
 };
 
-const gameLogic = { generateNewCat, calcCatAge, calcCatMood, addItem, updateEmotions };
+const gameLogic = { generateNewCat, calcCatAge, calcCatMood, addItem, updateEmotions, parseAction };
 export default gameLogic;

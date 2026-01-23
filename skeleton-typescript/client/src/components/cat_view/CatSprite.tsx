@@ -22,7 +22,11 @@ const CatSprite = (props: Props) => {
       case "feed":
         console.log("cat id is" + urlParam.catId);
         post("/api/resolveaction", { action: props.action, socketid: socket.id });
-        post("/api/updatecat", { action: props.action, catid: urlParam.catId }).then((result) => {
+        post("/api/updatecat", {
+          action: props.action,
+          catid: urlParam.catId,
+          socketid: socket.id,
+        }).then((result) => {
           console.log(result);
         });
         break;
