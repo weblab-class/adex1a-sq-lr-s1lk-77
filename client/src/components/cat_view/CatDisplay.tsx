@@ -74,6 +74,7 @@ const CatDisplay = (props: Props) => {
     socket.on("actionbegan", handleActionTrigger);
     socket.on("actiondenied", handleActionDenied);
     socket.on("updatestatus", handleActionComplete);
+    makeRandomNoise();
 
     return () => {
       socket.off("actionbegan", handleActionTrigger);
