@@ -166,36 +166,20 @@ const parseAction = (action: string): string[] => {
 // MUTATES INPUT
 const updateEmotions = (
   parsedAction: string[],
-  goal: Record<string, string[]>,
+  goal: Array<Array<string>>,
   currentStats: number[]
 ): string => {
-  let deltaLog: Record<string, number> = { happy: 0, sad: 0, angry: 0 };
+  let deltaLog: Object = { happy: 0, sad: 0, angry: 0 };
 
   emotionMap.forEach((emotion: string, index: number) => {
-    console.log(goal);
-    console.log(emotion);
-    // const filterFunc = (item) => true;
+    const goalArray = goal[index];
+    const delta: number = parsedAction.filter((word: string, i: number) => {
+      return word === goalArray[i];
+    }).length;
 
-    const key = Object.entries(goal);
-    console.log("KEY", key);
-
-    const test = goal[emotion]; //.filter((item) => true);
-    console.log(test, emotion);
-
-    deltaLog[emotion] = emotion.length;
-    currentStats[index] += emotion.length;
+    currentStats[index] += delta;
+    deltaLog[emotion] = delta;
   });
-
-  // loops
-  // emotionMap.forEach((emotion: string, index: number): void => {
-  //   const delta: number = goal[emotion].filter((word: string, i: number): boolean => {
-  //     return word === parsedAction[i];
-  //   }).length;
-
-  // deltaLog[emotion] = delta;
-  //   currentStats[index] += delta;
-  // });
-
   // return Object.keys(deltaLog).reduce((emo1, emo2): string =>
   //   deltaLog[emo1] > deltaLog[emo2] ? emo1 : emo2
   // );
