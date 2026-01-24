@@ -225,7 +225,7 @@ router.post("/updatecat", async (req, res) => {
     return res.send({ mood: "action bad" });
   }
 
-  // do cat things
+  // do cat things things
   const thisCat = await Cat.findById(catId);
   if (!thisCat) {
     return res.send({ mood: "no cat" });
@@ -233,6 +233,15 @@ router.post("/updatecat", async (req, res) => {
   const parsedAction = gameLogic.parseAction(thisAction);
   const goal = [thisCat.happy, thisCat.sad, thisCat.angry];
   const mostfelt: string = gameLogic.updateEmotions(parsedAction, goal, thisCat.currentmood);
+
+  // check if interaction is optimizer
+  if (JSON.stringify(parsedAction) === JSON.stringify(thisCat.happy)) {
+    thisCat.set("hasachieved.0", true);
+  } else if (JSON.stringify(parsedAction) === JSON.stringify(thisCat.sad)) {
+    thisCat.set("hasachieved.1", true);
+  } else if (JSON.stringify(parsedAction) === JSON.stringify(thisCat.angry)) {
+    thisCat.set("hasachieved.2", true);
+  }
   socketManager
     .getSocketFromSocketID(req.body.socketid)
     ?.emit("updatestatus", { currentmood: thisCat.currentmood, mostfelt: mostfelt });
