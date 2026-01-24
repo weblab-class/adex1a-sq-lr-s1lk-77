@@ -235,16 +235,17 @@ router.post("/updatecat", async (req, res) => {
   const mostfelt: string = gameLogic.updateEmotions(parsedAction, goal, thisCat.currentmood);
 
   // check if interaction is optimizer
-  let completed: string = "no";
+  let completed: boolean = false;
   if (JSON.stringify(parsedAction) === JSON.stringify(thisCat.happy)) {
     thisCat.set("hasachieved.0", true);
-    completed = "happy";
   } else if (JSON.stringify(parsedAction) === JSON.stringify(thisCat.sad)) {
     thisCat.set("hasachieved.1", true);
-    completed = "sad";
   } else if (JSON.stringify(parsedAction) === JSON.stringify(thisCat.angry)) {
     thisCat.set("hasachieved.2", true);
-    completed = "angry";
+  }
+  // check if cat is complete
+  if (thisCat.hasachieved[0] && thisCat.hasachieved[1] && thisCat.hasachieved[2]) {
+    completed = true;
   }
   socketManager
     .getSocketFromSocketID(req.body.socketid)

@@ -42,7 +42,7 @@ const CatSprite = (props: Props) => {
           socketid: socket.id,
         }).then((result) => {
           console.log("RESULT:", result);
-          if (result != "no") {
+          if (result.completed) {
             getActiveCats();
           }
         });

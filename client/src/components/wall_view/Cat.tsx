@@ -17,11 +17,12 @@ const Cat = (props: Props) => {
 
   const navigate = useNavigate();
   const handleClick = () => {
-    post("/api/visitcat", { catId: cat._id }).then((new_cat) =>
+    post("/api/visitcat", { catId: cat._id }).then((new_cat) => {
+      console.log(new_cat.timestamp);
       setActiveCats((activeCats) =>
         activeCats.map((cat) => (cat._id === new_cat._id ? new_cat : cat))
-      )
-    );
+      );
+    });
     navigate(`/cat/${cat._id}`);
   };
   return (
