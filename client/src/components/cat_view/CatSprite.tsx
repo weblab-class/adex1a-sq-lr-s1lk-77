@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./CatDisplay.css";
-import { post } from "../../utilities";
+import { get, post } from "../../utilities";
 import { socket } from "../../client-socket";
 import { useParams } from "react-router";
+
+import { ActiveCatContext } from "../App";
 
 type Props = {
   sprite: string;
@@ -11,7 +13,16 @@ type Props = {
 };
 
 const CatSprite = (props: Props) => {
+  const { activeCats, setActiveCats } = useContext(ActiveCatContext);
   let urlParam = useParams<"catId">();
+
+  const getActiveCats = () => {
+    get("/api/activecats").then((catData) => {
+      setActiveCats(catData);
+    });
+    // console.log("it working");
+  };
+
   // click handler
   const handleClick = (): void => {
     const trigger: string =
@@ -30,7 +41,10 @@ const CatSprite = (props: Props) => {
           catid: urlParam.catId,
           socketid: socket.id,
         }).then((result) => {
-          console.log(result);
+          console.log("RESULT:", result);
+          if (result != "no") {
+            getActiveCats();
+          }
         });
         break;
       case "default":
