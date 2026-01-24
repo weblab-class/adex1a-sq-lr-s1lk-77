@@ -41,10 +41,10 @@ const WallView = () => {
 
   return (
     <div
-      className="min-h-screen bg-no-repeat bg-cover bg-center u-flex"
+      className="w-full h-full bg-no-repeat bg-cover bg-center u-flex"
       style={{ backgroundImage: `url(${bg})` }}
     >
-      <div className="grow">
+      <div>
         {activeCats.map((cat) => (
           <Cat key={cat._id} catDoc={cat} />
         ))}
@@ -56,7 +56,7 @@ const WallView = () => {
         <PaintSelector />
       </div>
 
-      <div className="w-[13.25%]">
+      <div>
         <InventoryBar initialitems={items} dependency={"placeholder"} canInteract={false} />
       </div>
     </div>

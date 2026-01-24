@@ -74,9 +74,28 @@ const App = () => {
   return (
     <>
       {showSettings && <SettingsButton />}
-      <ActiveCatContext.Provider value={{ activeCats: activeCats, setActiveCats: setActiveCats }}>
-        <Outlet context={{ userId, handleLogin, handleLogout }} />
-      </ActiveCatContext.Provider>
+
+      <div className="w-screen h-screen flex items-center justify-center bg-black">
+        <div
+          className="
+          aspect-[16/9]
+
+    w-[320px] h-[180px]
+    sm:w-[480px] sm:h-[270px]
+    md:w-[768px] md:h-[432px]
+    lg:w-[1024px] lg:h-[576px]
+    xl:w-[1200px] xl:h-[675px]
+
+    bg-white
+    relative
+          relative
+          "
+        >
+          <ActiveCatContext.Provider value={{ activeCats, setActiveCats }}>
+            <Outlet context={{ userId, handleLogin, handleLogout }} />
+          </ActiveCatContext.Provider>
+        </div>
+      </div>
     </>
   );
 };

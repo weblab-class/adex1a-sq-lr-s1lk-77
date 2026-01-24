@@ -169,7 +169,7 @@ const InventoryBar = (props: Props) => {
   });
 
   return (
-    <div className="u-flexColumn border-2 border-solid h-screen bg-black">
+    <div className="u-flexColumn border-2 border-solid bg-black">
       <div className="InventoryBar-header u-flex">
         <p className="text-lg text-white">
           {" "}
