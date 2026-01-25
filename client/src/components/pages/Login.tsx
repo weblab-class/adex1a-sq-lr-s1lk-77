@@ -9,8 +9,6 @@ import {
 
 import { Link } from "react-router-dom";
 
-import "./Login.css";
-
 //TODO(weblab student): REPLACE WITH YOUR OWN CLIENT_ID
 const GOOGLE_CLIENT_ID = "12657035452-bgq61jdi9b2sva449ujmb1bceds7r87n.apps.googleusercontent.com";
 

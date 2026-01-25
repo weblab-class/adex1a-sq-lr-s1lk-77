@@ -8,11 +8,15 @@
 .CatStatus-header {
   height: 15%;
   width: 100%;
+  font-size: clamp(0.8rem, 1.4vw, 1.5rem);
+  line-height: 1.2;
 }
 
 .CatStatus-bar {
   flex-grow: 1;
   width: 100%;
+  font-size: clamp(0.7rem, 1.2vw, 1.1rem);
+  line-height: 1.2;
   /* border: 2px solid red; */
 }
 
@@ -25,7 +29,7 @@
   /* border: 2px solid red; */
   display: flex;
   justify-content: space-evenly;
-  z-index: -1;
+  z-index: 0;
 }
 
 .CatStatus-gridline {

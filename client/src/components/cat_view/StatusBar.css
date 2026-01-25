@@ -1,7 +1,7 @@
 .StatusBar-container {
   width: 100%;
   position: relative;
-  height: 35%;
+  height: clamp(0.6rem, 2.2vh, 1.2rem);
 }
 
 .StatusBar-back {
