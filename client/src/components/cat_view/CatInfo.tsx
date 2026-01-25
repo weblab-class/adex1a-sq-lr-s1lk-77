@@ -45,7 +45,7 @@ const CatInfo = () => {
       <div
         className="CatInterface-panel CatInterface-tl border-2 border-black p-sm flex-row"
         style={{
-          fontSize: "clamp(0.8rem, 1.4vw, 1.5rem)",
+          fontSize: "clamp(0.8rem, 2vw, 1.8rem)",
           display: "flex",
           flexDirection: "column",
           gap: "0.5rem",
@@ -55,8 +55,8 @@ const CatInfo = () => {
         }}
       >
         <div>
-          Name: {selectedCat?.name} <br />
-          Age: {selectedCat?.age} <br />
+          <h3 style={{ margin: 0 }}>Name: {selectedCat?.name}</h3>
+          <h3 style={{ margin: 0 }}>Age: {selectedCat?.age}</h3>
         </div>
         <form
           ref={formRef}

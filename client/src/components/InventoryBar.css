@@ -3,7 +3,7 @@
 }
 
 .InventoryBar-title {
-  font-size: clamp(0.1rem, 1.2vw, 1.25rem);
+  font-size: clamp(0.8rem, 1.7vw, 1.5rem);
 }
 
 .InventoryBar-slot {

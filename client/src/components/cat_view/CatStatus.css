@@ -8,7 +8,7 @@
 .CatStatus-header {
   height: 15%;
   width: 100%;
-  font-size: clamp(0.8rem, 1.4vw, 1.5rem);
+  font-size: clamp(0.8rem, 2vw, 1.8rem);
   line-height: 1.2;
   z-index: 0;
 }

@@ -25,7 +25,7 @@
 }
 
 .CatDisplay-speech {
-  font-size: clamp(0.65rem, 1.6vw, 1.2rem);
+  font-size: clamp(0.5rem, 1.5vw, 1.5rem);
   position: absolute;
   bottom: 105%;
   left: 50%;
