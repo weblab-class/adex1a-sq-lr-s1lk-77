@@ -53,22 +53,20 @@ const CatInterface = () => {
   }, [selectedCat]);
 
   return (
-    <div className="CatInterface-layout">
-      <div className="CatInterface-left">
-        <div className="CatInterface-left-top">
-          <CatInfo />
+    <>
+      <BackButton />
+      <div className="u-flex">
+        <div className="u-flex justify-center items-center grow max-w-4/5">
+          <CatDisplay sprite={catImg} />
         </div>
-        <div className="CatInterface-left-bottom">
-          <CatStatus selectedCat={selectedCat} />
+        <div className="CatInterface-inventorycontainer">
+          <InventoryBar initialitems={player.items} dependency={activeItem} canInteract={true} />
+          {/* Assign callback function and pass as props down, should pass dependency variable, function body */}
         </div>
       </div>
-      <div className="CatInterface-center">
-        <CatDisplay sprite={catImg} />
-      </div>
-      <div className="CatInterface-right">
-        <InventoryBar initialitems={player.items} dependency={activeItem} canInteract={true} />
-      </div>
-    </div>
+      <CatStatus selectedCat={selectedCat} />
+      <CatInfo />
+    </>
   );
 };
 
