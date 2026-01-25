@@ -42,19 +42,68 @@ const CatInfo = () => {
 
   return (
     <>
-      <div className="CatInterface-panel CatInterface-tl border-2 border-black p-sm">
-        Name: {selectedCat?.name} <br />
-        Age: {selectedCat?.age} <br />
-        Notes:
-        <form ref={formRef} onSubmit={handleSubmit}>
-          <input
-            ref={inputRef}
-            type="text"
+      <div
+        className="CatInterface-panel CatInterface-tl border-2 border-black p-sm flex-row"
+        style={{
+          fontSize: "clamp(0.8rem, 1.4vw, 1.5rem)",
+          display: "flex",
+          flexDirection: "column",
+          gap: "0.5rem",
+          height: "100%",
+          minHeight: 0,
+          overflow: "hidden",
+        }}
+      >
+        <div>
+          Name: {selectedCat?.name} <br />
+          Age: {selectedCat?.age} <br />
+        </div>
+        <form
+          ref={formRef}
+          onSubmit={handleSubmit}
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "0.5rem",
+            marginTop: "0.5rem",
+            width: "100%",
+            flex: 1,
+            minHeight: 0,
+          }}
+        >
+          <label style={{ fontSize: "clamp(0.7rem, 1.1vw, 1rem)" }}>Notes:</label>
+          <textarea
+            ref={inputRef as unknown as React.Ref<HTMLTextAreaElement>}
             value={notes}
             onChange={(e) => setNotes(e.target.value)}
-          />{" "}
-          <br />
-          <input id="notes_submit" type="submit" value="Submit" />
+            rows={3}
+            style={{
+              width: "100%",
+              boxSizing: "border-box",
+              padding: "0.4rem 0.5rem",
+              minHeight: 0,
+              flex: 1,
+              border: "1px solid #000",
+              borderRadius: "0.4rem",
+              resize: "vertical",
+              fontSize: 15,
+            }}
+          />
+          <input
+            id="notes_submit"
+            type="submit"
+            value="Submit"
+            style={{
+              alignSelf: "flex-start",
+              padding: "0.35rem 0.75rem",
+              border: "1px solid #000",
+              borderRadius: "0.5rem",
+              background: "#ffffff",
+              cursor: "pointer",
+              boxShadow: "0 1px 0 rgba(0, 0, 0, 0.25)",
+              fontSize: "clamp(0.7rem, 1.1vw, 1rem)",
+            }}
+          />
         </form>
       </div>
     </>

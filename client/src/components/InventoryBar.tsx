@@ -175,7 +175,6 @@ const InventoryBar = (props: Props) => {
           {" "}
           {selectedItem.item ? parseItemName(selectedItem.item) : "No Item Selected"}{" "}
         </p>
-        <img className="text-white" alt="Gear Icon" />
       </div>
       <div className="u-flexColumn border-solid border-white border-2 grow InventoryBar-relative">
         {itemsList}

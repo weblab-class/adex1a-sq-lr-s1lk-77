@@ -12,11 +12,13 @@
   flex-direction: column;
   min-height: 0;
   gap: 2%;
+  min-width: 0;
 }
 
 .CatInterface-panel {
   position: relative;
   background-color: aqua;
+  min-width: 0;
 }
 
 .CatInterface-left-top {
