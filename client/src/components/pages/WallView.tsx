@@ -46,8 +46,8 @@ const WallView = () => {
     >
       <div className="relative w-full h-full grow">
         <Cat catDoc={activeCats[0]} x={20} y={10} />
-        <Cat catDoc={activeCats[0]} x={10} y={20} />
-        <Cat catDoc={activeCats[0]} x={10} y={30} />
+        <Cat catDoc={activeCats[1]} x={10} y={20} />
+        <Cat catDoc={activeCats[2]} x={10} y={30} />
 
         <ItemStation addItem={addItem} item={"green-pickle"} x={30} y={30} />
         <ItemStation addItem={addItem} item={"white-homework"} x={40} y={40} />

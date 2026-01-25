@@ -29,6 +29,9 @@
   position: absolute;
   bottom: 105%;
   left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  max-width: 100%;
 }
 
 /* .CatDisplay-speech {

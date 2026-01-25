@@ -86,7 +86,7 @@ const CatInfo = () => {
               border: "1px solid #000",
               borderRadius: "0.4rem",
               resize: "vertical",
-              fontSize: 15,
+              fontSize: "clamp(0.7rem, 1.1vw, 1rem)",
             }}
           />
           <input
@@ -95,7 +95,7 @@ const CatInfo = () => {
             value="Submit"
             style={{
               alignSelf: "flex-start",
-              padding: "0.35rem 0.75rem",
+              padding: "0.2rem 0.3rem",
               border: "1px solid #000",
               borderRadius: "0.5rem",
               background: "#ffffff",
