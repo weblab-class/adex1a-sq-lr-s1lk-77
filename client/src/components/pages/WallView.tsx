@@ -44,19 +44,19 @@ const WallView = () => {
       className="w-full h-full bg-no-repeat bg-cover bg-center u-flex"
       style={{ backgroundImage: `url(${bg})` }}
     >
-      <div>
-        {activeCats.map((cat) => (
-          <Cat key={cat._id} catDoc={cat} />
-        ))}
+      <div className="relative w-full h-full grow">
+        <Cat catDoc={activeCats[0]} x={20} y={10} />
+        <Cat catDoc={activeCats[0]} x={10} y={20} />
+        <Cat catDoc={activeCats[0]} x={10} y={30} />
 
-        <ItemStation addItem={addItem} item={"green-pickle"} />
-        <ItemStation addItem={addItem} item={"white-homework"} />
-        <ItemStation addItem={addItem} item={"red-balloon"} />
+        <ItemStation addItem={addItem} item={"green-pickle"} x={30} y={30} />
+        <ItemStation addItem={addItem} item={"white-homework"} x={40} y={40} />
+        <ItemStation addItem={addItem} item={"red-balloon"} x={50} y={50} />
 
-        <PaintSelector />
+        <PaintSelector x={60} y={70} />
       </div>
 
-      <div>
+      <div className="w-[20%] h-full">
         <InventoryBar initialitems={items} dependency={"placeholder"} canInteract={false} />
       </div>
     </div>

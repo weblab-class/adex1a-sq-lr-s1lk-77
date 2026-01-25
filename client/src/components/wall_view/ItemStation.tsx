@@ -3,6 +3,8 @@ import React from "react";
 type Props = {
   addItem: Function;
   item: string;
+  x: number;
+  y: number;
 };
 
 const ItemStation = (props: Props) => {
@@ -11,7 +13,11 @@ const ItemStation = (props: Props) => {
 
   return (
     <>
-      <p className="text-lg" onClick={() => addItem(item)}>
+      <p
+        className="absolute text-lg"
+        onClick={() => addItem(item)}
+        style={{ left: `${props.x}%`, top: `${props.y}%` }}
+      >
         {item}
       </p>
     </>

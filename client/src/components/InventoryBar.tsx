@@ -169,9 +169,9 @@ const InventoryBar = (props: Props) => {
   });
 
   return (
-    <div className="u-flexColumn border-2 border-solid bg-black">
+    <div className="u-flexColumn border-2 border-solid bg-black w-full h-full">
       <div className="InventoryBar-header u-flex">
-        <p className="text-lg text-white">
+        <p className="InventoryBar-title text-white">
           {" "}
           {selectedItem.item ? parseItemName(selectedItem.item) : "No Item Selected"}{" "}
         </p>

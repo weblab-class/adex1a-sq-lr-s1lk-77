@@ -80,16 +80,15 @@ const App = () => {
           className="
           aspect-[16/9]
 
-    w-[320px] h-[180px]
-    sm:w-[480px] sm:h-[270px]
-    md:w-[768px] md:h-[432px]
-    lg:w-[1024px] lg:h-[576px]
-    xl:w-[1200px] xl:h-[675px]
+          w-[75%]
+          max-w-[1200px]
+          min-w-[520px]
 
-    bg-white
-    relative
+          bg-white
           relative
-          "
+          rounded-2xl
+          overflow-hidden
+        "
         >
           <ActiveCatContext.Provider value={{ activeCats, setActiveCats }}>
             <Outlet context={{ userId, handleLogin, handleLogout }} />
