@@ -4,6 +4,7 @@ const items: Array<string> = ["pickle", "homework", "balloon"];
 const item_colors: Array<string> = ["red", "green", "blue", "white"];
 const actions: Array<string> = ["pet", "feed", "dress", "bonk"];
 const emotionMap: string[] = ["happy", "sad", "angry"];
+const spawnMap: Array<Array<string>> = [items, item_colors, actions];
 
 const max_age: number = 100;
 const default_name_prefixes: string[] = [
@@ -100,6 +101,18 @@ const randomElementIn = (arr: string[]): string => {
 };
 
 const generateNewCat = (playerid: string): CatData => {
+  const happy: string[] = [];
+  const sad: string[] = [];
+  const angry: string[] = [];
+
+  spawnMap.forEach((elts: string[], index: number) => {
+    happy.push(randomElementIn(elts));
+    let nextElts: string[] = elts.filter((elt: string) => elt !== happy[index]);
+    sad.push(randomElementIn(nextElts));
+    nextElts = nextElts.filter((elt: string) => elt !== sad[index]);
+    angry.push(randomElementIn(nextElts));
+  });
+
   return {
     playerid: playerid,
     name: randomElementIn(default_name_prefixes) + randomElementIn(default_name_suffixes),
@@ -108,9 +121,12 @@ const generateNewCat = (playerid: string): CatData => {
     pattern: randomElementIn(patterns),
     timestamp: Date.now(),
     currentmood: [default_mood, default_mood, default_mood],
-    happy: [randomElementIn(items), randomElementIn(item_colors), randomElementIn(actions)],
-    sad: [randomElementIn(items), randomElementIn(item_colors), randomElementIn(actions)],
-    angry: [randomElementIn(items), randomElementIn(item_colors), randomElementIn(actions)],
+    // happy: [randomElementIn(items), randomElementIn(item_colors), randomElementIn(actions)],
+    // sad: [randomElementIn(items), randomElementIn(item_colors), randomElementIn(actions)],
+    // angry: [randomElementIn(items), randomElementIn(item_colors), randomElementIn(actions)],
+    happy: happy,
+    sad: sad,
+    angry: angry,
     hasachieved: [false, false, false],
     notes: "",
   };
