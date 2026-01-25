@@ -11,6 +11,7 @@ import BackButton from "../cat_view/BackButton";
 import CatDisplay from "../cat_view/CatDisplay";
 import CatInfo from "../cat_view/CatInfo";
 import CatStatus from "../cat_view/CatStatus";
+import Follower from "../cat_view/Follower";
 
 const CatInterface = () => {
   let props = useParams<"catId">();
@@ -66,6 +67,7 @@ const CatInterface = () => {
       </div>
       <CatStatus selectedCat={selectedCat} />
       <CatInfo />
+      <Follower />
     </>
   );
 };
