@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { get, post } from "../../utilities";
 import InventoryBar from "../InventoryBar";
-import catImg from "../../assets/cat.jpg";
+import catImg from "../../assets/newcat.jpg";
 import "./CatInterface.css";
 import { useParams } from "react-router-dom";
 import CatInterfaceMongo from "../../../../shared/Cat";
