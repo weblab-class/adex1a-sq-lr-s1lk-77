@@ -9,6 +9,8 @@ import { ActiveCatContext } from "../App";
 
 type Props = {
   catDoc: Cat;
+  x: number;
+  y: number;
 };
 
 const Cat = (props: Props) => {
@@ -26,9 +28,12 @@ const Cat = (props: Props) => {
     navigate(`/cat/${cat._id}`);
   };
   return (
-    <>
-      <img src={catImg} onClick={handleClick} className="w-[15vw] h-auto" />
-    </>
+    <img
+      src={catImg}
+      onClick={handleClick}
+      className="absolute w-[12%] h-auto cursor-pointer"
+      style={{ left: `${props.x}%`, top: `${props.y}%` }}
+    />
   );
 };
 

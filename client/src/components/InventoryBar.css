@@ -2,6 +2,10 @@
   height: 10%;
 }
 
+.InventoryBar-title {
+  font-size: clamp(0.8rem, 1.7vw, 1.5rem);
+}
+
 .InventoryBar-slot {
   /* h-1/4 border-solid border-white border-2 u-flex justify-center items-center */
   height: 25%;

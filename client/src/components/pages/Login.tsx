@@ -9,8 +9,6 @@ import {
 
 import { Link } from "react-router-dom";
 
-import "./Login.css";
-
 //TODO(weblab student): REPLACE WITH YOUR OWN CLIENT_ID
 const GOOGLE_CLIENT_ID = "12657035452-bgq61jdi9b2sva449ujmb1bceds7r87n.apps.googleusercontent.com";
 
@@ -26,7 +24,7 @@ const Skeleton = () => {
     handleLogout: Function;
   }>();
   return (
-    <div className="min-h-screen bg-blue-50 flex flex-col items-center justify-center">
+    <div className="w-full h-full bg-blue-50 flex flex-col items-center justify-center">
       <h1 className="text-black-950 p-sm text-lg">Tired of your mundane life?</h1>
       <h1 className="text-black-950 p-sm m-xl text-lg">Come escape to the weird cat cafe!</h1>
       {userId && (

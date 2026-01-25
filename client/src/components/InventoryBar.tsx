@@ -169,13 +169,12 @@ const InventoryBar = (props: Props) => {
   });
 
   return (
-    <div className="u-flexColumn border-2 border-solid h-screen bg-black">
+    <div className="u-flexColumn border-2 border-solid bg-black w-full h-full">
       <div className="InventoryBar-header u-flex">
-        <p className="text-lg text-white">
+        <p className="InventoryBar-title text-white">
           {" "}
           {selectedItem.item ? parseItemName(selectedItem.item) : "No Item Selected"}{" "}
         </p>
-        <img className="text-white" alt="Gear Icon" />
       </div>
       <div className="u-flexColumn border-solid border-white border-2 grow InventoryBar-relative">
         {itemsList}

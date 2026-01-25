@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
-import GameScene from "../wall_view/GameScene";
 import { get, post } from "../../utilities";
 import InventoryBar from "../InventoryBar";
-import catImg from "../../assets/cat.jpg";
+import catImg from "../../assets/newcat.jpg";
 import "./CatInterface.css";
 import { useParams } from "react-router-dom";
 import CatInterfaceMongo from "../../../../shared/Cat";
@@ -11,6 +10,7 @@ import BackButton from "../cat_view/BackButton";
 import CatDisplay from "../cat_view/CatDisplay";
 import CatInfo from "../cat_view/CatInfo";
 import CatStatus from "../cat_view/CatStatus";
+import Follower from "../cat_view/Follower";
 
 const CatInterface = () => {
   let props = useParams<"catId">();
@@ -54,9 +54,9 @@ const CatInterface = () => {
 
   return (
     <>
-      <BackButton />
-      <div className="u-flex">
-        <div className="u-flex justify-center items-center grow max-w-4/5">
+      {/* <BackButton /> */}
+      <div className="u-flex CatInterface-main">
+        <div className="CatInterface-cat">
           <CatDisplay sprite={catImg} />
         </div>
         <div className="CatInterface-inventorycontainer">
@@ -66,6 +66,7 @@ const CatInterface = () => {
       </div>
       <CatStatus selectedCat={selectedCat} />
       <CatInfo />
+      <Follower />
     </>
   );
 };
