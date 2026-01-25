@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import GameScene from "../wall_view/GameScene";
 import { get, post } from "../../utilities";
 import InventoryBar from "../InventoryBar";
 import catImg from "../../assets/cat.jpg";

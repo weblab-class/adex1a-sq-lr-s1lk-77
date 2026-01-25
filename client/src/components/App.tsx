@@ -14,9 +14,11 @@ import { useLocation } from "react-router-dom";
 import Cat from "../../../shared/Cat";
 
 import SettingsButton from "../components/SettingsButton";
+import TempBackground from "../assets/background.jpg";
 
 import "../utilities.css";
 import "../output.css";
+import "./App.css";
 
 // activeCats and setActiveCats as context
 export const ActiveCatContext = createContext<{
@@ -75,7 +77,10 @@ const App = () => {
     <>
       {showSettings && <SettingsButton />}
 
-      <div className="w-screen h-screen flex items-center justify-center bg-black">
+      <div
+        className="w-screen h-screen App-screen"
+        // style={{ backgroundImage: `url(${TempBackground})` }}
+      >
         <div
           className="
           aspect-[16/9]
@@ -88,6 +93,8 @@ const App = () => {
           relative
           rounded-2xl
           overflow-hidden
+
+          App-scene
         "
         >
           <ActiveCatContext.Provider value={{ activeCats, setActiveCats }}>

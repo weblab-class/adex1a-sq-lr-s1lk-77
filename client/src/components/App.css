@@ -1,0 +1,11 @@
+.App-screen {
+  background-image: url("../assets/background.jpg");
+  /* background-size: contain; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.App-scene {
+  border: 5px solid black;
+}
