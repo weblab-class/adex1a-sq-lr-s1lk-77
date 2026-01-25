@@ -54,9 +54,9 @@ const CatInterface = () => {
 
   return (
     <>
-      <BackButton />
-      <div className="u-flex">
-        <div className="u-flex justify-center items-center grow max-w-4/5">
+      {/* <BackButton /> */}
+      <div className="u-flex CatInterface-main">
+        <div className="CatInterface-cat">
           <CatDisplay sprite={catImg} />
         </div>
         <div className="CatInterface-inventorycontainer">

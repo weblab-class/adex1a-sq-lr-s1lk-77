@@ -8,6 +8,7 @@
 .CatStatus-header {
   height: 15%;
   width: 100%;
+  z-index: 1;
 }
 
 .CatStatus-bar {
@@ -25,7 +26,7 @@
   /* border: 2px solid red; */
   display: flex;
   justify-content: space-evenly;
-  z-index: -1;
+  z-index: 0;
 }
 
 .CatStatus-gridline {
