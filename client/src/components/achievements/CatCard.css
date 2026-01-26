@@ -37,6 +37,10 @@
   /* background-color: blue; */
 }
 
+.CatCard-gray:hover {
+  cursor: help;
+}
+
 .CatCard-happy {
   background-image: url("../../assets/cathappy.png");
 }
