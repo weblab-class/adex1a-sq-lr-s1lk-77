@@ -16,10 +16,14 @@ const PaintStation = (props: Props) => {
     <div
       onClick={callPaintPing}
       className="absolute"
-      style={{ left: `${props.x}%`, top: `${props.y}%` }}
-    >
-      {props.color}
-    </div>
+      style={{
+        left: `${props.x}%`,
+        top: `${props.y}%`,
+        width: "2cqw",
+        height: "2cqw",
+        backgroundColor: `${props.color}`,
+      }}
+    ></div>
   );
 };
 
