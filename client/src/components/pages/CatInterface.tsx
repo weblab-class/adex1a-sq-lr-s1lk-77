@@ -54,7 +54,7 @@ const CatInterface = () => {
 
   return (
     <>
-      {/* <BackButton /> */}
+      <BackButton />
       <div className="u-flex CatInterface-main">
         <div className="CatInterface-cat">
           <CatDisplay sprite={catImg} />
