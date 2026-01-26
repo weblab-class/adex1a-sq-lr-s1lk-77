@@ -96,6 +96,19 @@ const cat_colors: string[] = ["orange", "brown", "gray", "black"];
 const patterns: string[] = ["none", "tabby", "spotted"];
 const default_mood: number = 0;
 
+const jumpscares: string[] = [
+  "Look behind, are they watching...",
+  "Are you responsible for what you touch?",
+  "Are we just puppets in some greater show we can’t see out the proscenium of?",
+  "If you talk enough sense, you'll lose your mind.",
+  "All that you touch, you change.",
+  "How much longer...",
+  "Take your time. One can always stay. For just one moment more...",
+  "Maybe we can remain. Forever.",
+  "Have you ever sat at the mouth of a pipe and watched the water drip, drip, drip as must the tick of a clock until the end of time?",
+  "Talk some sense to me.",
+];
+
 const randomElementIn = (arr: string[]): string => {
   return arr[Math.floor(Math.random() * arr.length)];
 };
@@ -245,5 +258,6 @@ const gameLogic = {
   verifyColor,
   verifyItems,
   changeColor,
+  jumpscares,
 };
 export default gameLogic;
