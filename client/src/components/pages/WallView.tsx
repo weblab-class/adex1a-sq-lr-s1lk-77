@@ -53,7 +53,7 @@ const WallView = () => {
         <ItemStation addItem={addItem} item={"white-homework"} x={40} y={40} />
         <ItemStation addItem={addItem} item={"red-balloon"} x={50} y={50} />
 
-        <PaintSelector x={60} y={70} />
+        <PaintSelector x={84} y={60} />
       </div>
 
       <div className="w-[20%] h-full">

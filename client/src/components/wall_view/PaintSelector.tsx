@@ -9,14 +9,18 @@ const PaintSelector = (props: Props) => {
   const [visible, setVisible] = useState<boolean>(false);
 
   return (
-    <>
-      <p
+    <div className="w-full h-full">
+      <div
         onClick={() => setVisible(!visible)}
-        className="absolute cursor-pointer"
-        style={{ left: `${props.x}%`, top: `${props.y}%` }}
-      >
-        Paint Selector
-      </p>
+        className="absolute cursor-pointer block aspect-square"
+        style={{
+          left: `${props.x}%`,
+          top: `${props.y}%`,
+          width: "5cqw",
+          height: "5cqw",
+          backgroundColor: "transparent",
+        }}
+      />
       {visible && (
         <>
           <PaintStation color="red" x={10} y={60} />
@@ -24,7 +28,7 @@ const PaintSelector = (props: Props) => {
           <PaintStation color="blue" x={10} y={90} />
         </>
       )}
-    </>
+    </div>
   );
 };
 
