@@ -10,3 +10,9 @@
 .App-scene {
   border: 5px solid black;
 }
+
+.App-settings {
+  position: absolute;
+  top: 2%;
+  right: 0;
+}

@@ -14,7 +14,6 @@ import { useLocation } from "react-router-dom";
 import Cat from "../../../shared/Cat";
 
 import SettingsButton from "../components/SettingsButton";
-import TempBackground from "../assets/background.jpg";
 
 import "../utilities.css";
 import "../output.css";
@@ -75,8 +74,6 @@ const App = () => {
     userId && (location.pathname === "/wallview" || location.pathname.startsWith("/cat/"));
   return (
     <>
-      {showSettings && <SettingsButton />}
-
       <div
         className="w-screen h-screen App-screen"
         // style={{ backgroundImage: `url(${TempBackground})` }}
@@ -97,6 +94,11 @@ const App = () => {
           App-scene
         "
         >
+          {showSettings && (
+            <div className="App-settings">
+              <SettingsButton />
+            </div>
+          )}
           <ActiveCatContext.Provider value={{ activeCats, setActiveCats }}>
             <Outlet context={{ userId, handleLogin, handleLogout }} />
           </ActiveCatContext.Provider>
