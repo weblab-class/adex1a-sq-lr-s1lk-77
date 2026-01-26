@@ -31,7 +31,7 @@
 .CatDisplay-speech {
   position: absolute;
   bottom: 105%;
-  padding: 8px;
+  padding: clamp(0.2em, 1cqw, 0.5em);
   background-color: var(--white);
   border-radius: 25%;
 }
