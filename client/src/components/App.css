@@ -25,5 +25,5 @@
   color: var(--darkpurple);
   -webkit-text-stroke-width: 3px;
   -webkit-text-stroke-color: var(--white);
-  font-size: clamp(8rem, 1.2vw, 2rem);
+  font-size: clamp(8rem, 1.2cqw, 2rem);
 }
