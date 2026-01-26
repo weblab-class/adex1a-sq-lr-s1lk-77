@@ -8,6 +8,7 @@ import {
 } from "@react-oauth/google";
 
 import { Link } from "react-router-dom";
+import "./Login.css";
 
 //TODO(weblab student): REPLACE WITH YOUR OWN CLIENT_ID
 const GOOGLE_CLIENT_ID = "12657035452-bgq61jdi9b2sva449ujmb1bceds7r87n.apps.googleusercontent.com";
@@ -24,12 +25,34 @@ const Skeleton = () => {
     handleLogout: Function;
   }>();
   return (
-    <div className="w-full h-full bg-blue-50 flex flex-col items-center justify-center">
-      <h1 className="text-black-950 p-sm text-lg">Tired of your mundane life?</h1>
-      <h1 className="text-black-950 p-sm m-xl text-lg">Come escape to the weird cat cafe!</h1>
+    <div className="login-page w-full h-full bg-blue-50 flex flex-col items-center justify-center">
+      <h1 className="text-black-950 p-sm" style={{ fontSize: "clamp(0.8rem, 2vw, 1.5rem)" }}>
+        Tired of your mundane life?
+      </h1>
+      <h1
+        className="text-black-950 p-sm leading-none"
+        style={{ fontSize: "clamp(0.8rem, 2vw, 1.5rem)" }}
+      >
+        Come escape to the{" "}
+      </h1>
+      <h1
+        className="text-black-950 p-sm m-xl barrio-regular"
+        style={{ fontSize: "clamp(0.8rem, 8vw, 9rem)" }}
+        justify-center
+      >
+        Weird Cat Cafe!
+      </h1>
       {userId && (
-        <Link to="/wallview" className="bg-emerald-500 mb-xl px-xs py-2 rounded-md">
+        <Link
+          to="/wallview"
+          className="login-button login-button--primary bg-emerald-500 mb-xl rounded-md"
+        >
           Start!
+        </Link>
+      )}
+      {userId && (
+        <Link to="/wallview" id="tutorial-button" className="login-button mb-xl rounded-md">
+          Tutorial
         </Link>
       )}
       {!userId && (
@@ -38,7 +61,7 @@ const Skeleton = () => {
       <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
         {userId ? (
           <button
-            className="bg-gray-400 px-xs py-2 rounded-md"
+            className="login-button login-button--muted bg-gray-400 rounded-md"
             onClick={() => {
               googleLogout();
               handleLogout();
@@ -47,7 +70,9 @@ const Skeleton = () => {
             Logout
           </button>
         ) : (
-          <GoogleLogin onSuccess={handleLogin} onError={() => console.log("Error Logging in")} />
+          <div className="login-google">
+            <GoogleLogin onSuccess={handleLogin} onError={() => console.log("Error Logging in")} />
+          </div>
         )}
       </GoogleOAuthProvider>
     </div>
