@@ -1,7 +1,7 @@
 .CatInfo-submitbutton {
   align-self: flex-start;
   padding: 0.2rem 0.3rem;
-  border: 1px solid #000;
+  border: 1px solid var(black);
   border-radius: 0.5rem;
   background-color: var(--darkpurple);
   cursor: pointer;

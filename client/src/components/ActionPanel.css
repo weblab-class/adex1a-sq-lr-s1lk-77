@@ -1,12 +1,16 @@
 .ActionPanel-container button {
-  border: 2px solid red;
   margin-top: 0.3em;
   padding-left: 0.4em;
   padding-right: 0.4em;
+  background-color: var(--darkpurple);
+  color: var(--white);
+  border: 1px solid var(--black);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.25);
+  border-radius: 0.5rem;
 }
 
 .ActionPanel-container button:hover {
-  background-color: aqua;
+  background-color: var(--purple);
 }
 
 .ActionPanel-container {

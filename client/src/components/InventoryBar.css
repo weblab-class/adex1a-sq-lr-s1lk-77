@@ -1,3 +1,7 @@
+.InventoryBar-main {
+  background-color: var(--black);
+}
+
 .InventoryBar-header {
   height: 10%;
 }
@@ -11,6 +15,7 @@
   height: 25%;
   /* border: 5px solid var(--black); */
   background-color: #f8eeff;
+  /* background: radial-gradient(circle, #ffffff, #f8eeff); */
   border-radius: 3cap;
   margin-left: 8%;
   margin-right: 5%;
@@ -35,8 +40,9 @@
 .ActionPanel {
   position: absolute;
   right: 110%;
-  border: 2px solid black;
+  border: 2px solid var(--black);
   padding: 1em;
+  background-color: var(--white);
 }
 
 .ActionPanel-pos0 {
