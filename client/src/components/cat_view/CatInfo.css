@@ -1,0 +1,15 @@
+.CatInfo-submitbutton {
+  align-self: flex-start;
+  padding: 0.2rem 0.3rem;
+  border: 1px solid #000;
+  border-radius: 0.5rem;
+  background-color: var(--darkpurple);
+  cursor: pointer;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.25);
+  font-size: clamp(0.7rem, 1.1vw, 1rem);
+  color: var(--white);
+}
+
+.CatInfo-submitbutton:hover {
+  background-color: var(--purple);
+}

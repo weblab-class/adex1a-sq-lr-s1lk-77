@@ -3,6 +3,7 @@ import { get, post } from "../../utilities";
 import "../pages/CatInterface.css";
 import { useParams } from "react-router-dom";
 import CatInterfaceMongo from "../../../../shared/Cat";
+import "./CatInfo.css";
 
 const CatInfo = () => {
   let props = useParams<"catId">();
@@ -43,7 +44,7 @@ const CatInfo = () => {
   return (
     <>
       <div
-        className="CatInterface-panel CatInterface-tl border-2 border-black p-sm flex-row"
+        className="CatInterface-panel CatInterface-tl p-sm flex-row"
         style={{
           fontSize: "clamp(0.8rem, 2vw, 1.8rem)",
           display: "flex",
@@ -89,21 +90,7 @@ const CatInfo = () => {
               fontSize: "clamp(0.7rem, 1.1vw, 1rem)",
             }}
           />
-          <input
-            id="notes_submit"
-            type="submit"
-            value="Submit"
-            style={{
-              alignSelf: "flex-start",
-              padding: "0.2rem 0.3rem",
-              border: "1px solid #000",
-              borderRadius: "0.5rem",
-              background: "#ffffff",
-              cursor: "pointer",
-              boxShadow: "0 1px 0 rgba(0, 0, 0, 0.25)",
-              fontSize: "clamp(0.7rem, 1.1vw, 1rem)",
-            }}
-          />
+          <input id="notes_submit" type="submit" value="Submit" className="CatInfo-submitbutton" />
         </form>
       </div>
     </>

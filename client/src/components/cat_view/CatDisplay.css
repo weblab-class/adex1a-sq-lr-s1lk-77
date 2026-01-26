@@ -18,7 +18,7 @@
 
 .CatDisplay-containerbig {
   /* w-1/2 h-1/2 border-2 border-black */
-  width: 55%;
+  width: 60%;
   height: 55%;
   border: 2px solid black;
   position: relative;

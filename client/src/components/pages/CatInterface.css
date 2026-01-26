@@ -1,7 +1,9 @@
 .CatInterface-panel {
   position: absolute;
-  background-color: aqua;
+  background-color: var(--white);
   left: 3%;
+  /* border-radius: 1cap; */
+  border: 2px solid var(--black);
 }
 
 .CatInterface-bl {
@@ -25,6 +27,7 @@
 .CatInterface-main {
   height: 100%;
   width: 100%;
+  background-color: var(--pastelpink);
 }
 
 .CatInterface-cat {

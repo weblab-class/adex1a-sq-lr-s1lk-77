@@ -44,20 +44,20 @@ const CatStatus = (props: Props) => {
 
   return (
     <>
-      <div className="CatInterface-panel CatInterface-bl  border-2 border-black p-sm">
+      <div className="CatInterface-panel CatInterface-bl p-sm">
         <div className="CatStatus-container">
           <div className="CatStatus-underlay">{gridlines}</div>
           <h2 className="CatStatus-header">Current Mood</h2>
           <div className="CatStatus-bar">
-            <StatusBar stat={Math.round(currentMood[0])} />
+            <StatusBar stat={Math.round(currentMood[0])} emotion="happy" />
             Happy
           </div>
           <div className="CatStatus-bar">
-            <StatusBar stat={Math.round(currentMood[1])} />
+            <StatusBar stat={Math.round(currentMood[1])} emotion="sad" />
             Sad
           </div>
           <div className="CatStatus-bar">
-            <StatusBar stat={Math.round(currentMood[2])} />
+            <StatusBar stat={Math.round(currentMood[2])} emotion="angry" />
             Angry
           </div>
         </div>

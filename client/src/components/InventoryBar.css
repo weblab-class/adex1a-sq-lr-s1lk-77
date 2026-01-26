@@ -9,7 +9,13 @@
 .InventoryBar-slot {
   /* h-1/4 border-solid border-white border-2 u-flex justify-center items-center */
   height: 25%;
-  border: 2px solid white;
+  /* border: 5px solid var(--black); */
+  background-color: #f8eeff;
+  border-radius: 3cap;
+  margin-left: 8%;
+  margin-right: 5%;
+  margin-top: 3%;
+  margin-bottom: 3%;
 }
 
 .InventoryBar-hasitem {
@@ -19,7 +25,7 @@
 }
 
 .InventoryBar-selected {
-  background-color: rgb(114, 255, 255);
+  background-color: var(--white);
 }
 
 .InventoryBar-relative {
