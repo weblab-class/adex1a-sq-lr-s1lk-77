@@ -27,10 +27,10 @@ const CatDisplay = (props: Props) => {
     const [color, item, action] = input.split("-");
     const toSpeech = `Meow! ${capitalizeFirst(action)} me with your ${color} ${item}`;
     setSpeech(toSpeech);
-    setTrigger(input);
     if (intervalRef.current) {
       clearInterval(intervalRef.current);
     }
+    setTrigger(input);
   };
 
   // denied action
