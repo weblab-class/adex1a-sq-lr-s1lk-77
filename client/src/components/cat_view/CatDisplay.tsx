@@ -48,7 +48,6 @@ const CatDisplay = (props: Props) => {
 
   // on click cat image when action not firing
   const makeRandomNoise = (): void => {
-    console.log(phrases.current);
     let noise: string;
     if (phrases.current.length > 0 && Math.random() > 0.85) {
       noise = phrases.current[Math.floor(Math.random() * phrases.current.length)];
@@ -67,20 +66,22 @@ const CatDisplay = (props: Props) => {
   // on action complete
   const handleActionComplete = (data): void => {
     let message: string;
-    console.log(data);
-
-    switch (data.mostfelt) {
-      case "happy":
-        message = "purrrr";
-        break;
-      case "sad":
-        message = "sadge QQ";
-        break;
-      case "angry":
-        message = "hiss";
-        break;
-      default:
-        message = "meow";
+    if (phrases.current.length > 0 && Math.random() > 0.9) {
+      message = phrases.current[Math.floor(Math.random() * phrases.current.length)];
+    } else {
+      switch (data.mostfelt) {
+        case "happy":
+          message = "purrrr";
+          break;
+        case "sad":
+          message = "oh, the misery";
+          break;
+        case "angry":
+          message = "hissss";
+          break;
+        default:
+          message = "meow";
+      }
     }
 
     setTrigger("default");
