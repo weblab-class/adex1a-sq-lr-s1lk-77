@@ -7,7 +7,7 @@
 }
 
 .InventoryBar-title {
-  font-size: clamp(0.8rem, 1.7cqw, 1.5rem);
+  font-size: clamp(0.8rem, 1.7vw, 1.5rem);
 }
 
 .InventoryBar-slot {
@@ -58,5 +58,5 @@
 }
 
 .ActionPanel-pos3 {
-  top: 75%;
+  top: 65%;
 }

@@ -12,7 +12,6 @@
   /* w-1/2 h-1/2 border-2 border-black */
   width: 55%;
   height: 50%;
-  border: 2px solid black;
   position: relative;
   transition:
     width 0.2s ease,
@@ -23,7 +22,6 @@
   /* w-1/2 h-1/2 border-2 border-black */
   width: 60%;
   height: 55%;
-  border: 2px solid black;
   position: relative;
   transition:
     width 0.2s ease,
@@ -31,11 +29,9 @@
 }
 
 .CatDisplay-speech {
-  font-size: 2em;
   position: absolute;
   bottom: 105%;
-  left: 50%;
+  padding: 8px;
+  background-color: var(--white);
+  border-radius: 25%;
 }
-
-/* .CatDisplay-speech {
-} */
