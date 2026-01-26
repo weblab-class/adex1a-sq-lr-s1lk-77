@@ -2,6 +2,7 @@
   background-image: url("../assets/background.jpg");
   /* background-size: contain; */
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   background-size: 480px;
@@ -15,4 +16,14 @@
   position: absolute;
   top: 2%;
   right: 0;
+}
+
+.App-title {
+  position: fixed;
+  top: -6px;
+  font-family: "barrio";
+  color: var(--darkpurple);
+  -webkit-text-stroke-width: 3px;
+  -webkit-text-stroke-color: var(--white);
+  font-size: clamp(8rem, 1.2vw, 2rem);
 }
