@@ -30,8 +30,10 @@ const SpeechBubble = (props: Props) => {
             transform: "translateX(-50%)",
             width: "100%",
             textAlign: "center",
-            fontSize: `clamp(0.3em, 1.65cqw, 1.5em)`,
+            fontSize: `clamp(0.3em, 1.3cqw, 1.3em)`,
             fontFamily: props.is_spoopy ? "Rubik Glitch" : "Josefin Sans",
+            color: props.is_spoopy ? "white" : "black",
+            backgroundColor: props.is_spoopy ? "black" : "white",
           }}
         >
           {props.textcontent}
