@@ -1,5 +1,5 @@
 .App-screen {
-  background-image: url("../assets/blueback.jpg");
+  background-image: url("../assets/blueback.png");
   /* background-size: contain; */
   display: flex;
   flex-direction: column;
