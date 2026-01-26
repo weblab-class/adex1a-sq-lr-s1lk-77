@@ -34,6 +34,7 @@ const SpeechBubble = (props: Props) => {
             fontFamily: props.is_spoopy ? "Rubik Glitch" : "Josefin Sans",
             color: props.is_spoopy ? "white" : "black",
             backgroundColor: props.is_spoopy ? "black" : "white",
+            borderRadius: props.is_spoopy ? 0 : "35%",
           }}
         >
           {props.textcontent}
