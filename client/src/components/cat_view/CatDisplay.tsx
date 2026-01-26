@@ -15,6 +15,7 @@ type CatNoises = Array<"mrrrp" | "meow" | "chrrrp" | "purrr" | "hiss" | "meow me
 
 const CatDisplay = (props: Props) => {
   const [speech, setSpeech] = useState<string | null>(null);
+  const [is_spoopy, set_is_spoopy] = useState<boolean>(false);
   const [trigger, setTrigger] = useState<string>("default");
   const catNoises: CatNoises = ["mrrrp", "meow", "chrrrp", "meow meow"];
   // let phrases: string[] = [];
@@ -27,6 +28,7 @@ const CatDisplay = (props: Props) => {
     const [color, item, action] = input.split("-");
     const toSpeech = `Meow! ${capitalizeFirst(action)} me with your ${color} ${item}`;
     setSpeech(toSpeech);
+    set_is_spoopy(false);
     if (intervalRef.current) {
       clearInterval(intervalRef.current);
     }
@@ -45,6 +47,7 @@ const CatDisplay = (props: Props) => {
     const color = input.split("-")[0];
     const toSpeech = `meow, ${color} is boring, add some color`;
     setSpeech(toSpeech);
+    set_is_spoopy(false);
 
     setTimeout(() => {
       setTrigger("default");
@@ -57,9 +60,11 @@ const CatDisplay = (props: Props) => {
     let noise: string;
     if (phrases.current.length > 0 && Math.random() > 0.85) {
       noise = phrases.current[Math.floor(Math.random() * phrases.current.length)];
+      set_is_spoopy(true);
     } else {
       // code here
       noise = catNoises[Math.floor(Math.random() * catNoises.length)];
+      set_is_spoopy(false);
     }
     setSpeech(noise);
     setTrigger("failed");
@@ -74,6 +79,7 @@ const CatDisplay = (props: Props) => {
     let message: string;
     if (phrases.current.length > 0 && !data.isAchievement && Math.random() > 0.9) {
       message = phrases.current[Math.floor(Math.random() * phrases.current.length)];
+      set_is_spoopy(true);
     } else {
       switch (data.mostfelt) {
         case "happy":
@@ -88,10 +94,12 @@ const CatDisplay = (props: Props) => {
         default:
           message = data.mostfelt;
       }
+      set_is_spoopy(false);
     }
 
     setTrigger("default");
     setSpeech(message);
+    set_is_spoopy(false);
     intervalRef.current = setInterval(() => {
       makeRandomNoise();
     }, 3000);
@@ -133,7 +141,7 @@ const CatDisplay = (props: Props) => {
 
   return (
     <div className={trigger !== "default" ? "CatDisplay-containerbig" : "CatDisplay-container"}>
-      {speech && <SpeechBubble textcontent={speech} />}
+      {speech && <SpeechBubble textcontent={speech} is_spoopy={is_spoopy} />}
       <CatSprite sprite={props.sprite} action={trigger} callback={makeRandomNoise} />
     </div>
   );

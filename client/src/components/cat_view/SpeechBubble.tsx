@@ -4,6 +4,7 @@ import "./CatDisplay.css";
 
 type Props = {
   textcontent: string;
+  is_spoopy: boolean;
 };
 
 const SpeechBubble = (props: Props) => {
@@ -16,6 +17,7 @@ const SpeechBubble = (props: Props) => {
             left: "50%",
             transform: "translateX(-50%)",
             fontSize: `clamp(1em, 2.5cqw, 1.8em)`,
+            fontFamily: props.is_spoopy ? "Rubik Glitch" : "Josefin Sans",
           }}
         >
           {props.textcontent}
@@ -26,8 +28,10 @@ const SpeechBubble = (props: Props) => {
           style={{
             left: "50%",
             transform: "translateX(-50%)",
-            fontSize: `clamp(0.3em, 1cqw, 2em)`,
-            fontFamily: "Rubik Glitch",
+            width: "100%",
+            textAlign: "center",
+            fontSize: `clamp(0.3em, 1.65cqw, 1.5em)`,
+            fontFamily: props.is_spoopy ? "Rubik Glitch" : "Josefin Sans",
           }}
         >
           {props.textcontent}
