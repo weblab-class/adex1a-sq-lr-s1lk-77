@@ -35,9 +35,17 @@ const CatInfo = () => {
 
   const formRef = useRef<HTMLFormElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const buttonRef = useRef<HTMLInputElement>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (buttonRef.current) {
+      buttonRef.current.value = "Saved";
+
+      setTimeout(() => {
+        buttonRef.current!.value = "Save";
+      }, 400);
+    }
     await post("/api/editnotes", { notes_value: notes, catId: props.catId });
   };
 
@@ -84,13 +92,19 @@ const CatInfo = () => {
               padding: "0.4rem 0.5rem",
               minHeight: 0,
               flex: 1,
-              border: "1px solid #000",
+              border: "1px solid #28282b",
               borderRadius: "0.4rem",
               resize: "vertical",
               fontSize: "clamp(0.7rem, 1.1cqw, 1.1rem)",
             }}
           />
-          <input id="notes_submit" type="submit" value="Submit" className="CatInfo-submitbutton" />
+          <input
+            ref={buttonRef as React.Ref<HTMLInputElement>}
+            id="notes_submit"
+            type="submit"
+            value="Save"
+            className="CatInfo-submitbutton"
+          />
         </form>
       </div>
     </>
