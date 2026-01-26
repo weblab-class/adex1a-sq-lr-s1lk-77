@@ -1,0 +1,50 @@
+.CatCard-container {
+  flex-grow: 1;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.CatCard-header {
+  height: 20%;
+  font-size: 2em;
+}
+
+.CatCard-slot {
+  flex-grow: 1;
+  display: flex;
+  width: 80%;
+  margin-bottom: 1%;
+}
+
+.CatCard-img {
+  height: 100%;
+  border: 2px solid var(--black);
+  aspect-ratio: 1 / 1;
+  background-size: cover;
+}
+
+.CatCard-text {
+  flex-grow: 1;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+}
+
+.CatCard-gray {
+  background-image: url("../../assets/catgray.png");
+  /* background-color: blue; */
+}
+
+.CatCard-happy {
+  background-image: url("../../assets/cathappy.png");
+}
+
+.CatCard-sad {
+  background-image: url("../../assets/catsad.png");
+}
+
+.CatCard-angry {
+  background-image: url("../../assets/catangry.png");
+}

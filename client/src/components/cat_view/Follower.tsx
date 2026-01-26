@@ -32,7 +32,7 @@ const Follower = () => {
   };
 
   // on action complete
-  const handleActionComplete = (): void => {
+  const handleActionComplete = (data): void => {
     setDisplayFollower(false);
   };
 

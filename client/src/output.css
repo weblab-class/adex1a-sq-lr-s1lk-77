@@ -582,6 +582,10 @@ video {
   margin-bottom: 24px;
 }
 
+.block {
+  display: block;
+}
+
 .flex {
   display: flex;
 }
@@ -592,6 +596,10 @@ video {
 
 .aspect-\[16\/9\] {
   aspect-ratio: 16/9;
+}
+
+.aspect-square {
+  aspect-ratio: 1 / 1;
 }
 
 .h-auto {
