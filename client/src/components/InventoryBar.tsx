@@ -39,6 +39,7 @@ const InventoryBar = (props: Props) => {
     }).then((new_items) => {
       console.log(new_items);
       setItems(new_items);
+      setSelectedItem({ item: new_items[selectedItem.index], index: selectedItem.index });
     });
   };
   // !!! event handler definitions
