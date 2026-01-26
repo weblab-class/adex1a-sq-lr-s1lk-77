@@ -87,7 +87,7 @@ const CatInfo = () => {
               border: "1px solid #000",
               borderRadius: "0.4rem",
               resize: "vertical",
-              fontSize: "clamp(0.7rem, 1.1cqw, 1rem)",
+              fontSize: "clamp(0.7rem, 1.1cqw, 1.1rem)",
             }}
           />
           <input id="notes_submit" type="submit" value="Submit" className="CatInfo-submitbutton" />
