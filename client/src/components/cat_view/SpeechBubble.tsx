@@ -7,7 +7,19 @@ type Props = {
 };
 
 const SpeechBubble = (props: Props) => {
-  return <p className="CatDisplay-speech">{props.textcontent}</p>;
+  return (
+    <>
+      {props.textcontent.length < 15 ? (
+        <p className="CatDisplay-speech" style={{ left: `45%`, fontSize: `2em` }}>
+          {props.textcontent}
+        </p>
+      ) : (
+        <p className="CatDisplay-speech" style={{ left: `0%`, fontSize: `1.15em` }}>
+          {props.textcontent}
+        </p>
+      )}
+    </>
+  );
 };
 
 export default SpeechBubble;
