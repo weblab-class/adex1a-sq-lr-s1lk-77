@@ -232,24 +232,33 @@ router.post("/updatecat", async (req, res) => {
   }
   const parsedAction = gameLogic.parseAction(thisAction);
   const goal = [thisCat.happy, thisCat.sad, thisCat.angry];
-  const mostfelt: string = gameLogic.updateEmotions(parsedAction, goal, thisCat.currentmood);
+  let mostfelt: string = gameLogic.updateEmotions(parsedAction, goal, thisCat.currentmood);
+  let isAchievement: boolean = false;
 
   // check if interaction is optimizer
   let completed: boolean = false;
   if (JSON.stringify(parsedAction) === JSON.stringify(thisCat.happy)) {
     thisCat.set("hasachieved.0", true);
+    mostfelt = "purrfect";
+    isAchievement = true;
   } else if (JSON.stringify(parsedAction) === JSON.stringify(thisCat.sad)) {
     thisCat.set("hasachieved.1", true);
+    mostfelt = "miseraculous";
+    isAchievement = true;
   } else if (JSON.stringify(parsedAction) === JSON.stringify(thisCat.angry)) {
     thisCat.set("hasachieved.2", true);
+    mostfelt = "hisstorical";
+    isAchievement = true;
   }
   // check if cat is complete
   if (thisCat.hasachieved[0] && thisCat.hasachieved[1] && thisCat.hasachieved[2]) {
     completed = true;
   }
-  socketManager
-    .getSocketFromSocketID(req.body.socketid)
-    ?.emit("updatestatus", { currentmood: thisCat.currentmood, mostfelt: mostfelt });
+  socketManager.getSocketFromSocketID(req.body.socketid)?.emit("updatestatus", {
+    currentmood: thisCat.currentmood,
+    mostfelt: mostfelt,
+    isAchievement: isAchievement,
+  });
   await thisCat.save();
   res.send({ completed });
 });

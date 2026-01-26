@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import "./CatDisplay.css";
 import { get, post } from "../../utilities";
 import { socket } from "../../client-socket";
@@ -22,6 +22,10 @@ const CatSprite = (props: Props) => {
     });
     // console.log("it working");
   };
+
+  useEffect(() => {
+    console.log("props.action changed to " + props.action);
+  }, [props.action]);
 
   // click handler
   const handleClick = (): void => {

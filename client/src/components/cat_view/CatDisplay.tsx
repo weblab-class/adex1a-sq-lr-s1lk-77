@@ -66,7 +66,7 @@ const CatDisplay = (props: Props) => {
   // on action complete
   const handleActionComplete = (data): void => {
     let message: string;
-    if (phrases.current.length > 0 && Math.random() > 0.9) {
+    if (phrases.current.length > 0 && !data.isAchievement && Math.random() > 0.9) {
       message = phrases.current[Math.floor(Math.random() * phrases.current.length)];
     } else {
       switch (data.mostfelt) {
@@ -80,7 +80,7 @@ const CatDisplay = (props: Props) => {
           message = "hissss";
           break;
         default:
-          message = "meow";
+          message = data.mostfelt;
       }
     }
 
@@ -120,6 +120,10 @@ const CatDisplay = (props: Props) => {
       }
     };
   }, []);
+
+  useEffect(() => {
+    console.log("trigger changed to " + trigger);
+  }, [trigger]);
 
   return (
     <div className={trigger !== "default" ? "CatDisplay-containerbig" : "CatDisplay-container"}>
