@@ -31,6 +31,12 @@ const CatDisplay = (props: Props) => {
       clearInterval(intervalRef.current);
     }
     setTrigger(input);
+
+    setTimeout((): void => {
+      if (trigger !== input) {
+        setTrigger(input);
+      }
+    }, 200);
   };
 
   // denied action

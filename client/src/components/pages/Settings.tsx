@@ -14,6 +14,9 @@ const Settings = () => {
 
   // achievements stuff
   const { activeCats, setActiveCats } = useContext(ActiveCatContext);
+  activeCats.map((cat) => {
+    console.log("active cat name is " + cat.name);
+  });
   const [catOne, setCatOne] = useState<CatInterfaceMongo | null>(null);
   const [catTwo, setCatTwo] = useState<CatInterfaceMongo | null>(null);
   const [catThree, setCatThree] = useState<CatInterfaceMongo | null>(null);
@@ -64,7 +67,7 @@ const Settings = () => {
       <div className="Settings-achievementmain">
         <CatCard cat={catOne ? catOne : null} />
         <CatCard cat={catTwo ? catTwo : null} />
-        <CatCard cat={catThree ? catTwo : null} />
+        <CatCard cat={catThree ? catThree : null} />
         {/* {cardList} */}
       </div>
     </div>
