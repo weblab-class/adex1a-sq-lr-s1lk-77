@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import catImg from "../../assets/cat.jpg";
+import catImg from "../../assets/newcat.png";
 import Cat from "../../../../shared/Cat";
 
 import { get, post } from "../../utilities";
