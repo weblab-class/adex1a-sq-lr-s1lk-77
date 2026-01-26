@@ -22,7 +22,14 @@
   --darkgrey: #d4d4d4;
   --medgrey: #e0e0e0;
   --grey: #f7f7f7;
-  --white: #fff;
+
+  /* our colors */
+  --white: #f7f7f2;
+  --pink: #ffafcc;
+  --purple: #b380d5;
+  --orange: #f77f00;
+  --black: #28282b;
+  --blue: #dfedfb;
 
   --xs: 4px;
   --s: 8px;
