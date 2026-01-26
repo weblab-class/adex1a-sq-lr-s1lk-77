@@ -2,12 +2,22 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: clamp(140px, 40vw, 220px);
-  min-height: clamp(40px, 4vw, 56px);
-  padding: clamp(0.6rem, 1.5vw, 1rem) clamp(1.2rem, 3vw, 2rem);
-  font-size: clamp(1rem, 2.5vw, 1.5rem);
+  min-width: clamp(110px, 20cqw, 160px);
+  min-height: clamp(32px, 2cqw, 44px);
+  padding: clamp(0.45rem, 0.75cqw, 0.7rem) clamp(0.9rem, 1.6cqw, 1.2rem);
+  font-size: clamp(0.85rem, 1.3cqw, 1.1rem);
   font-weight: 600;
   text-decoration: none;
+}
+
+.login-page {
+  container-type: inline-size;
+  overflow-y: hidden;
+  min-height: 0;
+}
+
+.login-page .login-button {
+  margin-bottom: clamp(0.35rem, 1cqw, 0.75rem);
 }
 
 .login-button--primary {
@@ -21,8 +31,8 @@
 .login-google {
   display: flex;
   justify-content: center;
-  margin-top: clamp(0.5rem, 1.5vw, 1rem);
-  transform: scale(clamp(0.9, 0.9 + 0.3vw, 1.1));
+  margin-top: clamp(0.5rem, 1.1cqw, 0.9rem);
+  transform: scale(clamp(0.9, 0.9 + 0.2cqw, 1.05));
   transform-origin: center;
 }
 

@@ -26,18 +26,18 @@ const Skeleton = () => {
   }>();
   return (
     <div className="login-page w-full h-full bg-blue-50 flex flex-col items-center justify-center">
-      <h1 className="text-black-950 p-sm" style={{ fontSize: "clamp(0.8rem, 2vw, 1.5rem)" }}>
+      <h1 className="text-black-950 p-sm" style={{ fontSize: "clamp(0.8rem, 2.5cqw, 2.3rem)" }}>
         Tired of your mundane life?
       </h1>
       <h1
         className="text-black-950 p-sm leading-none"
-        style={{ fontSize: "clamp(0.8rem, 2vw, 1.5rem)" }}
+        style={{ fontSize: "clamp(0.8rem, 2.5cqw, 2.3rem)" }}
       >
         Come escape to the{" "}
       </h1>
       <h1
         className="text-black-950 p-sm m-xl barrio-regular"
-        style={{ fontSize: "clamp(0.8rem, 8vw, 9rem)" }}
+        style={{ fontSize: "clamp(0.8rem, 6cqw, 7rem)" }}
         justify-center
       >
         Weird Cat Cafe!

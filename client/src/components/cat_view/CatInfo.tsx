@@ -46,7 +46,7 @@ const CatInfo = () => {
       <div
         className="CatInterface-panel CatInterface-tl p-sm flex-row"
         style={{
-          fontSize: "clamp(0.8rem, 2vw, 1.8rem)",
+          fontSize: "clamp(0.8rem, 2cqw, 1.8rem)",
           display: "flex",
           flexDirection: "column",
           gap: "0.5rem",
@@ -72,7 +72,7 @@ const CatInfo = () => {
             minHeight: 0,
           }}
         >
-          <label style={{ fontSize: "clamp(0.7rem, 1.1vw, 1rem)" }}>Notes:</label>
+          <label style={{ fontSize: "clamp(0.7rem, 1.1cqw, 1rem)" }}>Notes:</label>
           <textarea
             ref={inputRef as unknown as React.Ref<HTMLTextAreaElement>}
             value={notes}
@@ -87,7 +87,7 @@ const CatInfo = () => {
               border: "1px solid #000",
               borderRadius: "0.4rem",
               resize: "vertical",
-              fontSize: "clamp(0.7rem, 1.1vw, 1rem)",
+              fontSize: "clamp(0.7rem, 1.1cqw, 1rem)",
             }}
           />
           <input id="notes_submit" type="submit" value="Submit" className="CatInfo-submitbutton" />

@@ -5,14 +5,14 @@
   align-items: center;
   height: 100%;
   overflow-y: auto;
-  padding: clamp(1rem, 3vw, 2rem);
+  padding: clamp(1rem, 3cqw, 2rem);
   box-sizing: border-box;
 }
 
 .settings-page__back {
   position: absolute;
-  top: clamp(0.75rem, 2vw, 1.5rem);
-  left: clamp(0.75rem, 2vw, 1.5rem);
+  top: clamp(0.75rem, 2cqw, 1.5rem);
+  left: clamp(0.75rem, 2cqw, 1.5rem);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -20,22 +20,22 @@
 }
 
 .settings-page__title {
-  margin-bottom: clamp(1rem, 3vw, 2rem);
-  font-size: clamp(1.2rem, 3vw, 2rem);
+  margin-bottom: clamp(1rem, 3cqw, 2rem);
+  font-size: clamp(1.2rem, 3cqw, 2rem);
   font-weight: 600;
 }
 
 .settings-page__actions {
   display: flex;
   flex-direction: column;
-  gap: clamp(0.75rem, 2vw, 1.25rem);
+  gap: clamp(0.75rem, 2cqw, 1.25rem);
   margin-bottom: 2%;
 }
 
 .settings-page__button {
   width: min(500px, 100%);
-  padding: clamp(0.6rem, 1.5vw, 0.9rem) clamp(1rem, 3vw, 1.5rem);
-  font-size: clamp(1rem, 2.5vw, 1.25rem);
+  padding: clamp(0.6rem, 1.5cqw, 0.9rem) clamp(1rem, 3cqw, 1.5rem);
+  font-size: clamp(1rem, 2.5cqw, 1.25rem);
   font-weight: 600;
   border-radius: 0.5rem;
   background-color: var(--white);
@@ -51,14 +51,14 @@
   align-items: center;
   height: 100%;
   overflow-y: auto;
-  padding: clamp(1rem, 3vw, 2rem);
+  padding: clamp(1rem, 3cqw, 2rem);
   box-sizing: border-box;
 }
 
 .settings-page__back {
   position: absolute;
-  top: clamp(0.75rem, 2vw, 1.5rem);
-  left: clamp(0.75rem, 2vw, 1.5rem);
+  top: clamp(0.75rem, 2cqw, 1.5rem);
+  left: clamp(0.75rem, 2cqw, 1.5rem);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -66,8 +66,8 @@
 }
 
 .settings-page__title {
-  margin-bottom: clamp(1rem, 3vw, 2rem);
-  font-size: clamp(1.2rem, 3vw, 2rem);
+  margin-bottom: clamp(1rem, 3cqw, 2rem);
+  font-size: clamp(1.2rem, 3cqw, 2rem);
   font-weight: 600;
 }
 
@@ -76,14 +76,14 @@
   flex-direction: row;
   width: 100%;
   /* border: 2px solid red; */
-  gap: clamp(0.75rem, 2vw, 1.25rem);
+  gap: clamp(0.75rem, 2cqw, 1.25rem);
   justify-content: center;
 }
 
 .settings-page__button {
   width: min(280px, 33%);
-  padding: clamp(0.6rem, 1.5vw, 0.9rem) clamp(1rem, 3vw, 1.5rem);
-  font-size: clamp(1rem, 2.5vw, 1.25rem);
+  padding: clamp(0.6rem, 1.5cqw, 0.9rem) clamp(1rem, 3cqw, 1.5rem);
+  font-size: clamp(1rem, 2.5cqw, 1.25rem);
   font-weight: 600;
   border-radius: 0.5rem;
   background-color: var(--white);
