@@ -3,17 +3,20 @@
   flex-direction: column;
   height: 100%;
   position: relative;
+  container-type: inline-size;
 }
 
 .CatStatus-header {
   height: 15%;
   width: 100%;
   z-index: 1;
+  font-size: clamp(0.5rem, 5cqw, 2rem);
 }
 
 .CatStatus-bar {
   flex-grow: 1;
   width: 100%;
+  font-size: clamp(0.7rem, 1.1cqw, 1.1rem);
   /* border: 2px solid red; */
 }
 
@@ -38,4 +41,5 @@
 .CatStatus-gridlabel {
   position: absolute;
   bottom: 0;
+  font-size: clamp(0.6rem, 0.9cqw, 0.9rem);
 }
