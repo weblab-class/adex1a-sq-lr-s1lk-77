@@ -286,6 +286,10 @@ router.post("/applypaint", async (req, res) => {
   res.send(req.player.items);
 });
 
+router.get("/phrases", (req, res) => {
+  res.send({ phrases: gameLogic.jumpscares });
+});
+
 // anything else falls to this "not found" case
 router.all("*", (req, res) => {
   const msg = `Api route not found: ${req.method} ${req.url}`;

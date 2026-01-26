@@ -14,6 +14,9 @@
   height: 50%;
   border: 2px solid black;
   position: relative;
+  transition:
+    width 0.2s ease,
+    height 0.2s ease;
 }
 
 .CatDisplay-containerbig {
@@ -22,6 +25,9 @@
   height: 55%;
   border: 2px solid black;
   position: relative;
+  transition:
+    width 0.2s ease,
+    height 0.2s ease;
 }
 
 .CatDisplay-speech {
