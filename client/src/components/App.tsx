@@ -78,6 +78,7 @@ const App = () => {
         className="w-screen h-screen App-screen"
         // style={{ backgroundImage: `url(${TempBackground})` }}
       >
+        <p className="App-title">Weird Cat Cafe</p>
         <div
           className="
           aspect-[16/9]
