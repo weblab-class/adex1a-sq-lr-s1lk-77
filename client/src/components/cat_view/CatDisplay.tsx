@@ -6,6 +6,11 @@ import { socket } from "../../client-socket";
 import { capitalizeFirst } from "../../custom-utilities";
 import CatSprite from "./CatSprite";
 import { get } from "../../utilities";
+import { playSFX } from "../../sound";
+import purr_sfx from "../../assets/sfx/purr.mp3";
+import hiss_sfx from "../../assets/sfx/hiss.mp3";
+import sad_sfx from "../../assets/sfx/sad.wav";
+import button_click_sfx from "../../assets/sfx/button_click.wav";
 
 type Props = {
   sprite: string;
@@ -78,17 +83,21 @@ const CatDisplay = (props: Props) => {
   const handleActionComplete = (data): void => {
     let message: string;
     if (phrases.current.length > 0 && !data.isAchievement && Math.random() > 0.9) {
+      playSFX(button_click_sfx);
       message = phrases.current[Math.floor(Math.random() * phrases.current.length)];
       set_is_spoopy(true);
     } else {
       switch (data.mostfelt) {
         case "happy":
+          playSFX(purr_sfx);
           message = "purrrr";
           break;
         case "sad":
+          playSFX(sad_sfx);
           message = "oh, the misery";
           break;
         case "angry":
+          playSFX(hiss_sfx);
           message = "hissss";
           break;
         default:
