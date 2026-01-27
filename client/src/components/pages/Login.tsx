@@ -10,6 +10,11 @@ import {
 import { Link } from "react-router-dom";
 import "./Login.css";
 
+import { playSFX } from "../../sound";
+import button_hover_sfx from "../../assets/sfx/button_hover.wav";
+import button_click_sfx from "../../assets/sfx/button_click.wav";
+import success_sfx from "../../assets/sfx/success.mp3";
+
 //TODO(weblab student): REPLACE WITH YOUR OWN CLIENT_ID
 const GOOGLE_CLIENT_ID = "12657035452-bgq61jdi9b2sva449ujmb1bceds7r87n.apps.googleusercontent.com";
 
@@ -43,15 +48,25 @@ const Skeleton = () => {
         Weird Cat Cafe!
       </h1>
       {userId && (
-        <Link
-          to="/wallview"
-          className="login-button login-button--primary bg-emerald-500 mb-xl rounded-md"
-        >
-          Start!
-        </Link>
+        <div>
+          <Link
+            to="/wallview"
+            onMouseEnter={() => playSFX(button_hover_sfx)}
+            onClick={() => playSFX(success_sfx)}
+            className="login-button login-button--primary bg-emerald-500 mb-xl rounded-md"
+          >
+            Start!
+          </Link>
+        </div>
       )}
       {userId && (
-        <Link to="/wallview" id="tutorial-button" className="login-button mb-xl rounded-md">
+        <Link
+          to="/wallview"
+          id="tutorial-button"
+          className="login-button mb-xl rounded-md"
+          onMouseEnter={() => playSFX(button_hover_sfx)}
+          onClick={() => playSFX(button_click_sfx)}
+        >
           Tutorial
         </Link>
       )}
