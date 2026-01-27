@@ -31,9 +31,10 @@ const PaintSelector = (props: Props) => {
       />
       {visible && (
         <>
-          <PaintStation color="red" x={85.5} y={45} />
-          <PaintStation color="green" x={83} y={50} />
-          <PaintStation color="blue" x={88} y={50} />
+          <PaintStation color="red" x={84} y={45} />
+          <PaintStation color="green" x={84} y={50} />
+          <PaintStation color="blue" x={87.5} y={45} />
+          <PaintStation color="white" x={87.5} y={50} />
         </>
       )}
     </div>
