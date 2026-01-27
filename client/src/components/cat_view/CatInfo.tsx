@@ -4,6 +4,9 @@ import "../pages/CatInterface.css";
 import { useParams } from "react-router-dom";
 import CatInterfaceMongo from "../../../../shared/Cat";
 import "./CatInfo.css";
+import { playSFX } from "../../sound";
+import button_click_sfx from "../../assets/sfx/button_click.wav";
+import button_hover_sfx from "../../assets/sfx/button_hover.wav";
 
 const CatInfo = () => {
   let props = useParams<"catId">();
@@ -90,7 +93,14 @@ const CatInfo = () => {
               fontSize: "clamp(0.7rem, 1.1cqw, 1.1rem)",
             }}
           />
-          <input id="notes_submit" type="submit" value="Submit" className="CatInfo-submitbutton" />
+          <input
+            id="notes_submit"
+            type="submit"
+            value="Submit"
+            className="CatInfo-submitbutton"
+            onMouseEnter={() => playSFX(button_hover_sfx)}
+            onClick={() => playSFX(button_click_sfx)}
+          />
         </form>
       </div>
     </>

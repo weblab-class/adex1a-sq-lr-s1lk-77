@@ -3,6 +3,9 @@ import { get } from "../../utilities";
 import Cat from "../../../../shared/Cat";
 import CatalogEntry from "../CatalogEntry";
 import { useNavigate, useOutletContext } from "react-router-dom";
+import { playSFX } from "../../sound";
+import button_click_sfx from "../../assets/sfx/button_click.wav";
+import button_hover_sfx from "../../assets/sfx/button_hover.wav";
 import "./Settings.css";
 
 const Catalog = () => {
@@ -21,7 +24,14 @@ const Catalog = () => {
 
   return (
     <>
-      <button className="settings-page__back" onClick={() => navigate(-1)}>
+      <button
+        className="settings-page__back"
+        onMouseEnter={() => playSFX(button_hover_sfx)}
+        onClick={() => {
+          playSFX(button_click_sfx);
+          navigate(-1);
+        }}
+      >
         <img alt="go back" />
       </button>
 
