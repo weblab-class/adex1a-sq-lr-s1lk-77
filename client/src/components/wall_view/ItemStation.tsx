@@ -1,4 +1,7 @@
 import React from "react";
+import { playSFX } from "../../sound";
+import button_click_sfx from "../../assets/sfx/button_click.wav";
+import button_hover_sfx from "../../assets/sfx/button_hover.wav";
 
 type Props = {
   addItem: Function;
@@ -15,7 +18,11 @@ const ItemStation = (props: Props) => {
     <>
       <p
         className="absolute text-lg"
-        onClick={() => addItem(item)}
+        onMouseEnter={() => playSFX(button_hover_sfx)}
+        onClick={() => {
+          playSFX(button_click_sfx);
+          addItem(item);
+        }}
         style={{ left: `${props.x}%`, top: `${props.y}%` }}
       >
         {item}

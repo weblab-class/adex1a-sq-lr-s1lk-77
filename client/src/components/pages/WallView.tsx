@@ -5,7 +5,8 @@ import ItemStation from "../wall_view/ItemStation";
 import PaintSelector from "../wall_view/PaintSelector";
 import InventoryBar from "../InventoryBar";
 import { get, post } from "../../utilities";
-
+import { playSFX } from "../../sound";
+import coin_sfx from "../../assets/sfx/coin.mp3";
 import { ActiveCatContext } from "../App";
 
 import bg from "../../assets/bg.png";
@@ -33,9 +34,11 @@ const WallView = () => {
       if (JSON.stringify(new_list_items) === JSON.stringify(items)) {
         //TO DO: u can't add item sadge popup
         console.log("ooh no");
+      } else {
+        playSFX(coin_sfx, 0.3);
+        console.log(new_list_items);
+        setItems(new_list_items);
       }
-      console.log(new_list_items);
-      setItems(new_list_items);
     });
   };
 

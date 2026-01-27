@@ -1,7 +1,9 @@
 // a single item in the inventory
 import React from "react";
 import "./SingleItem.css";
-
+import { playSFX } from "../sound";
+import button_click_sfx from "../assets/sfx/button_click.wav";
+import button_hover_sfx from "../assets/sfx/button_hover.wav";
 type Props = {
   itemname: string; // name of item
   slotnumber: number;
@@ -10,12 +12,23 @@ type Props = {
 
 const SingleItem = (props: Props) => {
   // callback function on button press
+
+  const handleHover = () => {
+    playSFX(button_hover_sfx);
+  };
+
   const handleClick = (event: React.MouseEvent) => {
     props.selectItem && props.selectItem(props.slotnumber); // ping inventory bar that item has been selected
+    playSFX(button_click_sfx);
   };
 
   return (
-    <img className="SingleItem-container text-white" alt={props.itemname} onClick={handleClick} />
+    <img
+      className="SingleItem-container text-white"
+      alt={props.itemname}
+      onClick={handleClick}
+      onMouseEnter={handleHover}
+    />
   );
 };
 

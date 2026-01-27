@@ -1,6 +1,9 @@
 // a single item in the inventory
-import React from "react";
+import React, { useEffect } from "react";
 import "./CatDisplay.css";
+
+import { playSFX } from "../../sound";
+import spoopy_sfx from "../../assets/sfx/spoopy.mp3";
 
 type Props = {
   textcontent: string;
@@ -8,6 +11,9 @@ type Props = {
 };
 
 const SpeechBubble = (props: Props) => {
+  useEffect(() => {
+    if (props.is_spoopy) playSFX(spoopy_sfx, 0.1);
+  }, [props.textcontent]);
   return (
     <>
       {props.textcontent.length < 15 ? (

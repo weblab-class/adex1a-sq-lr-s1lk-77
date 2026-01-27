@@ -4,6 +4,10 @@ import "./ActionPanel.css";
 import { post } from "../utilities";
 import { socket } from "../client-socket";
 
+import { playSFX } from "../sound";
+import button_hover_sfx from "../assets/sfx/button_hover.wav";
+import button_click_sfx from "../assets/sfx/button_click.wav";
+
 type Props = {
   itemname: string;
   index: number;
@@ -15,6 +19,7 @@ type ActionNames = Array<"Pet" | "Feed" | "Dress" | "Bonk">;
 const SingleItem = (props: Props) => {
   // click callback for button
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+    playSFX(button_click_sfx);
     let thisAction: string = (event.target as HTMLElement).textContent;
     thisAction = thisAction.charAt(0).toLowerCase() + thisAction.slice(1);
 
@@ -33,7 +38,11 @@ const SingleItem = (props: Props) => {
     <div className="ActionPanel-container">
       {actionNames.map((action: string, i: number): React.ReactNode => {
         return (
-          <button key={`ActionPanel-button${i}`} onClick={handleClick}>
+          <button
+            onMouseEnter={() => playSFX(button_hover_sfx)}
+            key={`ActionPanel-button${i}`}
+            onClick={handleClick}
+          >
             {action}
           </button>
         );
