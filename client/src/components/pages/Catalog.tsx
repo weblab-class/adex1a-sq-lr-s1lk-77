@@ -32,7 +32,7 @@ const Catalog = () => {
           navigate(-1);
         }}
       >
-        <img alt="go back" />
+        ⬅
       </button>
 
       <h1 className="flex items-center justify-center p-sm" style={{ fontSize: `2em` }}>

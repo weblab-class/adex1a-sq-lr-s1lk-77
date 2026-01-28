@@ -48,13 +48,13 @@ const WallView = () => {
       style={{ backgroundImage: `url(${bg})` }}
     >
       <div className="relative w-full h-full grow">
-        <Cat catDoc={activeCats[0]} x={20} y={10} />
-        <Cat catDoc={activeCats[1]} x={10} y={20} />
-        <Cat catDoc={activeCats[2]} x={10} y={30} />
+        <Cat catDoc={activeCats[0]} x={20} y={80} />
+        <Cat catDoc={activeCats[1]} x={40} y={80} />
+        <Cat catDoc={activeCats[2]} x={60} y={80} />
 
-        <ItemStation addItem={addItem} item={"green-pickle"} x={30} y={30} />
-        <ItemStation addItem={addItem} item={"white-homework"} x={40} y={40} />
-        <ItemStation addItem={addItem} item={"red-balloon"} x={50} y={50} />
+        <ItemStation addItem={addItem} item={"green-pickle"} x={60} y={30} />
+        <ItemStation addItem={addItem} item={"white-homework"} x={60} y={40} />
+        <ItemStation addItem={addItem} item={"red-balloon"} x={60} y={50} />
 
         <PaintSelector x={84} y={60} />
       </div>
