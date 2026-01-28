@@ -18,6 +18,7 @@ type Props = {
   catDoc: Cat;
   x: number;
   y: number;
+  width: number;
 };
 
 const Cat = (props: Props) => {
@@ -50,7 +51,11 @@ const Cat = (props: Props) => {
       onClick={handleClick}
       onMouseEnter={() => playSFX(button_hover_sfx)}
       className="absolute w-[12%] h-auto cursor-pointer"
-      style={{ left: `${props.x}%`, top: `${props.y}%`, width: "15cqw" }}
+      style={{
+        width: `${props.width}cqw`,
+        left: `${props.x}%`,
+        top: `${props.y}%`,
+      }}
     />
   );
 };
