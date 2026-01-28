@@ -29,6 +29,7 @@ const Skeleton = () => {
     handleLogin: Function;
     handleLogout: Function;
   }>();
+  const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
   return (
     <div className="login-page w-full h-full bg-blue-50 flex flex-col items-center justify-center">
       <h1 className="text-black-950 p-sm" style={{ fontSize: "clamp(0.8rem, 2.5cqw, 2.3rem)" }}>
@@ -52,8 +53,9 @@ const Skeleton = () => {
           <Link
             to="/wallview"
             onMouseEnter={() => playSFX(button_hover_sfx)}
-            onClick={() => {
+            onClick={async () => {
               playSFX(success_sfx);
+              await sleep(1000);
               playMusicLoop(meow_loop);
             }}
             className="login-button login-button--primary bg-emerald-500 mb-xl rounded-md"
