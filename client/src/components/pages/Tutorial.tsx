@@ -3,6 +3,7 @@ import { get } from "../../utilities";
 import { useNavigate, useOutletContext } from "react-router-dom";
 import { playSFX } from "../../sound";
 import button_click_sfx from "../../assets/sfx/button_click.wav";
+import spoopy_sfx from "../../assets/sfx/spoopy.mp3";
 import button_hover_sfx from "../../assets/sfx/button_hover.wav";
 import "./Settings.css";
 
@@ -26,7 +27,10 @@ const Tutorial = () => {
       <h1
         className="flex items-center justify-center p-sm cursor-pointer"
         style={{ fontSize: `2cqw`, paddingTop: "2cqw", textAlign: "center" }}
-        onClick={() => setShowGlitch((prev) => !prev)}
+        onClick={() => {
+          setShowGlitch((prev) => !prev);
+          playSFX(spoopy_sfx);
+        }}
       >
         {" "}
         Tutorial
