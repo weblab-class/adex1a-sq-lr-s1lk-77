@@ -3,7 +3,7 @@
   /* background-size: contain; */
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   background-size: 480px;
 }
@@ -14,16 +14,17 @@
 
 .App-settings {
   position: absolute;
-  top: 2%;
-  right: 0;
+  top: -2%;
+  right: 1%;
 }
 
 .App-title {
-  position: fixed;
-  top: -6px;
+  position: relative;
   font-family: "barrio";
   color: var(--darkpurple);
-  -webkit-text-stroke-width: 3px;
+  -webkit-text-stroke-width: clamp(0.1rem, 0.3cqw, 0.1rem);
   -webkit-text-stroke-color: var(--white);
-  font-size: clamp(8rem, 1.2cqw, 2rem);
+  font-size: clamp(4rem, 5cqw, 4rem);
+  margin-bottom: 0;
+  margin-top: 0.5cqw;
 }

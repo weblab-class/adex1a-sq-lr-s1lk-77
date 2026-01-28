@@ -53,7 +53,7 @@ const Settings = () => {
           navigate(-1);
         }}
       >
-        <img alt="go back" />
+        ⬅
       </button>
       <p className="settings-page__title">Settings.</p>
       <div className="settings-page__actions">

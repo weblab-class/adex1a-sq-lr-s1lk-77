@@ -18,8 +18,9 @@ const SettingsButton = (props: Props) => {
           playSFX(button_click_sfx);
           navigate("/settings");
         }}
+        style={{ color: "white", fontSize: "3cqw" }}
       >
-        <img className="text-white" alt="Gear Icon" />
+        ⏣
       </button>
     </>
   );

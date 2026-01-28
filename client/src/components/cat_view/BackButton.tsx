@@ -17,7 +17,7 @@ const BackButton = () => {
           navigate("/wallview");
         }}
       >
-        <img alt="back" />
+        ⬅
       </button>
     </>
   );
