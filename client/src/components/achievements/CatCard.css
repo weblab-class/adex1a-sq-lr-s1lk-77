@@ -8,7 +8,7 @@
 
 .CatCard-header {
   height: 20%;
-  font-size: 2em;
+  font-size: 2.5cqw;
 }
 
 .CatCard-slot {
@@ -19,7 +19,7 @@
 }
 
 .CatCard-img {
-  height: 100%;
+  height: clamp(2cqw, 5.5cqw, 3.6cqw);
   border: 2px solid var(--black);
   aspect-ratio: 1 / 1;
   background-size: cover;
@@ -30,6 +30,7 @@
   justify-content: center;
   display: flex;
   align-items: center;
+  font-size: 1.5cqw;
 }
 
 .CatCard-gray {

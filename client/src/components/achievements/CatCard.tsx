@@ -18,7 +18,7 @@ const CatCard = (props: Props) => {
     return <></>;
   }
   return (
-    <div className="CatCard-container">
+    <div className="w-full h-full CatCard-container">
       <h1 className="CatCard-header">{props.cat.name}</h1>
       <div className="CatCard-slot">
         {/* <img src={props.cat.hasachieved[0] ? CatHappy : CatGray} alt="placeholder" /> */}
