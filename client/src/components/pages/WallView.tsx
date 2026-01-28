@@ -52,9 +52,9 @@ const WallView = () => {
         <Cat catDoc={activeCats[1]} x={49} y={10} />
         <Cat catDoc={activeCats[2]} x={75} y={-2} />
 
-        <ItemStation addItem={addItem} item={"green-pickle"} x={60} y={30} />
+        <ItemStation addItem={addItem} item={"green-pickle"} x={40} y={80} />
         <ItemStation addItem={addItem} item={"white-homework"} x={65} y={75} />
-        <ItemStation addItem={addItem} item={"red-balloon"} x={60} y={50} />
+        <ItemStation addItem={addItem} item={"red-balloon"} x={10} y={10} />
 
         <PaintSelector x={84} y={60} />
       </div>

@@ -3,6 +3,8 @@ import { playSFX } from "../../sound";
 import button_click_sfx from "../../assets/sfx/button_click.wav";
 import button_hover_sfx from "../../assets/sfx/button_hover.wav";
 import homework_producer from "../../assets/homework-producer.png";
+import balloon_producer from "../../assets/balloon-producer.png";
+import pickle_producer from "../../assets/pickle-producer.png";
 type Props = {
   addItem: Function;
   item: string;
@@ -15,6 +17,9 @@ const ItemStation = (props: Props) => {
   const item = props.item;
   let src = "asdf";
   if (item == "white-homework") src = homework_producer;
+  else if (item == "green-pickle") src = pickle_producer;
+  else if (item == "red-balloon") src = balloon_producer;
+
   return (
     <>
       <img
