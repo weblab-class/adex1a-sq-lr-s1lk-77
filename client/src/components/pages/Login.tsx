@@ -10,7 +10,7 @@ import {
 import { Link } from "react-router-dom";
 import "./Login.css";
 
-import { playSFX } from "../../sound";
+import { playSFX, playMusicLoop } from "../../sound";
 import button_hover_sfx from "../../assets/sfx/button_hover.wav";
 import button_click_sfx from "../../assets/sfx/button_click.wav";
 import success_sfx from "../../assets/sfx/success.mp3";
@@ -52,7 +52,10 @@ const Skeleton = () => {
           <Link
             to="/wallview"
             onMouseEnter={() => playSFX(button_hover_sfx)}
-            onClick={() => playSFX(success_sfx)}
+            onClick={() => {
+              playSFX(success_sfx);
+              playMusicLoop(meow_loop);
+            }}
             className="login-button login-button--primary bg-emerald-500 mb-xl rounded-md"
           >
             Start!
