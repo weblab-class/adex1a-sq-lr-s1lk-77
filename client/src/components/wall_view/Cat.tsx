@@ -3,7 +3,11 @@ import { useNavigate } from "react-router-dom";
 import { playSFX } from "../../sound";
 import meow_sfx from "../../assets/sfx/meow.mp3";
 import button_hover_sfx from "../../assets/sfx/button_hover.wav";
-import catImg from "../../assets/newcat.png";
+import brown_cat from "../../assets/cat-base-brown.png";
+import black_cat from "../../assets/cat-base-black.png";
+import orange_cat from "../../assets/cat-base-orange.png";
+import gray_cat from "../../assets/cat-base-gray.png";
+
 import Cat from "../../../../shared/Cat";
 
 import { get, post } from "../../utilities";
@@ -19,7 +23,16 @@ type Props = {
 const Cat = (props: Props) => {
   const { activeCats, setActiveCats } = useContext(ActiveCatContext);
   const cat = props.catDoc;
-
+  let catImg = "";
+  if (cat.color == "orange") {
+    catImg = orange_cat;
+  } else if (cat.color == "gray") {
+    catImg = gray_cat;
+  } else if (cat.color == "black") {
+    catImg = black_cat;
+  } else if (cat.color == "brown") {
+    catImg = brown_cat;
+  }
   const navigate = useNavigate();
   const handleClick = () => {
     playSFX(meow_sfx);
@@ -37,7 +50,7 @@ const Cat = (props: Props) => {
       onClick={handleClick}
       onMouseEnter={() => playSFX(button_hover_sfx)}
       className="absolute w-[12%] h-auto cursor-pointer"
-      style={{ left: `${props.x}%`, top: `${props.y}%` }}
+      style={{ left: `${props.x}%`, top: `${props.y}%`, width: "15cqw" }}
     />
   );
 };
