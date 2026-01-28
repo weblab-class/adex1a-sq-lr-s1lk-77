@@ -24,12 +24,12 @@ const ItemStation = (props: Props) => {
     <>
       <img
         src={src}
-        className="absolute text-lg"
+        className="absolute text-lg cursor-pointer"
         onMouseEnter={() => playSFX(button_hover_sfx)}
         onClick={() => {
           addItem(item);
         }}
-        style={{ width: "10cqw", left: `${props.x}%`, top: `${props.y}%` }}
+        style={{ width: "16%", left: `${props.x}%`, top: `${props.y}%` }}
         alt={props.item}
       />
     </>
