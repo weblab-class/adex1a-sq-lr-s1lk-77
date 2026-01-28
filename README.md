@@ -13,15 +13,11 @@ with love,
 
 s1lk77, adexia, and asdf_asdfghjkl :D
 
----
-
 ## Tech Used
 - MongoDB  
 - Express  
 - React  
 - Node.js  
-
----
 
 ## Install & Run
 
@@ -35,8 +31,6 @@ Run:
 npm install
 npm start
 npm run dev
-
----
 
 ## Art Credits
 Sprite art: s1lk77  
