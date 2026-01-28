@@ -55,7 +55,7 @@ const Skeleton = () => {
             onMouseEnter={() => playSFX(button_hover_sfx)}
             onClick={async () => {
               playSFX(success_sfx);
-              await sleep(1000);
+              await sleep(500);
               playMusicLoop(meow_loop);
             }}
             className="login-button login-button--primary bg-emerald-500 mb-xl rounded-md"
@@ -66,7 +66,7 @@ const Skeleton = () => {
       )}
       {userId && (
         <Link
-          to="/wallview"
+          to="/tutorial"
           id="tutorial-button"
           className="login-button mb-xl rounded-md"
           onMouseEnter={() => playSFX(button_hover_sfx)}
@@ -83,9 +83,11 @@ const Skeleton = () => {
           <button
             className="login-button login-button--muted bg-gray-400 rounded-md"
             onClick={() => {
+              playSFX(button_click_sfx);
               googleLogout();
               handleLogout();
             }}
+            onMouseEnter={() => playSFX(button_hover_sfx)}
           >
             Logout
           </button>

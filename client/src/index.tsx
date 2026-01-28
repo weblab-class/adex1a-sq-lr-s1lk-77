@@ -14,12 +14,14 @@ import Login from "./components/pages/Login";
 import Catalog from "./components/pages/Catalog";
 import CatInterface from "./components/pages/CatInterface";
 import Settings from "./components/pages/Settings";
+import Tutorial from "./components/pages/Tutorial";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route errorElement={<NotFound />} element={<App />}>
       <Route path="/" element={<Login />} />
       <Route path="/wallview" element={<WallView />} />
+      <Route path="/tutorial" element={<Tutorial />} />
       <Route path="/settings" element={<Settings />} />
       <Route path="/catalog" element={<Catalog />} />
       <Route path="/cat/:catId" element={<CatInterface />} />

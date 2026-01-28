@@ -62,7 +62,7 @@ const Settings = () => {
           onMouseEnter={() => playSFX(button_hover_sfx)}
           onClick={() => {
             playSFX(button_click_sfx);
-            navigate("/wallview");
+            navigate("/tutorial");
           }}
         >
           Tutorial
