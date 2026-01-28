@@ -14,7 +14,7 @@ import { playSFX, playMusicLoop } from "../../sound";
 import button_hover_sfx from "../../assets/sfx/button_hover.wav";
 import button_click_sfx from "../../assets/sfx/button_click.wav";
 import success_sfx from "../../assets/sfx/success.mp3";
-
+import meow_loop from "../../assets/sfx/catcafeloop.mp3";
 //TODO(weblab student): REPLACE WITH YOUR OWN CLIENT_ID
 const GOOGLE_CLIENT_ID = "12657035452-bgq61jdi9b2sva449ujmb1bceds7r87n.apps.googleusercontent.com";
 

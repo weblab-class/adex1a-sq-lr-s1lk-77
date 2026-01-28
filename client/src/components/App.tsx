@@ -20,7 +20,6 @@ import "../output.css";
 import "./App.css";
 
 import { playMusicLoop, stopMusic } from "../sound.ts";
-import meow_loop from "../assets/sfx/catcafeloop.mp3";
 // activeCats and setActiveCats as context
 export const ActiveCatContext = createContext<{
   activeCats: Cat[];
@@ -44,7 +43,6 @@ const App = () => {
   }, []);
 
   const handleLogin = (credentialResponse: CredentialResponse) => {
-    playMusicLoop(meow_loop);
     const userToken = credentialResponse.credential;
     post("/api/login", { token: userToken }).then((player) => {
       setUserId(player._id);
