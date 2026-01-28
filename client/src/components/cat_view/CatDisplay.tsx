@@ -11,6 +11,7 @@ import purr_sfx from "../../assets/sfx/purr.mp3";
 import hiss_sfx from "../../assets/sfx/hiss.mp3";
 import sad_sfx from "../../assets/sfx/sad.wav";
 import button_click_sfx from "../../assets/sfx/button_click.wav";
+import achievement_sfx from "../../assets/sfx/achievement.mp3";
 
 type Props = {
   sprite: string;
@@ -101,6 +102,7 @@ const CatDisplay = (props: Props) => {
           message = "hissss";
           break;
         default:
+          playSFX(achievement_sfx);
           message = data.mostfelt;
       }
       set_is_spoopy(false);
