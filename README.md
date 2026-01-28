@@ -29,7 +29,9 @@ SESSION_SECRET
 Run:
 
 npm install
+
 npm start
+
 npm run dev
 
 ## Art Credits
