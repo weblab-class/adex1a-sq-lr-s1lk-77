@@ -11,10 +11,15 @@ import CatDisplay from "../cat_view/CatDisplay";
 import CatInfo from "../cat_view/CatInfo";
 import CatStatus from "../cat_view/CatStatus";
 import Follower from "../cat_view/Follower";
+import brown_cat from "../../assets/cat-base-brown.png";
+import black_cat from "../../assets/cat-base-black.png";
+import orange_cat from "../../assets/cat-base-orange.png";
+import gray_cat from "../../assets/cat-base-gray.png";
 
 const CatInterface = () => {
   let props = useParams<"catId">();
   const [selectedCat, setSelectedCat] = useState<CatInterfaceMongo | null>(null);
+  const [catImg, setCatImg] = useState<string | null>(null);
   const [activeItem, setActiveItem] = useState<null>(null);
   const [player, setPlayer] = useState<PlayerInterface | object>({
     items: [null, null, null, null],
@@ -39,6 +44,20 @@ const CatInterface = () => {
       );
     }
   }, []);
+
+  useEffect(() => {
+    if (selectedCat) {
+      if (selectedCat!.color == "orange") {
+        setCatImg(orange_cat);
+      } else if (selectedCat!.color == "gray") {
+        setCatImg(gray_cat);
+      } else if (selectedCat!.color == "black") {
+        setCatImg(black_cat);
+      } else if (selectedCat!.color == "brown") {
+        setCatImg(brown_cat);
+      }
+    }
+  }, [selectedCat]);
 
   useEffect(() => {
     console.log(`player name is ${player.name}`);

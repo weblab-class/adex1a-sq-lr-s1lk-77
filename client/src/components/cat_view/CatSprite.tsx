@@ -3,7 +3,6 @@ import "./CatDisplay.css";
 import { get, post } from "../../utilities";
 import { socket } from "../../client-socket";
 import { useParams } from "react-router";
-
 import { ActiveCatContext } from "../App";
 
 type Props = {
