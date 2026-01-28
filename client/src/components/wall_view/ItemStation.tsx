@@ -20,7 +20,6 @@ const ItemStation = (props: Props) => {
         className="absolute text-lg"
         onMouseEnter={() => playSFX(button_hover_sfx)}
         onClick={() => {
-          playSFX(button_click_sfx);
           addItem(item);
         }}
         style={{ left: `${props.x}%`, top: `${props.y}%` }}
