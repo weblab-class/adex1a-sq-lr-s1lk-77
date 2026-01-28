@@ -1,7 +1,6 @@
 .SingleItem-container {
   height: 80%;
   width: 80%;
-  border: 2px solid red;
   transition: ease;
 }
 
@@ -9,6 +8,5 @@
   height: 85%;
   width: 85%;
   cursor: pointer;
-  border: 2px solid red;
   transition: ease;
 }
