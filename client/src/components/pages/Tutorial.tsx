@@ -25,23 +25,23 @@ const Tutorial = () => {
       </button>
 
       <h1
-        className="flex items-center justify-center p-sm cursor-pointer"
+        className="flex items-center justify-center p-sm"
         style={{ fontSize: `2cqw`, paddingTop: "2cqw", textAlign: "center" }}
-        onClick={() => {
-          setShowGlitch((prev) => !prev);
-          playSFX(spoopy_sfx);
-        }}
       >
         {" "}
         Tutorial
       </h1>
       <p
-        className="flex flex-col items-center justify-center"
+        className="flex flex-col items-center justify-center cursor-pointer"
         style={{
           textAlign: "center",
           fontSize: "1.2cqw",
           paddingLeft: "5cqw",
           paddingRight: "5cqw",
+        }}
+        onClick={() => {
+          setShowGlitch((prev) => !prev);
+          playSFX(spoopy_sfx);
         }}
       >
         henlo valued hooman! welcome to s1lk77, adexia, and asdf_asdfghjkl's Weird Cat Cafe™
