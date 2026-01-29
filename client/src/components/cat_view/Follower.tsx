@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import "../pages/CatInterface.css";
 import { socket } from "../../client-socket";
+const itemImages = import.meta.glob("../../assets/*.png", {
+  eager: true,
+  import: "default",
+}) as Record<string, string>;
 
 const Follower = () => {
   const [displayFollower, setDisplayFollower] = useState(false);
@@ -8,6 +12,8 @@ const Follower = () => {
 
   //so that follower can display item name for now
   const [item, setItem] = useState<string>("");
+  let itemSrc;
+  // console.log(itemImages);
 
   //tracking mouse position
   useEffect(() => {
@@ -26,10 +32,16 @@ const Follower = () => {
   const handleActionTrigger = (input: string): void => {
     setDisplayFollower(true);
     //gets color + name, not action
-    const itemName = input.split("-")[0].concat(" " + input.split("-")[1]);
+    const itemName = input.split("-")[0].concat("-" + input.split("-")[1]);
     setItem(itemName);
-    console.log(item);
+    console.log(itemName);
   };
+
+  useEffect(() => {
+    console.log(item);
+    itemSrc = itemImages[`../../assets/${item}.png`];
+    console.log(itemSrc);
+  }, [item]);
 
   // on action complete
   const handleActionComplete = (data): void => {
@@ -50,10 +62,12 @@ const Follower = () => {
   return (
     <>
       {displayFollower && (
-        <div className="follower" style={{ left: `${pos.x}px`, top: `${pos.y}px` }}>
-          {/* ideally we'll be displaying the item's image eventually, but its name for now*/}
-          {item}
-        </div>
+        <img
+          className="follower"
+          style={{ left: `${pos.x}px`, top: `${pos.y}px` }}
+          alt={item}
+          src={itemSrc}
+        />
       )}
     </>
   );
