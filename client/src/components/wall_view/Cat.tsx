@@ -52,9 +52,11 @@ const Cat = (props: Props) => {
       onMouseEnter={() => playSFX(button_hover_sfx)}
       className="absolute w-[12%] h-auto cursor-pointer"
       style={{
-        width: `${props.width}cqw`,
+        width: `${props.width}%`,
         left: `${props.x}%`,
         top: `${props.y}%`,
+        // maxWidth: "120px",
+        minWidth: "52px",
       }}
     />
   );
