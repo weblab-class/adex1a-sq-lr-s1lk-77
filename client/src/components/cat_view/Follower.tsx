@@ -12,7 +12,7 @@ const Follower = () => {
 
   //so that follower can display item name for now
   const [item, setItem] = useState<string>("");
-  let itemSrc;
+  const [itemSrc, setItemSrc] = useState<string>("");
   // console.log(itemImages);
 
   //tracking mouse position
@@ -38,9 +38,11 @@ const Follower = () => {
   };
 
   useEffect(() => {
-    console.log(item);
-    itemSrc = itemImages[`../../assets/${item}.png`];
-    console.log(itemSrc);
+    if (item.includes("balloon")) {
+      setItemSrc(itemImages[`../../assets/${item + "-drag"}.png`]);
+      return;
+    }
+    setItemSrc(itemImages[`../../assets/${item}.png`]);
   }, [item]);
 
   // on action complete
